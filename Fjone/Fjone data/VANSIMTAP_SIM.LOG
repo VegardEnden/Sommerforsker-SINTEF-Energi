@@ -1,0 +1,146 @@
+ -> Using old system for license control with environment variables.
+
+ Detmod
+
+ Etablering av modell/internfiler for detaljert vannkraft.
+ Henting av historiske tilsigsserier fra arkiv.
+
+ 
+
+ Midlere aarlig tilsigsvolum, Maaleenhet: Mm3 
+ Serienavn                               Aarsmiddel
+                                         Kalendarisk      EFI
+                                         tidsopploesning  tidsopploesning
+ 5060-J                                       173.63           173.39
+  Detmod; delomradenr :           0   Blokknr:            1
+  Systemnavn Detd: FJONE               
+ 
+
+
+ Ferdig preparering av detaljerte vannkraftdata
+
+ -> Using old system for license control with environment variables.
+   ::::: :: ::   :: :::::: :::::: ::::::
+  ::     :: :::  ::   ::   ::     ::
+   ::::  :: :: : ::   ::   ::::   ::::
+      :: :: ::  :::   ::   ::     ::
+  :::::  :: ::   ::   ::   :::::: ::    Energi AS
+
+  S I M T A P - 10.0.5/beta/r16400 - 2020-06-22
+  -----------------------------------------------------------
+  Brukerveiledning..: Vansimtap
+  Sintef Support....: support.energy@sintef.no, Tel: 40471700/Senb: 73597200  
+  Kj|retidspunkt....:  7. september 2020, kl  9:59:22
+
+ 
+ HDF5 (Hierarchical Data Format 5) Software Library and Utilities 
+ Copyright 2006-2013 by The HDF Group. 
+ 
+  See: ./hdf5_copywrite.dat
+ 
+ 
+ Tilsigsberegning
+
+ Revisjonsplaner leses; gyldige revisjonsplaner funnet for:
+     Stasjon             MW ute             Uker
+  10515 fjone                      30.0           37 -  37
+ 
+ Simulering av }r 1931
+ Simulering av }r 1932
+ Simulering av }r 1933
+ Simulering av }r 1934
+ Simulering av }r 1935
+ Simulering av }r 1936
+ Simulering av }r 1937
+ Simulering av }r 1938
+ Simulering av }r 1939
+ Simulering av }r 1940
+ Simulering av }r 1941
+ Simulering av }r 1942
+ Simulering av }r 1943
+ Simulering av }r 1944
+ Simulering av }r 1945
+ Simulering av }r 1946
+ Simulering av }r 1947
+ Simulering av }r 1948
+ Simulering av }r 1949
+ Simulering av }r 1950
+ Simulering av }r 1951
+ Simulering av }r 1952
+ Simulering av }r 1953
+ Simulering av }r 1954
+ Simulering av }r 1955
+ Simulering av }r 1956
+ Simulering av }r 1957
+ Simulering av }r 1958
+ Simulering av }r 1959
+ Simulering av }r 1960
+ Simulering av }r 1961
+ Simulering av }r 1962
+ Simulering av }r 1963
+ Simulering av }r 1964
+ Simulering av }r 1965
+ Simulering av }r 1966
+ Simulering av }r 1967
+ Simulering av }r 1968
+ Simulering av }r 1969
+ Simulering av }r 1970
+ Simulering av }r 1971
+ Simulering av }r 1972
+ Simulering av }r 1973
+ Simulering av }r 1974
+ Simulering av }r 1975
+ Simulering av }r 1976
+ Simulering av }r 1977
+ Simulering av }r 1978
+ Simulering av }r 1979
+ Simulering av }r 1980
+ Simulering av }r 1981
+ Simulering av }r 1982
+ Simulering av }r 1983
+ Simulering av }r 1984
+ Simulering av }r 1985
+ Simulering av }r 1986
+ Simulering av }r 1987
+ Simulering av }r 1988
+ Simulering av }r 1989
+ Simulering av }r 1990
+ Simulering av }r 1991
+ Simulering av }r 1992
+ Simulering av }r 1993
+ Simulering av }r 1994
+ Simulering av }r 1995
+ Simulering av }r 1996
+ Simulering av }r 1997
+ Simulering av }r 1998
+ Simulering av }r 1999
+ Simulering av }r 2000
+ Simulering av }r 2001
+ Simulering av }r 2002
+ Simulering av }r 2003
+ Simulering av }r 2004
+ Simulering av }r 2005
+ Simulering av }r 2006
+ Simulering av }r 2007
+ Simulering av }r 2008
+ Simulering av }r 2009
+ Simulering av }r 2010
+ -> Using old system for license control with environment variables.
+   ::::: :: ::   :: :::::: :::::: ::::::
+  ::     :: :::  ::   ::   ::     ::
+   ::::  :: :: : ::   ::   ::::   ::::
+      :: :: ::  :::   ::   ::     ::
+  :::::  :: ::   ::   ::   :::::: ::    Energi AS
+
+  T I L S I M - 10.0.5/beta/r16400 - 2020-06-22
+  -----------------------------------------------------------
+  Brukerveiledning..: Samkj|ringsmodellen 
+  Sintef Support....: support.energy@sintef.no, Tel: 40471700/Senb: 73597200  
+  Kj|retidspunkt....:  7. september 2020, kl  9:59:23
+
+
+
+  Midlere tilsig for perioden: Uke nr  36- 260
+  Regulert:    518.23  Uregulert:      0.41
+
+

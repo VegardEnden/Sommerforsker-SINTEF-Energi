@@ -1,0 +1,74 @@
+Simuleringsmappe: C:\ltm_simulering\fjone\18-2022-05-v10-prodrisk\
+Vassdrag: fjone
+Host : influx
+Port : 8086
+user : prodrisk
+passwd : 1R3KzJR8NuCQ2W8!sNp!j
+db : operasjonell
+op : yes
+['C:', 'ltm_simulering', 'fjone', '18-2022-05-v10-prodrisk', '']
+18-2022-05-v10-prodrisk
+2022
+Leser  C:\ltm_simulering\fjone\18-2022-05-v10-prodrisk\detsimres.h5
+<HDF5 file "detsimres.h5" (mode r+)>
+startet å hente ut info fra fila <HDF5 group "/result_description" (11 members)>
+56.0
+2022-05-02
+magasinvolum 13608
+Tid brukt:  0:00:49.818442
+56.0
+magasinvolum 13608
+Tid brukt:  0:00:49.271673
+56.0
+magasinvolum 13608
+Tid brukt:  0:00:50.318344
+56.0
+2022-05-02
+flom 13608
+Tid brukt:  0:00:48.646797
+56.0
+flom 13608
+Tid brukt:  0:00:48.318733
+56.0
+flom 13608
+Tid brukt:  0:00:49.084201
+56.0
+2022-05-02
+tilsig 13608
+Tid brukt:  0:00:48.771743
+56.0
+tilsig 13608
+Tid brukt:  0:00:47.990649
+56.0
+tilsig 13608
+Tid brukt:  0:00:51.333752
+56.0
+2022-05-02
+produksjon 13608
+Tid brukt:  0:00:48.131254
+56.0
+produksjon 13608
+Tid brukt:  0:00:48.115637
+56.0
+produksjon 13608
+Tid brukt:  0:00:47.850063
+56.0
+2022-05-02
+driftsvannforing 13608
+Tid brukt:  0:00:48.443700
+56.0
+driftsvannforing 13608
+Tid brukt:  0:00:48.287484
+56.0
+driftsvannforing 13608
+Tid brukt:  0:01:00.644455
+56.0
+2022-05-02
+forbitapping 13608
+Tid brukt:  0:00:57.738771
+56.0
+forbitapping 13608
+Tid brukt:  0:00:56.176575
+56.0
+forbitapping 13608
+Tid brukt:  0:00:50.396449

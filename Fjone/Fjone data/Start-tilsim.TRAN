@@ -1,0 +1,8 @@
+ 1,2025,11, 7,15,19,42,'Start tilsim'
+   1,'Styreparameter'
+ 'fjone               ','Systemnavn'
+   0,'Omr}denummer'
+   1,'0=tilsigsprognose brukes ikke, 1=brukes'
+fjone.R30,'Filnavn for regulert energitilsig'
+fjone.U30,'Filnavn for uregulert energitilsig'
+,'Filnavn for tilsigsavhengig fastkraft'

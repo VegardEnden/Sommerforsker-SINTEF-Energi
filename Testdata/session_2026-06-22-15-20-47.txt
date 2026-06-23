@@ -1,0 +1,338 @@
+New session: 2026-6-22, 15:20:51
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\prodrisk.CPAR' for writing.
+Closed ascii file. Wrote a total of 10 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\straff.CPAR' for writing.
+Closed ascii file. Wrote a total of 1 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\tilsigsddp.CPAR' for writing.
+Closed ascii file. Wrote a total of 5 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\riskparam.dat' for writing.
+Closed ascii file. Wrote a total of 1 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\SYSTEM.SMAG' for writing.
+Closed ascii file. Wrote a total of 2 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\LASTPROFIL.ARCH' for writing.
+Closed ascii file. Wrote a total of 3 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\EFFEKTPROFIL.ARCH' for writing.
+Closed ascii file. Wrote a total of 3 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\PRISAVSNITT.DATA' for writing.
+Closed ascii file. Wrote a total of 16 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\SYSTEM.EMAR' for writing.
+Closed ascii file. Wrote a total of 263 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\PRISREKKE.PRI' for writing.
+Closed ascii file. Wrote a total of 218 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\PARAMETER.TRAN' for writing.
+Closed ascii file. Wrote a total of 1 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\constraints.xml' for writing.
+Closed ascii file. Wrote a total of 3 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\REVISJONSPLAN.STAS' for writing.
+Closed ascii file. Wrote a total of 1 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\SYSTEM.ENMD' for writing.
+Closed ascii file. Wrote a total of 35 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\currency.txt' for writing.
+Closed ascii file. Wrote a total of 3 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\HKORR.SDDP' for writing.
+The series to be written to this file are missing for all modules, so this functionality is ignored. 
+Aborting writing to file c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\HKORR.SDDP
+Deleting file c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\HKORR.SDDP
+Removed file. Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\MAGVOL.SDDP' for writing.
+The series to be written to this file are missing for all modules, so this functionality is ignored. 
+Aborting writing to file c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\MAGVOL.SDDP
+Deleting file c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\MAGVOL.SDDP
+Removed file. Opened binary file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\KUTT.SDDP' for writing.
+Cuts not set ahead of simulation, running without existing cuts. Removed file.
+
+Opened binary file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\STYREFIL-PB027.EFI' for writing.
+Closed binary file. Wrote a total of 4096 bytes.
+
+Opened binary file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\DYNMODELL.SIMT' for writing.
+Closed binary file. Wrote a total of 27720 bytes.
+
+Opened binary file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\VVERD_000.EOPS' for writing.
+Closed binary file. Wrote a total of 224196 bytes.
+
+Opened HDF5 file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\ScenarioData.h5' for writing.
+Closed HDF5 file.
+
+Opened HDF5 file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\model.h5' for writing.
+Closed HDF5 file.
+
+Opened HDF5 file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\txy_step.h5' for writing.
+Wait 0.010000 seconds before Prodrisk core is started inside this dataset.
+Handling command: "C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win/genpris.exe" 
+Launch the thread that gets the input and send it to the child
+Read the child's output
+
+
+   ::::: :: ::   :: :::::: :::::: ::::::
+  ::     :: :::  ::   ::   ::     ::
+   ::::  :: :: : ::   ::   ::::   ::::
+      :: :: ::  :::   ::   ::     ::
+  :::::  :: ::   ::   ::   :::::: ::    Energi AS
+
+  G E N P R I S - R10.14.3/Release/8f952c9d9 - 2026-05-21
+  ---------------------------------------------------------------------
+  Brukerveiledning..: Vansimtap                        
+  SINTEF Support....: support.energy@sintef.no, Tel: 40471700/Senb: 45456000  
+  Kj›retidspunkt....: 22. juni 2026, kl 15:20:51
+
+
+  Velg kilde <Blank for behandling av eksisterende
+  prisrekke> ............................................. :  
+  Navn på prisrekken  (prisrekke.pri) .................... :  PRISREKKE.PRI
+
+
+ Antall uker i dataperioden.......:       156
+ Antall delperioder i uken........:         7
+ Antall simulerings}r p} filen....:        30
+ F|rste }r i tilsigstatistikken...:      1901
+ Antall scenarier pr. tilsigsaar..:         1
+ Startuke.........................:         1
+ Sluttuke.........................:       156
+ Serie-/parallelsimulering........:  Parallel
+ Antall timer pr delperiode.......:  24  24  24  24  24  24  24
+
+ Prisrekken PRISREKKE.PRI er p† ascii filformat.
+
+ 
+  Angi kode for behandling av prisene eller RETURN ....... :  
+  Gi antall prispunkt som skal brukes i prismodellen  (5)
+  ....................................................... :  5
+  Gi minste antall prisscenarier per prispunkt  (6) ...... :  6
+ 
+Tell the thread to exit and wait for thread to die
+Name of Prodrisk executable set to default value prodrisk_ms_mpi.exe. 
+Handling command: "C:\Program Files\Microsoft MPI\bin/mpiexec" -np 6 "C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win/prodrisk_ms_mpi.exe" -SEKV 
+Launch the thread that gets the input and send it to the child
+Read the child's output
+ Process            0  administering            5  worker processes.
+ 
+ WARNING: HPO Option available but this version of the binary does not use it.
+ 
+
+
+   ::::: :: ::   :: :::::: :::::: ::::::
+  ::     :: :::  ::   ::   ::     ::
+   ::::  :: :: : ::   ::   ::::   ::::
+      :: :: ::  :::   ::   ::     ::
+  :::::  :: ::   ::   ::   :::::: ::    Energi AS
+
+  P r o d r i s k _ F l - R10.14.3/Release/8f952c9d9 - 2026-05-21
+  -----------------------------------------------------------------------------
+  Brukerveiledning..: AN 13.12.38
+  SINTEF Support....: support.energy@sintef.no, Tel: 40471700/Senb: 45456000  
+  Kj›retidspunkt....: 22. juni 2026, kl 15:20:52
+
+
+ 
+ 
+ HDF5 (Hierarchical Data Format 5) Software Library and Utilities 
+ Copyright 2006-2013 by The HDF Group. 
+ 
+  See: ./hdf5_copywrite.dat
+ 
+ 
+  Fil med enmagasinmodelldata  (SYSTEM.ENMD) ............. :  
+  Serie- eller parallellsimulering  (PARALLELL) .......... :  PARALLELL
+  Startuke for beregningene  (1) ......................... :  
+  Sluttuke for simulering  (156) ......................... :  
+  Sluttuke for beregning av nye kutt  (156) .............. :  
+  Startdoegn (hvis aktuelt)  (1) ......................... :  
+  Tast startår og antall simuleringsår <evt. V> (1901
+  30) .................................................... :  
+  Startmagasin : Tast D(empning), A(lle),
+  F(ortløpende), modul, RETURN eller annen kode .......... :  RF
+  Filnavn for magasinfyllingene .......................... :  SYSTEM.SMAG
+  Startmagasin : Tast D(empning), A(lle),
+  F(ortløpende), modul, RETURN eller annen kode .......... :  
+ Multiple startvolumes per module are available in SYSTEM.SMAG                  
+                                 but do not match the number of scenarios (NSIM)
+ .
+
+             ----- Valg av utf|relseskoder -----
+ Kode Verdi  Forklaring
+
+ UTS  - - -  Utskrift av startmagasin p} skjerm
+ PRO  - 0 -  Tilsigsprognose brukes
+ DET  - 1 -  Lagring av detaljerte resultat for senere presentasjon
+ KUTT - 0 -  Sluttverdisetting basert paa tidligere beregnede kutt
+ SHOP - 0 -  Utskrift av koblingsfil til SHOP
+ 
+  
+ 
+  Tast utførelseskode (eller RETURN) ..................... :  
+
+
+  --------- Beregningsparametre ---------
+
+  Parameter Verdi  Stikkord
+    VAAR       18  Forste uke i fyllingssesongen
+    HOEST      40  Forste uke i tappesesongen
+    SKAL      1.0  Skaleringsfaktor for vannverdi (benyttes i sluttverdisetting)
+    RENTE     0.0  Realrente (%)
+
+ 
+ 
+  Tast parameter og tilhørende verdi (eller RETURN) ...... :  
+
+ Revisjonsplaner leses; gyldige revisjonsplaner funnet for:
+     Stasjon             MW ute             Uker
+ 
+
+ Den innleste verdien for variabelen CTANK er uheldig; den b|r minst settes til       7510.0
+
+  Using residual inflow model.
+
+
+ Sequential price segments from week    1 to week   52
+
+ Aggregation of price segments from (and including) week    53
+ Aggregated water values used as end value setting.                             
+                      
+
+  Ingen hogdekorreksjon tilgjengelig
+
+
+  Ingen tidligere magasinfylling tilgjengelig.  Baserer fallhoyden paa innlest styrekurve.
+
+
+  Starts optimization from scratch
+
+
+  Ingen hogdekorreksjon
+
+  Baklengs gjennoml|p nummer   0
+
+  Forlengs gjennoml|p nummer   1
+  Baklengs gjennoml|p nummer   1
+  Iter:  1                                   F-kost:        -464.16
+                                             K-kost:        -467.34
+
+  Forlengs gjennoml|p nummer   2
+  Baklengs gjennoml|p nummer   2
+  Iter:  2                                   F-kost:        -472.48
+                                             K-kost:        -467.18
+
+  Forlengs gjennoml|p nummer   3
+  Baklengs gjennoml|p nummer   3
+  Iter:  3                                   F-kost:        -473.32
+                                             K-kost:        -467.13
+
+  Avsluttende simulering
+  Framkost  :   -473.522454268039     
+  Bak-kost  :   -467.126571373990     
+  Driftkost :   -51.2901895939352     
+
+
+  Midlere simulert sluttmagasin       :    160.51 (GWh)
+  Verdi av sluttmagasin               :    422.23 (MEUR)
+  Verdi regnet uavhengig av fordeling :    422.23 (MEUR)
+
+ 
+  Ingen brudd pï¿½ restriksjoner i sluttsimulering 
+ 
+  File HKORR.SDDP did not exist or wrong input data.
+  Prodrisk will run again with head correction.
+
+  Hogdekorreksjon innlest
+
+
+  Magasinfylling innlest
+
+
+  Starts optimization from scratch
+
+
+  Bruker hogdekorreksjon
+
+  Baklengs gjennoml|p nummer   0
+
+  Forlengs gjennoml|p nummer   1
+  Baklengs gjennoml|p nummer   1
+  Iter:  1                                   F-kost:        -465.40
+                                             K-kost:        -468.24
+
+  Forlengs gjennoml|p nummer   2
+  Baklengs gjennoml|p nummer   2
+  Iter:  2                                   F-kost:        -473.38
+                                             K-kost:        -468.10
+
+  Forlengs gjennoml|p nummer   3
+  Baklengs gjennoml|p nummer   3
+  Iter:  3                                   F-kost:        -474.02
+                                             K-kost:        -468.04
+
+  Forlengs gjennoml|p nummer   4
+  Baklengs gjennoml|p nummer   4
+  Iter:  4                                   F-kost:        -474.45
+                                             K-kost:        -468.02
+
+  Forlengs gjennoml|p nummer   5
+  Baklengs gjennoml|p nummer   5
+  Iter:  5                                   F-kost:        -474.45
+                                             K-kost:        -468.01
+
+  Avsluttende simulering
+  Framkost  :   -474.377569796265     
+  Bak-kost  :   -468.010054391963     
+  Driftkost :   -52.1466745883974     
+
+
+  Midlere simulert sluttmagasin       :    160.52 (GWh)
+  Verdi av sluttmagasin               :    422.23 (MEUR)
+  Verdi regnet uavhengig av fordeling :    422.23 (MEUR)
+
+ 
+  Ingen brudd pï¿½ restriksjoner i sluttsimulering 
+ 
+  Skriver kutt beregna med hogdekorreksjon, kode:   152059965
+ 
+ Writing results to ENMRES.h5.
+  Elapsed time =      17.7 sec
+ Prodrisk calculation finished
+Tell the thread to exit and wait for thread to die
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\TILSIG.SDDP' for reading.
+Closed ascii file. Read a total of 328 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\PRISREKKE.PRISMOD' for reading.
+Closed ascii file. Read a total of 1722 lines.
+
+Opened HDF5 file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\detsimres.h5' for reading.
+Closed HDF5 file.
+
+Opened HDF5 file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\ENMRES.h5' for reading.
+Closed HDF5 file.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\NY_HKORR.SDDP' for reading.
+Closed ascii file. Read a total of 158 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\HKORR.SDDP' for reading.
+Closed ascii file. Read a total of 158 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\NY_MAGVOL.SDDP' for reading.
+Closed ascii file. Read a total of 159 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\MAGVOL.SDDP' for reading.
+Closed ascii file. Read a total of 159 lines.
+
+Opened ascii file 'c:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Testdata\session_2026-06-22-15-20-47\indvan.prd' for reading.
+Closed ascii file. Read a total of 6 lines.
+
+
+No SHOP-input prepared, so will not copy SHOP files out of working directory.
+
+API: Done reading result files

@@ -1,0 +1,147 @@
+0,T,                                   * Datagruppe 0 
+100,00,08,19,14,21,10,2024, * Filversjon, Lagringstidspunkt
+  9,'HELGELAND           ',          * Omraade nummer og navn
+1,T,                                   * Datagruppe GENERELL: Diverse styreparametre 
+   1, 2030,   * Antall aar dataper., F/rste aar dataper.
+    1.00000,   * ETHA
+2,T,                                   * Datagruppe MAGSTASJ: Magasin- og stasjonsdata
+ 'HELGELAND.DETD',    * Filnavn detaljert vannkraftbeskrivelse
+3,T,                                   * Datagruppe VANNVERDI: Data knyttet til vannverdiberegninger
+    1,  52,   * Start V.V., Slutt V.V.
+ 51, 500,0.001,   * Ant. pkt mag. V.V.,Maks ant. int V.V., Pres. krav V.V.
+ T, 7, 1, 1,   * Automatisk gen. vekttall, Ant. tilsigsalt. ved vv. beregning, Ant. sluttuker, Ant. tilsigtilstander ved vv. beregninger
+16,T,                                  * Datagruppe FASTKON: Kontraktsforpliktelser og kontraktsrettigheter.
+  1, 1,'AF HELGELAND        ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__001
+ 'PE_AF_NO4                               '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,     2020.00,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_AF_Norge_Nord                        ',    * Profilreferanse last
+   1,   * Antall temperaturm}linger
+ '9005-A                                  ',    1.0000   * Temperaturserie, Vektfaktor
+ 'PT_ALM. FORS.NOR                        ',    * Profilreferanse temperaturkorrigering
+    2,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+   -1,   * Antall punkt på pris/mengde beskrivelse
+          75.000,   * Normalpris
+          -0.025,   * Eksp. ved expotensial funksjon
+        3000.000,   * Ovre grensepris
+           7.000,   * Nedre grensepris
+  2, 1,'EV HELGELAND        ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__002
+ 'PE_EV                                   '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,      292.00,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_Flat                                 ',    * Profilreferanse last
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+  3, 1,'IND HELGELAND       ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__003
+ 'PE_Flat                                 '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,     3872.00,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_Flat                                 ',    * Profilreferanse last
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+  4, 1,'HY HELGELAND        ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__004
+ 'PE_HY_NO4                               '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,       62.93,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_HY_NO4                               ',    * Profilreferanse last
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+  5, 1,'TAP HELGELAND       ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__005
+ 'PE_Flat                                 '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,      394.85,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_Flat                                 ',    * Profilreferanse last
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+ 99, 0,'                    ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__099
+4,T                                   * Datagruppe PREFDA: Kj|p/import, salg/eksport, varmekraft, rasjonering.
+    1,   2,'KRAFTINTENSIV 1     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..001
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        38.8000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+    2,   2,'KRAFTINTENSIV 2     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..002
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        38.8000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+    3,   2,'KRAFTINTENSIV 3     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..003
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        58.8000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+    4,   2,'KRAFTINTENSIV 4     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..004
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        60.0000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+    5,   2,'KRAFTINTENSIV 5     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..005
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        75.0000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+   31,   9,'KJELKRAFT TUNG 2    ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..031
+ 'PE_INDUSTRI                             '   * Profilnavn for relative effektfaktorer
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+ 'PL_KJELKRAFT TUNG REG1V                 '   * Referanse for }rsprofil
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        53.4000,   * Sluttuke, Pris
+  52,        -6.5000,   * Sluttuke, Utvekslingsmengde (GWH)
+   40,   2,'KRAFTINTENSIV 6     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..040
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        75.0000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+   41,   2,'KRAFTINTENSIV 7     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..041
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,       106.3000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+   42,   2,'KRAFTINTENSIV 8     ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..042
+ 'PE_INDUSTRI                             '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,       125.0000,   * Sluttuke, Pris
+  52,       -33.1964,   * Sluttuke, Overføringskapasitet (MW)
+  998,  20,'FLOMKRAFT           ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..998
+  52,         0.1000,   * Sluttuke, Pris
+  999,  40,'Rasjonering         ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..999
+  52,      3000.0000,   * Sluttuke, Pris
+99999, 0,'SluttPref', F,0.0, Slutt Preferansefunksjon
+5,T,                                   * Datagruppe REGULERT ENERGITILSIG:
+ 'HELGELAND.R30',  * Filnavn med regulert tilsig
+  52,    1.0000,                        * Regulert tilsig: sluttuke, omregningsfaktor
+7,T,                                   * Datagruppe UREGULERT ENERGITILSIG:
+ 'HELGELAND.U30',  * Filnavn med uregulert tilsig
+  52,    1.0000,                        * Uregulert tilsig: sluttuke, omregningsfaktor
+18,T,                                   * Datagruppe VINDKRAFT Vindkraftproduksjon
+'HELGELAND.W30',   100.000,   * Fil med vindkraftproduksjon, Eierandel
+  52,    0.1200,                        * Sluttuker, omregningsfaktorer
+'HELGELAND.S30',   100.000,   * Fil med vindkraftproduksjon, Eierandel
+  52,    0.0000,                        * Sluttuker, omregningsfaktorer
+'#Slutt',   999.900,   * Sluttegn for vindkraftproduksjon
+100,T

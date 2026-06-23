@@ -1,0 +1,360 @@
+SI
+ 
+ 
+A
+ 
+ 
+PROD
+PROD
+PROD
+PROD
+MAG
+MAG
+MAG
+MAG
+MAG
+MAG
+VANNF
+VANNF
+QFORB
+QFLOM
+QFORB
+QFLOM
+QFORB
+QFLOM
+QFORB
+QFLOM
+QFORB
+QFLOM
+ 
+73808 MW
+73801 MW
+73803 MW
+73805 MW
+73801 PR
+73802 PR
+73803 PR
+73804 PR
+73805 PR
+73808 PR
+73801 M3
+73808 M3
+73808 M3
+73808 M3
+73801 M3
+73801 M3
+73806 M3
+73806 M3
+73804 M3
+73804 M3
+73805 M3
+73805 M3
+SP
+1
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73808-PROD-MW.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+2
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73801-PROD-MW.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+3
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73803-PROD-MW.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+4
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73805-PROD-MW.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+5
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73801-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+6
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73802-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+7
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73803-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+8
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73804-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+9
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73805-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+10
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73808-MAG-PR.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+11
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73801-VANNF-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+12
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73808-VANNF-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+13
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73808-QFORB-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+14
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73808-QFLOM-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+15
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73801-QFORB-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+16
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73801-QFLOM-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+17
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73806-QFORB-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+18
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73806-QFLOM-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+19
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73804-QFORB-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+20
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73804-QFLOM-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+21
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73805-QFORB-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+SP
+22
+ 
+PA
+0 10 50 90 100
+FO
+Resultat-73805-QFLOM-M3.sdv
+J
+P
+ 
+ 
+A
+J
+ 
+EX

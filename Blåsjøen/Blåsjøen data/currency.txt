@@ -1,0 +1,4 @@
+EUR
+cent
+MWh
+8.71

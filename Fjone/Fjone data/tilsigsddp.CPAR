@@ -1,0 +1,5 @@
+    1, Antall prinsipalkomponenter ( 1<=NPRBRUK<=NSER )
+    3,   0,   0, Antall diskrete verdier ( NRSTKOM(1:NPRBRUK) 2<=NRSTKOM(I) )
+    1, Antall sesonger. (1<=NSESONG<=NUKE) Foerste sesongstart og alle sesongslutter neste linje. Viss NSESONG = 1, kan neste linje ha verdiene 0,0. Negativ sesongslutt indikerer at parametermatrisa for den sesongen skal nullstillest.
+   0   0
+          0         0         1        -1 Aar som skal simuleres med funnet modell     , TILFELDIG START, Klipping negative tilsig?  AVSL MED -1

@@ -1,0 +1,33 @@
+0,T,                                   * Datagruppe 0 
+100,00,37,10,13,04,10,2024, * Filversjon, Lagringstidspunkt
+  2,'MARKED              ',          * Omraade nummer og navn
+1,T,                                   * Datagruppe GENERELL: Diverse styreparametre 
+   1, 2022,   * Antall aar dataper., F/rste aar dataper.
+    0.00001,   * ETHA
+16,T,                                  * Datagruppe FASTKON: Kontraktsforpliktelser og kontraktsrettigheter.
+  1, 6,'dummy               ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__001
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+ 99, 0,'                    ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__099
+4,T                                   * Datagruppe PREFDA: Kj|p/import, salg/eksport, varmekraft, rasjonering.
+   10,   2,'salg                ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..010
+ 'PE_INDUSTRI 95                          '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  T,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        50.0000,   * Sluttuke, Pris
+  52,    -10000.0000,   * Sluttuke, Overføringskapasitet (MW)
+   11,   1,'KJop                ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..011
+ 'PE_INDUSTRI 95                          '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  T,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+      0.00000,     0.00000, F,   * Minimumsproduksjon, Startkostnader og Reservekrav (ikke aktiv)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,        50.0000,   * Sluttuke, Pris
+  52,     10000.0000,   * Sluttuke, Overføringskapasitet (MW)
+  999,  40,'Rasjonering         ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..999
+  52,      1200.0000,   * Sluttuke, Pris
+99999, 0,'SluttPref', F,0.0, Slutt Preferansefunksjon
+100,T

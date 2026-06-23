@@ -1,0 +1,62 @@
+ 1,2025, 8,15,13,12,27,'Start simtap'
+   2,'Styreparameter'
+   0,'Omr}denummer'
+  35,'Antall simuleringsuker'
+   1,'Startuke for simulering'
+  52,'Sluttuke for simulering'
+   1,'0=Parallellsimulering,1=Seriesimulering'
+   0,'0=Historisk tilsig benyttes,1=Tilsigsprognose'
+  18,'Startuke for fyllingssesong'
+  40,'Startuke for tappesesong'
+ 'SVARTISEN           ','Systemnavn'
+ 'SVARTISEN           ','Sysnavn (20 forste kar. Detd-fil'
+ 'SVARTISEN.ENMD                                              ','Filnavn Enmd-fil'
+ 'SVARTISEN.SMAG                                                                                                                                                                                                                                                 ','Filnavn Startmagasin'
+ 'SVARTISEN.RVOL                                                                                                                                                                                                                                                 ','Filnavn Restvolum'
+    F,'.TRUE. Likt start og sluttmag ved seriesim.'
+   0,'0=Induviduelle vannverdier beregnes ikke,1=Simul. med |konomiske data pluss bereg. av induvi. vannv.'
+   1,'Startuke for beregn. av induviduel. vannverd.'
+  52,'Sluttuke for beregn. av induviduel. vannverd.'
+  70.000,'Straff p} brudd p} krav til minstevannf|r.'
+  70.000,'Straff p} brudd p} krav til forbitapping'
+   3,'Antall magasinfyllinger ved induviduelle vannverdier'
+   0.000,'|nsket prisniv} f|rstkommende uke (EUR/MWh)
+   0.000,'Autokorrelasjon for korrigering av pris'
+    1,'Startd|gn for beregning i Sesongmodell'
+      0.2500,'Realrente'
+ 2023,'Startaar for dataperioden'
+ 1981,'Historisk tilsigs}r nr '  1
+ 1982,'Historisk tilsigs}r nr '  2
+ 1983,'Historisk tilsigs}r nr '  3
+ 1984,'Historisk tilsigs}r nr '  4
+ 1985,'Historisk tilsigs}r nr '  5
+ 1986,'Historisk tilsigs}r nr '  6
+ 1987,'Historisk tilsigs}r nr '  7
+ 1988,'Historisk tilsigs}r nr '  8
+ 1989,'Historisk tilsigs}r nr '  9
+ 1990,'Historisk tilsigs}r nr ' 10
+ 1991,'Historisk tilsigs}r nr ' 11
+ 1992,'Historisk tilsigs}r nr ' 12
+ 1993,'Historisk tilsigs}r nr ' 13
+ 1994,'Historisk tilsigs}r nr ' 14
+ 1995,'Historisk tilsigs}r nr ' 15
+ 1996,'Historisk tilsigs}r nr ' 16
+ 1997,'Historisk tilsigs}r nr ' 17
+ 1998,'Historisk tilsigs}r nr ' 18
+ 1999,'Historisk tilsigs}r nr ' 19
+ 2000,'Historisk tilsigs}r nr ' 20
+ 2001,'Historisk tilsigs}r nr ' 21
+ 2002,'Historisk tilsigs}r nr ' 22
+ 2003,'Historisk tilsigs}r nr ' 23
+ 2004,'Historisk tilsigs}r nr ' 24
+ 2005,'Historisk tilsigs}r nr ' 25
+ 2006,'Historisk tilsigs}r nr ' 26
+ 2007,'Historisk tilsigs}r nr ' 27
+ 2008,'Historisk tilsigs}r nr ' 28
+ 2009,'Historisk tilsigs}r nr ' 29
+ 2010,'Historisk tilsigs}r nr ' 30
+ 2011,'Historisk tilsigs}r nr ' 31
+ 2012,'Historisk tilsigs}r nr ' 32
+ 2013,'Historisk tilsigs}r nr ' 33
+ 2014,'Historisk tilsigs}r nr ' 34
+ 2015,'Historisk tilsigs}r nr ' 35

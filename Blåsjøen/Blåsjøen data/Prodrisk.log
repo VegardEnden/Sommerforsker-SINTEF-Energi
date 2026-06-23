@@ -1,0 +1,143 @@
+ -> Using old system for license control with environment variables.
+
+
+   ::::: :: ::   :: :::::: :::::: ::::::
+  ::     :: :::  ::   ::   ::     ::
+   ::::  :: :: : ::   ::   ::::   ::::
+      :: :: ::  :::   ::   ::     ::
+  :::::  :: ::   ::   ::   :::::: ::    Energi AS
+
+  P r o d r i s k - -verno- - -dato-
+  ------------------------------------------------
+  Brukerveiledning..: AN 13.12.38
+  SINTEF Support....: support.energy@sintef.no, Tel: 40471700/Senb: 45456000  
+  Kj›retidspunkt....: 12. februar 2026, kl  9:14:14
+
+
+ 
+ 
+ HDF5 (Hierarchical Data Format 5) Software Library and Utilities 
+ Copyright 2006-2013 by The HDF Group. 
+ 
+  See: ./hdf5_copywrite.dat
+ 
+ 
+  Fil med enmagasinmodelldata  (ULLA.ENMD) ............... : 
+  Serie- eller parallellsimulering  (PARALLELL) .......... :  PARA
+  Startuke for beregningene  (1) ......................... : 
+  Sluttuke for simulering  (260) ......................... :  260
+  Sluttuke for beregning av nye kutt  (260) .............. :  260
+  Startdoegn (hvis aktuelt)  (1) ......................... : 
+  Tast startår og antall simuleringsår <evt. V> (1931
+  88) .................................................... : 
+  Startmagasin : Tast D(empning), A(lle),
+  F(ortløpende), modul, RETURN eller annen kode .......... :  A 60
+  Startmagasin : Tast D(empning), A(lle),
+  F(ortløpende), modul, RETURN eller annen kode .......... : 
+ Multiple startvolumes per module are available in ULLA.SMAG                    
+                                 but do not match the number of scenarios (NSIM)
+ .
+
+             ----- Valg av utf|relseskoder -----
+ Kode Verdi  Forklaring
+
+ UTS  - - -  Utskrift av startmagasin p} skjerm
+ PRO  - 0 -  Tilsigsprognose brukes
+ DET  - 1 -  Lagring av detaljerte resultat for senere presentasjon
+ KUTT - 0 -  Sluttverdisetting basert paa tidligere beregnede kutt
+ SHOP - 0 -  Utskrift av koblingsfil til SHOP
+ 
+  
+ 
+  Tast utførelseskode (eller RETURN) ..................... : 
+
+
+  --------- Beregningsparametre ---------
+
+  Parameter Verdi  Stikkord
+    VAAR       18  Forste uke i fyllingssesongen
+    HOEST      40  Forste uke i tappesesongen
+    SKAL      1.0  Skaleringsfaktor for vannverdi (benyttes i sluttverdisetting)
+    RENTE     0.0  Realrente (%)
+
+ 
+ 
+  Tast parameter og tilhørende verdi (eller RETURN) ...... : 
+ 
+
+ Den innleste verdien for variabelen CTANK er uheldig; den b|r minst settes til       5010.0
+
+  Using principal component inflow model.
+
+  Opprinnelige straffeverdier brukes
+ Aggregated water values used as end value setting.                             
+                      
+
+  Hogdekorreksjon innlest
+
+
+  Magasinfylling innlest
+
+
+  Starts optimization from scratch
+
+
+  Bruker hogdekorreksjon
+
+  Baklengs gjennoml|p nummer   0
+
+  Forlengs gjennoml|p nummer   1
+  Baklengs gjennoml|p nummer   1
+  Iter:  1                                   F-kost:        -738.12
+                                             K-kost:        -740.94
+
+  Forlengs gjennoml|p nummer   2
+  Baklengs gjennoml|p nummer   2
+  Iter:  2                                   F-kost:        -744.41
+                                             K-kost:        -740.80
+
+  Forlengs gjennoml|p nummer   3
+  Baklengs gjennoml|p nummer   3
+  Iter:  3                                   F-kost:        -745.08
+                                             K-kost:        -740.78
+
+  Forlengs gjennoml|p nummer   4
+  Baklengs gjennoml|p nummer   4
+  Iter:  4                                   F-kost:        -745.13
+                                             K-kost:        -740.78
+
+  Forlengs gjennoml|p nummer   5
+  Baklengs gjennoml|p nummer   5
+  Iter:  5                                   F-kost:        -745.11
+                                             K-kost:        -740.77
+
+  Forlengs gjennoml|p nummer   6
+  Baklengs gjennoml|p nummer   6
+                                                   juke  t-sc  p_sc   mag
+  Iter:   6      Maks. vektet magendr      0.69 %   116    10     1     0
+  Iter:   6      Maks. endr_mid_enkel      0.03 %   134     0     0     1
+  Iter:   6      Maks. endr_summag         0.69 %   116    10     1     0
+  Iter:   6      Maks. endr_mid_summa      0.03 %   134     0     0     0
+  Iter:   6  Vektet Mag.endring:   0.69 %    F-kost:        -745.11
+             Endring summagasin:   0.69 %    K-kost:        -740.77
+
+  Avsluttende simulering
+  Framkost  :   -745.123674439678     
+  Bak-kost  :   -740.773118405847     
+  Driftkost :   -660.821070844589     
+
+
+  Midlere simulert sluttmagasin       :   1204.56 (GWh)
+  Verdi av sluttmagasin               :     84.30 (MEUR)
+  Verdi regnet uavhengig av fordeling :     84.30 (MEUR)
+
+ 
+  Ingen brudd pï¿½ restriksjoner i sluttsimulering 
+ 
+  Skriver kutt beregna med hogdekorreksjon, kode:   143513114
+ 
+ Writing results to ENMRES.h5.
+ Prodrisk calculation finished
+
+
+(C) Powered by ILOG

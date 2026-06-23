@@ -1,0 +1,59 @@
+0,T,                                   * Datagruppe 0 
+100,00,01,12,13,15,08,2025, * Filversjon, Lagringstidspunkt
+  0,'SVARTISEN           ',          * Omraade nummer og navn
+1,T,                                   * Datagruppe GENERELL: Diverse styreparametre 
+   1, 2023,   * Antall aar dataper., F/rste aar dataper.
+    1.00000,   * ETHA
+17,T,                                  *  Datagruppe PRISREKKE
+ 'prisrekke.pri',  * Navn p} prisrekkefil
+2,T,                                   * Datagruppe MAGSTASJ: Magasin- og stasjonsdata
+ 'SVARTISEN.DETD',    * Filnavn detaljert vannkraftbeskrivelse
+3,T,                                   * Datagruppe VANNVERDI: Data knyttet til vannverdiberegninger
+    1,  52,   * Start V.V., Slutt V.V.
+ 51, 500,0.001,   * Ant. pkt mag. V.V.,Maks ant. int V.V., Pres. krav V.V.
+ F, 7, 1, 1,   * Automatisk gen. vekttall, Ant. tilsigsalt. ved vv. beregning, Ant. sluttuker, Ant. tilsigtilstander ved vv. beregninger
+  52,    2.00,    9.00,    9.00,   30.00,    9.00,    5.00,    1.00,      * Sluttuke, vekttall
+16,T,                                  * Datagruppe FASTKON: Kontraktsforpliktelser og kontraktsrettigheter.
+  1, 1,'fast                ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__001
+ 'PE_fast                                 '   * Profil effektfaktorer
+    1,   * Antall delperioder
+    1,  52,        0.01,        0.00,   * Startuke, Sluttuke, Mengde (GWh), Pris
+ 'PL_fast                                 ',    * Profilreferanse last
+   0,   * Antall temperaturm}linger
+    0,   * Kode: Gjenkjøp/ikke betalingspliktig del=1,' Priselastisk=2, Ingen=0 
+ 99, 0,'                    ',F,   * Dellastnr, Kategori, Navn, Eget(T) >>__099
+4,T                                   * Datagruppe PREFDA: Kj|p/import, salg/eksport, varmekraft, rasjonering.
+    1,   6,'kjop                ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..001
+ 'PE_fast                                 '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+ ' '   * Filnavn til prisrekke for annen usikkerhet
+     1.00,    0.00,    0.00,   * Omr.f. h.prisr.,Omr.f. prisr. a.usik.h., konst.ledd
+  52,      1000.0000,   * Sluttuke, Overføringskapasitet (MW) for vannverdiberegning
+  52,      1000.0000,   * Sluttuke, Overføringskapasitet (MW)
+    2,   7,'salg                ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..002
+ 'PE_fast                                 '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+ ' '   * Filnavn til prisrekke for annen usikkerhet
+     1.00,    0.00,    0.00,   * Omr.f. h.prisr.,Omr.f. prisr. a.usik.h., konst.ledd
+  52,     -1000.0000,   * Sluttuke, Overføringskapasitet (MW) for vannverdiberegning
+  52,     -1000.0000,   * Sluttuke, Overføringskapasitet (MW)
+    3,   2,'Kraft u/marked      ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..003
+ 'PE_fast                                 '   * Profilnavn for skaleringsfaktorer for effektkapasitet
+  F,   * T => Effektfakt. gir skalering, F => Effektfakt. gir profilering 
+  100.000,   * Virkningsgrad (%)
+      0.00000,   * Lokale kostnader (Myntenhet/MW)
+    1,   * 0= ref. brenselarkiv, 1=egne brenselpriser
+  52,     0.0000E+00,   * Sluttuke, Pris
+  52,    -0.1000E-06,   * Sluttuke, Overføringskapasitet (MW)
+  998,  20,'Flomkraft           ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..998
+  52,     0.0000E+00,   * Sluttuke, Pris
+  999,  40,'Rasjonering         ',F,     0.00000,   * Typenr, Kategori, Navn, Eget(T), Ekstra variabel. >>..999
+  52,      3189.7910,   * Sluttuke, Pris
+99999, 0,'SluttPref', F,0.0, Slutt Preferansefunksjon
+5,T,                                   * Datagruppe REGULERT ENERGITILSIG:
+ 'SVARTISEN.R30',  * Filnavn med regulert tilsig
+  52,    1.0000,                        * Regulert tilsig: sluttuke, omregningsfaktor
+7,T,                                   * Datagruppe UREGULERT ENERGITILSIG:
+ 'SVARTISEN.U30',  * Filnavn med uregulert tilsig
+  52,    1.0000,                        * Uregulert tilsig: sluttuke, omregningsfaktor
+100,T

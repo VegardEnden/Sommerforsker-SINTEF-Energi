@@ -1,0 +1,62 @@
+datamod
+vannkr
+stasj
+10516
+13
+rolleivstadvatn
+behold
+1982
+2018
+15
+rolleivstadvatn
+behold
+12
+18.240509037513835
+
+stasj
+10517
+13
+sandvatn
+behold
+1982
+2018
+15
+sandvatn
+behold
+12
+20.55088871126243
+
+stasj
+10515
+13
+nape_lyting
+behold
+1982
+2018
+15
+nape_lyting
+behold
+12
+170.0180376829342
+
+AVSLUTT
+AVSLUTT
+simul
+arkopp f
+magrev f
+otilpro f
+tilpro f
+tilsetb f
+prepmark t
+markfill f
+vvtap f
+svv f
+ses f
+eff f
+optrev f
+havari f
+start
+AVSLUTT
+AVSLUTT
+AVSLUTT
+JA

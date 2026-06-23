@@ -1,0 +1,4 @@
+New session: 2026-6-23, 14:6:18
+
+Input check: different number of scenarios in stochastic TXY series
+There is invalid input data. Fix data and restart program.

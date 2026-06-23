@@ -1,0 +1,8 @@
+ 1,2025,11, 7,15,19,42,'Start vansim'
+   1,'Styreparameter'
+ 'FJONE               ','Systemnavn'
+ 'fjone.ENMD                                                  ','Navn ENMD-fil'
+   1,'0=tilsigsprognose brukes ikke,1=brukes'
+   0.000,'Realrente'
+  18,'Startuke vannverdiberegninger/Simulering'
+ 243,'Antall uker vannverdiberegninger/Simulering'

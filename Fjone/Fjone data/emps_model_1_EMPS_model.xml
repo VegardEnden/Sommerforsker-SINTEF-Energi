@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="18">
+<model class_id="0" tracking_level="1" version="0" object_id="_0">
+	<id>1</id>
+	<name>EMPS_model</name>
+	<created>-9223372036854775808</created>
+	<first_historical_year>1931</first_historical_year>
+	<n_historical_years>80</n_historical_years>
+	<first_year_data_period>2018</first_year_data_period>
+	<n_years_data_period>5</n_years_data_period>
+	<area class_id="1" tracking_level="0" version="0">
+		<count>1</count>
+		<item_version>0</item_version>
+		<item class_id="2" tracking_level="0" version="0">
+			<first>FJONE</first>
+			<second class_id="3" tracking_level="0" version="1">
+				<px class_id="4" tracking_level="1" version="0" object_id="_1">
+					<id>0</id>
+					<name>FJONE</name>
+					<power_modules class_id="5" tracking_level="0" version="0">
+						<count>4</count>
+						<item_version>0</item_version>
+						<item class_id="6" tracking_level="0" version="0">
+							<first>L_1</first>
+							<second class_id="7" tracking_level="0" version="1">
+								<px class_id="8" tracking_level="1" version="0" object_id="_2">
+									<id>L_1_A_0</id>
+									<name>alm forsyning</name>
+									<statkraft_share>0.00000000000000000e+00</statkraft_share>
+									<own_system>0</own_system>
+									<temperature class_id="9" tracking_level="1" version="0" object_id="_3">
+										<items class_id="10" tracking_level="0" version="0">
+											<count>0</count>
+											<item_version>0</item_version>
+										</items>
+									</temperature>
+									<power_profile class_id="11" tracking_level="1" version="0" object_id="_4">
+										<year_profile>PL_alm forsyning</year_profile>
+										<week_profile>PE_alm forsyning</week_profile>
+									</power_profile>
+									<ref_to_load_id></ref_to_load_id>
+									<power_type_id>0</power_type_id>
+									<load_type_id>1</load_type_id>
+									<wind_type_id>0</wind_type_id>
+									<fuel_ref></fuel_ref>
+									<chp_profile_ref>0</chp_profile_ref>
+									<periode_ref>0</periode_ref>
+									<exogen_price_ref></exogen_price_ref>
+									<temp_cor_profile_ref></temp_cor_profile_ref>
+									<other_json_data></other_json_data>
+								</px>
+							</second>
+						</item>
+						<item>
+							<first>P_1</first>
+							<second>
+								<px class_id_reference="8" object_id="_5">
+									<id>P_1_A_0</id>
+									<name>Kjop spot</name>
+									<statkraft_share>0.00000000000000000e+00</statkraft_share>
+									<own_system>0</own_system>
+									<temperature object_id="_6">
+										<items>
+											<count>0</count>
+											<item_version>0</item_version>
+										</items>
+									</temperature>
+									<power_profile object_id="_7">
+										<year_profile></year_profile>
+										<week_profile></week_profile>
+									</power_profile>
+									<ref_to_load_id>l0</ref_to_load_id>
+									<power_type_id>6</power_type_id>
+									<load_type_id>0</load_type_id>
+									<wind_type_id>0</wind_type_id>
+									<fuel_ref></fuel_ref>
+									<chp_profile_ref>0</chp_profile_ref>
+									<periode_ref>0</periode_ref>
+									<exogen_price_ref></exogen_price_ref>
+									<temp_cor_profile_ref></temp_cor_profile_ref>
+									<other_json_data></other_json_data>
+								</px>
+							</second>
+						</item>
+						<item>
+							<first>P_2</first>
+							<second>
+								<px class_id_reference="8" object_id="_8">
+									<id>P_2_A_0</id>
+									<name>Salg spot</name>
+									<statkraft_share>0.00000000000000000e+00</statkraft_share>
+									<own_system>0</own_system>
+									<temperature object_id="_9">
+										<items>
+											<count>0</count>
+											<item_version>0</item_version>
+										</items>
+									</temperature>
+									<power_profile object_id="_10">
+										<year_profile></year_profile>
+										<week_profile></week_profile>
+									</power_profile>
+									<ref_to_load_id>l0</ref_to_load_id>
+									<power_type_id>7</power_type_id>
+									<load_type_id>0</load_type_id>
+									<wind_type_id>0</wind_type_id>
+									<fuel_ref></fuel_ref>
+									<chp_profile_ref>0</chp_profile_ref>
+									<periode_ref>0</periode_ref>
+									<exogen_price_ref></exogen_price_ref>
+									<temp_cor_profile_ref></temp_cor_profile_ref>
+									<other_json_data></other_json_data>
+								</px>
+							</second>
+						</item>
+						<item>
+							<first>P_999</first>
+							<second>
+								<px class_id_reference="8" object_id="_11">
+									<id>P_999_A_0</id>
+									<name>Rasjonering</name>
+									<statkraft_share>0.00000000000000000e+00</statkraft_share>
+									<own_system>0</own_system>
+									<temperature object_id="_12">
+										<items>
+											<count>0</count>
+											<item_version>0</item_version>
+										</items>
+									</temperature>
+									<power_profile object_id="_13">
+										<year_profile></year_profile>
+										<week_profile></week_profile>
+									</power_profile>
+									<ref_to_load_id>l0</ref_to_load_id>
+									<power_type_id>40</power_type_id>
+									<load_type_id>0</load_type_id>
+									<wind_type_id>0</wind_type_id>
+									<fuel_ref></fuel_ref>
+									<chp_profile_ref>0</chp_profile_ref>
+									<periode_ref>0</periode_ref>
+									<exogen_price_ref></exogen_price_ref>
+									<temp_cor_profile_ref></temp_cor_profile_ref>
+									<other_json_data></other_json_data>
+								</px>
+							</second>
+						</item>
+					</power_modules>
+					<hps class_id="12" tracking_level="0" version="1">
+						<px class_id="13" tracking_level="1" version="0" object_id="_14">
+							<id>0</id>
+							<name>FJONE</name>
+							<created>-9223372036854775808</created>
+							<reservoirs class_id="14" tracking_level="0" version="0">
+								<count>4</count>
+								<item_version>1</item_version>
+								<item class_id="15" tracking_level="0" version="1">
+									<px class_id="16" tracking_level="1" version="0" object_id="_15">
+										<hc class_id="17" tracking_level="1" version="0" object_id="_16">
+											<hps class_id="18" tracking_level="0" version="0">
+												<weak_ptr>
+													<px class_id="-1"></px>
+												</weak_ptr>
+											</hps>
+											<id>0</id>
+											<name>havet</name>
+											<ds class_id="19" tracking_level="0" version="0">
+												<count>0</count>
+												<item_version>0</item_version>
+											</ds>
+											<us>
+												<count>5</count>
+												<item_version>0</item_version>
+												<item class_id="20" tracking_level="1" version="0" object_id="_17">
+													<role>3</role>
+													<target class_id="21" tracking_level="0" version="1">
+														<px class_id="22" class_name="ltm::core::water_route" tracking_level="1" version="0" object_id="_18">
+															<hc object_id="_19">
+																<hps>
+																	<weak_ptr>
+																		<px class_id="-1"></px>
+																	</weak_ptr>
+																</hps>
+																<id>0</id>
+																<name>Flood from Rolleivstadvatn to havet</name>
+																<ds>
+																	<count>1</count>
+																	<item_version>0</item_version>
+																	<item object_id="_20">
+																		<role>0</role>
+																		<target>
+																			<px class_id_reference="16" object_id_reference="_15"></px>
+																		</target>
+																	</item>
+																</ds>
+																<us>
+																	<count>1</count>
+																	<item_version>0</item_version>
+																	<item object_id="_21">
+																		<role>3</role>
+																		<target>
+																			<px class_id_reference="16" object_id="_22">
+																				<hc object_id="_23">
+																					<hps>
+																						<weak_ptr>
+																							<px class_id="-1"></px>
+																						</weak_ptr>
+																					</hps>
+																					<id>0</id>
+																					<name>Rolleivstadvatn</name>
+																					<ds>
+																						<count>2</count>
+																						<item_version>0</item_version>
+																						<item object_id="_24">
+																							<role>2</role>
+																							<target>
+																								<px class_id_reference="22" object_id_reference="_18"></px>
+																							</target>
+																						</item>
+																						<item object_id="_25">
+																							<role>1</role>
+																							<target>
+																								<px class_id_reference="22" object_id="_26">
+																									<hc object_id="_27">
+																										<hps>
+																											<weak_ptr>
+																												<px class_id="-1"></px>
+																											</weak_ptr>
+																										</hps>
+																										<id>0</id>
+																										<name>Bypass from Rolleivstadvatn to havet</name>
+																										<ds>
+																											<count>1</count>
+																											<item_version>0</item_version>
+																											<item object_id="_28">
+																												<role>0</role>
+																												<target>
+																													<px class_id_reference="16" object_id_reference="_15"></px>
+																												</target>
+																											</item>
+																										</ds>
+																										<us>
+																											<count>1</count>
+																											<item_version>0</item_version>
+																											<item object_id="_29">
+																												<role>3</role>
+																												<target>
+																													<px class_id_reference="16" object_id_reference="_22"></px>
+																												</target>
+																											</item>
+																										</us>
+																									</hc>
+																									<info class_id="23" tracking_level="1" version="0" object_id="_30">
+																										<uid>10516</uid>
+																										<max_cap_m3s>1.00000000000000000e+04</max_cap_m3s>
+																										<min_flow class_id="24" tracking_level="1" version="0" object_id="_31">
+																											<uid></uid>
+																											<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																											<watermark_ref></watermark_ref>
+																											<type>0</type>
+																											<other_json_data></other_json_data>
+																										</min_flow>
+																										<max_flow object_id="_32">
+																											<uid></uid>
+																											<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																											<watermark_ref></watermark_ref>
+																											<type>0</type>
+																											<other_json_data></other_json_data>
+																										</max_flow>
+																										<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																									</info>
+																								</px>
+																							</target>
+																						</item>
+																					</ds>
+																					<us>
+																						<count>1</count>
+																						<item_version>0</item_version>
+																						<item object_id="_33">
+																							<role>3</role>
+																							<target>
+																								<px class_id_reference="22" object_id="_34">
+																									<hc object_id="_35">
+																										<hps>
+																											<weak_ptr>
+																												<px class_id="-1"></px>
+																											</weak_ptr>
+																										</hps>
+																										<id>0</id>
+																										<name>Main water route 10516</name>
+																										<ds>
+																											<count>1</count>
+																											<item_version>0</item_version>
+																											<item object_id="_36">
+																												<role>0</role>
+																												<target>
+																													<px class_id_reference="16" object_id_reference="_22"></px>
+																												</target>
+																											</item>
+																										</ds>
+																										<us>
+																											<count>1</count>
+																											<item_version>0</item_version>
+																											<item object_id="_37">
+																												<role>3</role>
+																												<target>
+																													<px class_id="25" class_name="ltm::core::power_station" tracking_level="1" version="0" object_id="_38">
+																														<hc object_id="_39">
+																															<hps>
+																																<weak_ptr>
+																																	<px class_id="-1"></px>
+																																</weak_ptr>
+																															</hps>
+																															<id>0</id>
+																															<name>Rolleivstadvatn</name>
+																															<ds>
+																																<count>1</count>
+																																<item_version>0</item_version>
+																																<item object_id="_40">
+																																	<role>0</role>
+																																	<target>
+																																		<px class_id_reference="22" object_id_reference="_34"></px>
+																																	</target>
+																																</item>
+																															</ds>
+																															<us>
+																																<count>1</count>
+																																<item_version>0</item_version>
+																																<item object_id="_41">
+																																	<role>3</role>
+																																	<target>
+																																		<px class_id_reference="22" object_id="_42">
+																																			<hc object_id="_43">
+																																				<hps>
+																																					<weak_ptr>
+																																						<px class_id="-1"></px>
+																																					</weak_ptr>
+																																				</hps>
+																																				<id>0</id>
+																																				<name>Main water route 10516s</name>
+																																				<ds>
+																																					<count>1</count>
+																																					<item_version>0</item_version>
+																																					<item object_id="_44">
+																																						<role>0</role>
+																																						<target>
+																																							<px class_id_reference="25" object_id_reference="_38"></px>
+																																						</target>
+																																					</item>
+																																				</ds>
+																																				<us>
+																																					<count>1</count>
+																																					<item_version>0</item_version>
+																																					<item object_id="_45">
+																																						<role>3</role>
+																																						<target>
+																																							<px class_id_reference="16" object_id="_46">
+																																								<hc object_id="_47">
+																																									<hps>
+																																										<weak_ptr>
+																																											<px class_id="-1"></px>
+																																										</weak_ptr>
+																																									</hps>
+																																									<id>0</id>
+																																									<name>Sandvatn</name>
+																																									<ds>
+																																										<count>4</count>
+																																										<item_version>0</item_version>
+																																										<item object_id="_48">
+																																											<role>2</role>
+																																											<target>
+																																												<px class_id_reference="22" object_id="_49">
+																																													<hc object_id="_50">
+																																														<hps>
+																																															<weak_ptr>
+																																																<px class_id="-1"></px>
+																																															</weak_ptr>
+																																														</hps>
+																																														<id>0</id>
+																																														<name>Flood from Sandvatn to Nape</name>
+																																														<ds>
+																																															<count>1</count>
+																																															<item_version>0</item_version>
+																																															<item object_id="_51">
+																																																<role>0</role>
+																																																<target>
+																																																	<px class_id_reference="16" object_id="_52">
+																																																		<hc object_id="_53">
+																																																			<hps>
+																																																				<weak_ptr>
+																																																					<px class_id="-1"></px>
+																																																				</weak_ptr>
+																																																			</hps>
+																																																			<id>0</id>
+																																																			<name>Nape</name>
+																																																			<ds>
+																																																				<count>3</count>
+																																																				<item_version>0</item_version>
+																																																				<item object_id="_54">
+																																																					<role>2</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id="_55">
+																																																							<hc object_id="_56">
+																																																								<hps>
+																																																									<weak_ptr>
+																																																										<px class_id="-1"></px>
+																																																									</weak_ptr>
+																																																								</hps>
+																																																								<id>0</id>
+																																																								<name>Flood from Nape to havet</name>
+																																																								<ds>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_57">
+																																																										<role>0</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_15"></px>
+																																																										</target>
+																																																									</item>
+																																																								</ds>
+																																																								<us>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_58">
+																																																										<role>3</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_52"></px>
+																																																										</target>
+																																																									</item>
+																																																								</us>
+																																																							</hc>
+																																																							<info object_id="_59">
+																																																								<uid>10515</uid>
+																																																								<max_cap_m3s>1.00000000000000000e+05</max_cap_m3s>
+																																																								<min_flow object_id="_60">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</min_flow>
+																																																								<max_flow object_id="_61">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</max_flow>
+																																																								<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																							</info>
+																																																						</px>
+																																																					</target>
+																																																				</item>
+																																																				<item object_id="_62">
+																																																					<role>1</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id="_63">
+																																																							<hc object_id="_64">
+																																																								<hps>
+																																																									<weak_ptr>
+																																																										<px class_id="-1"></px>
+																																																									</weak_ptr>
+																																																								</hps>
+																																																								<id>0</id>
+																																																								<name>Bypass from Nape to havet</name>
+																																																								<ds>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_65">
+																																																										<role>0</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_15"></px>
+																																																										</target>
+																																																									</item>
+																																																								</ds>
+																																																								<us>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_66">
+																																																										<role>3</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_52"></px>
+																																																										</target>
+																																																									</item>
+																																																								</us>
+																																																							</hc>
+																																																							<info object_id="_67">
+																																																								<uid>10515</uid>
+																																																								<max_cap_m3s>1.00000000000000000e+04</max_cap_m3s>
+																																																								<min_flow object_id="_68">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</min_flow>
+																																																								<max_flow object_id="_69">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</max_flow>
+																																																								<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																							</info>
+																																																						</px>
+																																																					</target>
+																																																				</item>
+																																																				<item object_id="_70">
+																																																					<role>0</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id="_71">
+																																																							<hc object_id="_72">
+																																																								<hps>
+																																																									<weak_ptr>
+																																																										<px class_id="-1"></px>
+																																																									</weak_ptr>
+																																																								</hps>
+																																																								<id>0</id>
+																																																								<name>Main water route 10515s</name>
+																																																								<ds>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_73">
+																																																										<role>0</role>
+																																																										<target>
+																																																											<px class_id_reference="25" object_id="_74">
+																																																												<hc object_id="_75">
+																																																													<hps>
+																																																														<weak_ptr>
+																																																															<px class_id="-1"></px>
+																																																														</weak_ptr>
+																																																													</hps>
+																																																													<id>0</id>
+																																																													<name>Fjone_Nape</name>
+																																																													<ds>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_76">
+																																																															<role>0</role>
+																																																															<target>
+																																																																<px class_id_reference="22" object_id="_77">
+																																																																	<hc object_id="_78">
+																																																																		<hps>
+																																																																			<weak_ptr>
+																																																																				<px class_id="-1"></px>
+																																																																			</weak_ptr>
+																																																																		</hps>
+																																																																		<id>0</id>
+																																																																		<name>Main water route 10515</name>
+																																																																		<ds>
+																																																																			<count>1</count>
+																																																																			<item_version>0</item_version>
+																																																																			<item object_id="_79">
+																																																																				<role>0</role>
+																																																																				<target>
+																																																																					<px class_id_reference="16" object_id_reference="_15"></px>
+																																																																				</target>
+																																																																			</item>
+																																																																		</ds>
+																																																																		<us>
+																																																																			<count>1</count>
+																																																																			<item_version>0</item_version>
+																																																																			<item object_id="_80">
+																																																																				<role>3</role>
+																																																																				<target>
+																																																																					<px class_id_reference="25" object_id_reference="_74"></px>
+																																																																				</target>
+																																																																			</item>
+																																																																		</us>
+																																																																	</hc>
+																																																																	<info object_id="_81">
+																																																																		<uid>10515</uid>
+																																																																		<max_cap_m3s>2.29799995422363281e+01</max_cap_m3s>
+																																																																		<min_flow object_id="_82">
+																																																																			<uid></uid>
+																																																																			<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																																			<watermark_ref></watermark_ref>
+																																																																			<type>0</type>
+																																																																			<other_json_data></other_json_data>
+																																																																		</min_flow>
+																																																																		<max_flow object_id="_83">
+																																																																			<uid></uid>
+																																																																			<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																																			<watermark_ref></watermark_ref>
+																																																																			<type>0</type>
+																																																																			<other_json_data></other_json_data>
+																																																																		</max_flow>
+																																																																		<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																																	</info>
+																																																																</px>
+																																																															</target>
+																																																														</item>
+																																																													</ds>
+																																																													<us>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_84">
+																																																															<role>3</role>
+																																																															<target>
+																																																																<px class_id_reference="22" object_id_reference="_71"></px>
+																																																															</target>
+																																																														</item>
+																																																													</us>
+																																																												</hc>
+																																																												<info class_id="26" tracking_level="1" version="0" object_id="_85">
+																																																													<uid>10515</uid>
+																																																													<generations class_id="27" tracking_level="0" version="0">
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item class_id="28" tracking_level="1" version="0" object_id="_86">
+																																																															<res_id>10515</res_id>
+																																																															<eekv>6.20199978351593018e-01</eekv>
+																																																															<p_q_curve class_id="29" tracking_level="1" version="0" object_id="_87">
+																																																																<z>2.58040008544921875e+02</z>
+																																																																<xy_curve class_id="30" tracking_level="1" version="0" object_id="_88">
+																																																																	<points class_id="31" tracking_level="0" version="0">
+																																																																		<count>5</count>
+																																																																		<item_version>0</item_version>
+																																																																		<item class_id="32" tracking_level="1" version="0" object_id="_89">
+																																																																			<x>2.57700004577636719e+01</x>
+																																																																			<y>1.19099998474121094e+01</y>
+																																																																		</item>
+																																																																		<item object_id="_90">
+																																																																			<x>2.96700000762939453e+01</x>
+																																																																			<y>1.34799995422363281e+01</y>
+																																																																		</item>
+																																																																		<item object_id="_91">
+																																																																			<x>3.55400009155273438e+01</x>
+																																																																			<y>1.59399995803833008e+01</y>
+																																																																		</item>
+																																																																		<item object_id="_92">
+																																																																			<x>4.52900009155273438e+01</x>
+																																																																			<y>2.04899997711181641e+01</y>
+																																																																		</item>
+																																																																		<item object_id="_93">
+																																																																			<x>4.96800003051757813e+01</x>
+																																																																			<y>2.29799995422363281e+01</y>
+																																																																		</item>
+																																																																	</points>
+																																																																</xy_curve>
+																																																															</p_q_curve>
+																																																														</item>
+																																																													</generations>
+																																																													<gen_period_spec class_id="33" tracking_level="0" version="0">
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item class_id="34" tracking_level="1" version="0" object_id="_94">
+																																																															<spec>before_week(1309)</spec>
+																																																														</item>
+																																																													</gen_period_spec>
+																																																													<pump class_id="35" tracking_level="0" version="1">
+																																																														<px class_id="36" tracking_level="1" version="0" object_id="_95">
+																																																															<uid></uid>
+																																																															<a>0.00000000000000000e+00</a>
+																																																															<b>0.00000000000000000e+00</b>
+																																																															<p_average_height_MW>0.00000000000000000e+00</p_average_height_MW>
+																																																															<upstream_pc class_id="37" tracking_level="1" version="0" object_id="_96">
+																																																																<points class_id="38" tracking_level="0" version="0">
+																																																																	<count>0</count>
+																																																																	<item_version>0</item_version>
+																																																																</points>
+																																																															</upstream_pc>
+																																																															<downstream_pc object_id="_97">
+																																																																<points>
+																																																																	<count>0</count>
+																																																																	<item_version>0</item_version>
+																																																																</points>
+																																																															</downstream_pc>
+																																																															<connection_uid></connection_uid>
+																																																															<source_uid></source_uid>
+																																																															<target_uid></target_uid>
+																																																														</px>
+																																																													</pump>
+																																																													<outlet_elevation_m>2.45759994506835938e+02</outlet_elevation_m>
+																																																													<other_json_data>{&quot;statkraft_share&quot;: 1.0, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_yearly_reg_inflow&quot;: 176.50001525878906, &quot;deg_regulation&quot;: 1.1187000274658203, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;outlet_contour&quot;: 245.75999450683594, &quot;reference_height&quot;: 258.0400085449219}</other_json_data>
+																																																													<hydraulic_coupling class_id="39" tracking_level="1" version="0" object_id="_98">
+																																																														<hc_type>0</hc_type>
+																																																														<parameter>0.00000000000000000e+00</parameter>
+																																																														<switch_freq>0.00000000000000000e+00</switch_freq>
+																																																														<max_discharge>0.00000000000000000e+00</max_discharge>
+																																																													</hydraulic_coupling>
+																																																												</info>
+																																																											</px>
+																																																										</target>
+																																																									</item>
+																																																								</ds>
+																																																								<us>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_99">
+																																																										<role>3</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_52"></px>
+																																																										</target>
+																																																									</item>
+																																																								</us>
+																																																							</hc>
+																																																							<info object_id="_100">
+																																																								<uid>10515s</uid>
+																																																								<max_cap_m3s>2.29799995422363281e+01</max_cap_m3s>
+																																																								<min_flow object_id="_101">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</min_flow>
+																																																								<max_flow object_id="_102">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</max_flow>
+																																																								<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																							</info>
+																																																						</px>
+																																																					</target>
+																																																				</item>
+																																																			</ds>
+																																																			<us>
+																																																				<count>3</count>
+																																																				<item_version>0</item_version>
+																																																				<item object_id="_103">
+																																																					<role>3</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id_reference="_49"></px>
+																																																					</target>
+																																																				</item>
+																																																				<item object_id="_104">
+																																																					<role>3</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id="_105">
+																																																							<hc object_id="_106">
+																																																								<hps>
+																																																									<weak_ptr>
+																																																										<px class_id="-1"></px>
+																																																									</weak_ptr>
+																																																								</hps>
+																																																								<id>0</id>
+																																																								<name>Bypass from Sandvatn to Nape</name>
+																																																								<ds>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_107">
+																																																										<role>0</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_52"></px>
+																																																										</target>
+																																																									</item>
+																																																								</ds>
+																																																								<us>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_108">
+																																																										<role>3</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_46"></px>
+																																																										</target>
+																																																									</item>
+																																																								</us>
+																																																							</hc>
+																																																							<info object_id="_109">
+																																																								<uid>10517</uid>
+																																																								<max_cap_m3s>1.00000000000000000e+04</max_cap_m3s>
+																																																								<min_flow object_id="_110">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</min_flow>
+																																																								<max_flow object_id="_111">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</max_flow>
+																																																								<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																							</info>
+																																																						</px>
+																																																					</target>
+																																																				</item>
+																																																				<item object_id="_112">
+																																																					<role>3</role>
+																																																					<target>
+																																																						<px class_id_reference="22" object_id="_113">
+																																																							<hc object_id="_114">
+																																																								<hps>
+																																																									<weak_ptr>
+																																																										<px class_id="-1"></px>
+																																																									</weak_ptr>
+																																																								</hps>
+																																																								<id>0</id>
+																																																								<name>Main water route 10517</name>
+																																																								<ds>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_115">
+																																																										<role>0</role>
+																																																										<target>
+																																																											<px class_id_reference="16" object_id_reference="_52"></px>
+																																																										</target>
+																																																									</item>
+																																																								</ds>
+																																																								<us>
+																																																									<count>1</count>
+																																																									<item_version>0</item_version>
+																																																									<item object_id="_116">
+																																																										<role>3</role>
+																																																										<target>
+																																																											<px class_id_reference="25" object_id="_117">
+																																																												<hc object_id="_118">
+																																																													<hps>
+																																																														<weak_ptr>
+																																																															<px class_id="-1"></px>
+																																																														</weak_ptr>
+																																																													</hps>
+																																																													<id>0</id>
+																																																													<name>Sandvatn</name>
+																																																													<ds>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_119">
+																																																															<role>0</role>
+																																																															<target>
+																																																																<px class_id_reference="22" object_id_reference="_113"></px>
+																																																															</target>
+																																																														</item>
+																																																													</ds>
+																																																													<us>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_120">
+																																																															<role>3</role>
+																																																															<target>
+																																																																<px class_id_reference="22" object_id="_121">
+																																																																	<hc object_id="_122">
+																																																																		<hps>
+																																																																			<weak_ptr>
+																																																																				<px class_id="-1"></px>
+																																																																			</weak_ptr>
+																																																																		</hps>
+																																																																		<id>0</id>
+																																																																		<name>Main water route 10517s</name>
+																																																																		<ds>
+																																																																			<count>1</count>
+																																																																			<item_version>0</item_version>
+																																																																			<item object_id="_123">
+																																																																				<role>0</role>
+																																																																				<target>
+																																																																					<px class_id_reference="25" object_id_reference="_117"></px>
+																																																																				</target>
+																																																																			</item>
+																																																																		</ds>
+																																																																		<us>
+																																																																			<count>1</count>
+																																																																			<item_version>0</item_version>
+																																																																			<item object_id="_124">
+																																																																				<role>3</role>
+																																																																				<target>
+																																																																					<px class_id_reference="16" object_id_reference="_46"></px>
+																																																																				</target>
+																																																																			</item>
+																																																																		</us>
+																																																																	</hc>
+																																																																	<info object_id="_125">
+																																																																		<uid>10517s</uid>
+																																																																		<max_cap_m3s>2.50000000000000000e+01</max_cap_m3s>
+																																																																		<min_flow object_id="_126">
+																																																																			<uid></uid>
+																																																																			<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																																			<watermark_ref></watermark_ref>
+																																																																			<type>0</type>
+																																																																			<other_json_data></other_json_data>
+																																																																		</min_flow>
+																																																																		<max_flow object_id="_127">
+																																																																			<uid></uid>
+																																																																			<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																																			<watermark_ref></watermark_ref>
+																																																																			<type>0</type>
+																																																																			<other_json_data></other_json_data>
+																																																																		</max_flow>
+																																																																		<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																																	</info>
+																																																																</px>
+																																																															</target>
+																																																														</item>
+																																																													</us>
+																																																												</hc>
+																																																												<info object_id="_128">
+																																																													<uid>10517</uid>
+																																																													<generations>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_129">
+																																																															<res_id>10517</res_id>
+																																																															<eekv>0.00000000000000000e+00</eekv>
+																																																															<p_q_curve object_id="_130">
+																																																																<z>1.00000000000000000e+00</z>
+																																																																<xy_curve object_id="_131">
+																																																																	<points>
+																																																																		<count>1</count>
+																																																																		<item_version>0</item_version>
+																																																																		<item object_id="_132">
+																																																																			<x>0.00000000000000000e+00</x>
+																																																																			<y>2.50000000000000000e+01</y>
+																																																																		</item>
+																																																																	</points>
+																																																																</xy_curve>
+																																																															</p_q_curve>
+																																																														</item>
+																																																													</generations>
+																																																													<gen_period_spec>
+																																																														<count>1</count>
+																																																														<item_version>0</item_version>
+																																																														<item object_id="_133">
+																																																															<spec>before_week(1309)</spec>
+																																																														</item>
+																																																													</gen_period_spec>
+																																																													<pump>
+																																																														<px class_id_reference="36" object_id="_134">
+																																																															<uid></uid>
+																																																															<a>0.00000000000000000e+00</a>
+																																																															<b>0.00000000000000000e+00</b>
+																																																															<p_average_height_MW>0.00000000000000000e+00</p_average_height_MW>
+																																																															<upstream_pc object_id="_135">
+																																																																<points>
+																																																																	<count>0</count>
+																																																																	<item_version>0</item_version>
+																																																																</points>
+																																																															</upstream_pc>
+																																																															<downstream_pc object_id="_136">
+																																																																<points>
+																																																																	<count>0</count>
+																																																																	<item_version>0</item_version>
+																																																																</points>
+																																																															</downstream_pc>
+																																																															<connection_uid></connection_uid>
+																																																															<source_uid></source_uid>
+																																																															<target_uid></target_uid>
+																																																														</px>
+																																																													</pump>
+																																																													<outlet_elevation_m>6.72000000000000000e+02</outlet_elevation_m>
+																																																													<other_json_data>{&quot;statkraft_share&quot;: 1.0, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_yearly_reg_inflow&quot;: 7.400001049041748, &quot;deg_regulation&quot;: 0.006200000178068876, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;outlet_contour&quot;: 672.0, &quot;reference_height&quot;: 1.0}</other_json_data>
+																																																													<hydraulic_coupling object_id="_137">
+																																																														<hc_type>0</hc_type>
+																																																														<parameter>0.00000000000000000e+00</parameter>
+																																																														<switch_freq>0.00000000000000000e+00</switch_freq>
+																																																														<max_discharge>0.00000000000000000e+00</max_discharge>
+																																																													</hydraulic_coupling>
+																																																												</info>
+																																																											</px>
+																																																										</target>
+																																																									</item>
+																																																								</us>
+																																																							</hc>
+																																																							<info object_id="_138">
+																																																								<uid>10517</uid>
+																																																								<max_cap_m3s>2.50000000000000000e+01</max_cap_m3s>
+																																																								<min_flow object_id="_139">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</min_flow>
+																																																								<max_flow object_id="_140">
+																																																									<uid></uid>
+																																																									<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																																									<watermark_ref></watermark_ref>
+																																																									<type>0</type>
+																																																									<other_json_data></other_json_data>
+																																																								</max_flow>
+																																																								<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																																							</info>
+																																																						</px>
+																																																					</target>
+																																																				</item>
+																																																			</us>
+																																																		</hc>
+																																																		<info class_id="40" tracking_level="1" version="0" object_id="_141">
+																																																			<vol_descr object_id="_142">
+																																																				<points>
+																																																					<count>13</count>
+																																																					<item_version>0</item_version>
+																																																					<item object_id="_143">
+																																																						<x>4.87130004882812500e+02</x>
+																																																						<y>0.00000000000000000e+00</y>
+																																																					</item>
+																																																					<item object_id="_144">
+																																																						<x>4.89100006103515625e+02</x>
+																																																						<y>1.28800001144409180e+01</y>
+																																																					</item>
+																																																					<item object_id="_145">
+																																																						<x>4.91130004882812500e+02</x>
+																																																						<y>2.68999996185302734e+01</y>
+																																																					</item>
+																																																					<item object_id="_146">
+																																																						<x>4.93000000000000000e+02</x>
+																																																						<y>4.05999984741210938e+01</y>
+																																																					</item>
+																																																					<item object_id="_147">
+																																																						<x>4.95130004882812500e+02</x>
+																																																						<y>5.62999992370605469e+01</y>
+																																																					</item>
+																																																					<item object_id="_148">
+																																																						<x>4.97130004882812500e+02</x>
+																																																						<y>7.20699996948242188e+01</y>
+																																																					</item>
+																																																					<item object_id="_149">
+																																																						<x>4.99170013427734375e+02</x>
+																																																						<y>9.00699996948242188e+01</y>
+																																																					</item>
+																																																					<item object_id="_150">
+																																																						<x>5.01140014648437500e+02</x>
+																																																						<y>1.08029998779296875e+02</y>
+																																																					</item>
+																																																					<item object_id="_151">
+																																																						<x>5.03109985351562500e+02</x>
+																																																						<y>1.26529998779296875e+02</y>
+																																																					</item>
+																																																					<item object_id="_152">
+																																																						<x>5.05130004882812500e+02</x>
+																																																						<y>1.46039993286132813e+02</y>
+																																																					</item>
+																																																					<item object_id="_153">
+																																																						<x>5.07170013427734375e+02</x>
+																																																						<y>1.66240005493164063e+02</y>
+																																																					</item>
+																																																					<item object_id="_154">
+																																																						<x>5.09140014648437500e+02</x>
+																																																						<y>1.86179992675781250e+02</y>
+																																																					</item>
+																																																					<item object_id="_155">
+																																																						<x>5.12130004882812500e+02</x>
+																																																						<y>2.23500000000000000e+02</y>
+																																																					</item>
+																																																				</points>
+																																																			</vol_descr>
+																																																			<bottom_reservoir>0.00000000000000000e+00</bottom_reservoir>
+																																																			<owner_share>1.00000000000000000e+00</owner_share>
+																																																			<rsv_type>500</rsv_type>
+																																																			<uid>10515</uid>
+																																																			<other_json_data>{&quot;avg_yearly_reg_inflow&quot;: 176.50001525878906, &quot;deg_regulation&quot;: 1.1187000274658203, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;}</other_json_data>
+																																																			<hydraulic_coupling class_id="41" tracking_level="1" version="0" object_id="_156">
+																																																				<group_code>0</group_code>
+																																																				<max_discharge>0.00000000000000000e+00</max_discharge>
+																																																				<with_hatches>0</with_hatches>
+																																																			</hydraulic_coupling>
+																																																		</info>
+																																																	</px>
+																																																</target>
+																																															</item>
+																																														</ds>
+																																														<us>
+																																															<count>1</count>
+																																															<item_version>0</item_version>
+																																															<item object_id="_157">
+																																																<role>3</role>
+																																																<target>
+																																																	<px class_id_reference="16" object_id_reference="_46"></px>
+																																																</target>
+																																															</item>
+																																														</us>
+																																													</hc>
+																																													<info object_id="_158">
+																																														<uid>10517</uid>
+																																														<max_cap_m3s>1.00000000000000000e+05</max_cap_m3s>
+																																														<min_flow object_id="_159">
+																																															<uid></uid>
+																																															<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																															<watermark_ref></watermark_ref>
+																																															<type>0</type>
+																																															<other_json_data></other_json_data>
+																																														</min_flow>
+																																														<max_flow object_id="_160">
+																																															<uid></uid>
+																																															<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																															<watermark_ref></watermark_ref>
+																																															<type>0</type>
+																																															<other_json_data></other_json_data>
+																																														</max_flow>
+																																														<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																													</info>
+																																												</px>
+																																											</target>
+																																										</item>
+																																										<item object_id="_161">
+																																											<role>1</role>
+																																											<target>
+																																												<px class_id_reference="22" object_id_reference="_105"></px>
+																																											</target>
+																																										</item>
+																																										<item object_id="_162">
+																																											<role>0</role>
+																																											<target>
+																																												<px class_id_reference="22" object_id_reference="_42"></px>
+																																											</target>
+																																										</item>
+																																										<item object_id="_163">
+																																											<role>0</role>
+																																											<target>
+																																												<px class_id_reference="22" object_id_reference="_121"></px>
+																																											</target>
+																																										</item>
+																																									</ds>
+																																									<us>
+																																										<count>0</count>
+																																										<item_version>0</item_version>
+																																									</us>
+																																								</hc>
+																																								<info object_id="_164">
+																																									<vol_descr object_id="_165">
+																																										<points>
+																																											<count>2</count>
+																																											<item_version>0</item_version>
+																																											<item object_id="_166">
+																																												<x>6.73010009765625000e+02</x>
+																																												<y>0.00000000000000000e+00</y>
+																																											</item>
+																																											<item object_id="_167">
+																																												<x>6.73020019531250000e+02</x>
+																																												<y>1.00000001490116119e-01</y>
+																																											</item>
+																																										</points>
+																																									</vol_descr>
+																																									<bottom_reservoir>0.00000000000000000e+00</bottom_reservoir>
+																																									<owner_share>1.00000000000000000e+00</owner_share>
+																																									<rsv_type>0</rsv_type>
+																																									<uid>10517</uid>
+																																									<other_json_data>{&quot;avg_yearly_reg_inflow&quot;: 7.400001049041748, &quot;deg_regulation&quot;: 0.006200000178068876, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;}</other_json_data>
+																																									<hydraulic_coupling object_id="_168">
+																																										<group_code>0</group_code>
+																																										<max_discharge>0.00000000000000000e+00</max_discharge>
+																																										<with_hatches>0</with_hatches>
+																																									</hydraulic_coupling>
+																																								</info>
+																																							</px>
+																																						</target>
+																																					</item>
+																																				</us>
+																																			</hc>
+																																			<info object_id="_169">
+																																				<uid>10516s</uid>
+																																				<max_cap_m3s>0.00000000000000000e+00</max_cap_m3s>
+																																				<min_flow object_id="_170">
+																																					<uid></uid>
+																																					<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																					<watermark_ref></watermark_ref>
+																																					<type>0</type>
+																																					<other_json_data></other_json_data>
+																																				</min_flow>
+																																				<max_flow object_id="_171">
+																																					<uid></uid>
+																																					<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																																					<watermark_ref></watermark_ref>
+																																					<type>0</type>
+																																					<other_json_data></other_json_data>
+																																				</max_flow>
+																																				<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																																			</info>
+																																		</px>
+																																	</target>
+																																</item>
+																															</us>
+																														</hc>
+																														<info object_id="_172">
+																															<uid>10516</uid>
+																															<generations>
+																																<count>1</count>
+																																<item_version>0</item_version>
+																																<item object_id="_173">
+																																	<res_id>10517</res_id>
+																																	<eekv>-9.25925895571708679e-02</eekv>
+																																	<p_q_curve object_id="_174">
+																																		<z>-2.39000244140625000e+01</z>
+																																		<xy_curve object_id="_175">
+																																			<points>
+																																				<count>1</count>
+																																				<item_version>0</item_version>
+																																				<item object_id="_176">
+																																					<x>0.00000000000000000e+00</x>
+																																					<y>0.00000000000000000e+00</y>
+																																				</item>
+																																			</points>
+																																		</xy_curve>
+																																	</p_q_curve>
+																																</item>
+																															</generations>
+																															<gen_period_spec>
+																																<count>1</count>
+																																<item_version>0</item_version>
+																																<item object_id="_177">
+																																	<spec>before_week(1309)</spec>
+																																</item>
+																															</gen_period_spec>
+																															<pump>
+																																<px class_id_reference="36" object_id="_178">
+																																	<uid>10516</uid>
+																																	<a>-9.99999046325683594e-03</a>
+																																	<b>1.43699979782104492e+00</b>
+																																	<p_average_height_MW>4.00000005960464478e-01</p_average_height_MW>
+																																	<upstream_pc object_id="_179">
+																																		<points>
+																																			<count>2</count>
+																																			<item_version>0</item_version>
+																																			<item class_id="42" tracking_level="1" version="0" object_id="_180">
+																																				<t>week(1)</t>
+																																				<v>2.99999999999999989e-01</v>
+																																			</item>
+																																			<item object_id="_181">
+																																				<t>week(52)</t>
+																																				<v>1.00000000000000000e+00</v>
+																																			</item>
+																																		</points>
+																																	</upstream_pc>
+																																	<downstream_pc object_id="_182">
+																																		<points>
+																																			<count>2</count>
+																																			<item_version>0</item_version>
+																																			<item object_id="_183">
+																																				<t>week(1)</t>
+																																				<v>2.99999999999999989e-01</v>
+																																			</item>
+																																			<item object_id="_184">
+																																				<t>week(52)</t>
+																																				<v>2.99999999999999989e-01</v>
+																																			</item>
+																																		</points>
+																																	</downstream_pc>
+																																	<connection_uid>10516</connection_uid>
+																																	<source_uid>10516</source_uid>
+																																	<target_uid>10517</target_uid>
+																																</px>
+																															</pump>
+																															<outlet_elevation_m>6.49000000000000000e+02</outlet_elevation_m>
+																															<other_json_data>{&quot;statkraft_share&quot;: 1.0, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_yearly_reg_inflow&quot;: 16.10000228881836, &quot;deg_regulation&quot;: 0.40369999408721924, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;outlet_contour&quot;: 649.0, &quot;reference_height&quot;: -23.9000244140625}</other_json_data>
+																															<hydraulic_coupling object_id="_185">
+																																<hc_type>0</hc_type>
+																																<parameter>0.00000000000000000e+00</parameter>
+																																<switch_freq>0.00000000000000000e+00</switch_freq>
+																																<max_discharge>0.00000000000000000e+00</max_discharge>
+																															</hydraulic_coupling>
+																														</info>
+																													</px>
+																												</target>
+																											</item>
+																										</us>
+																									</hc>
+																									<info object_id="_186">
+																										<uid>10516</uid>
+																										<max_cap_m3s>0.00000000000000000e+00</max_cap_m3s>
+																										<min_flow object_id="_187">
+																											<uid></uid>
+																											<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																											<watermark_ref></watermark_ref>
+																											<type>0</type>
+																											<other_json_data></other_json_data>
+																										</min_flow>
+																										<max_flow object_id="_188">
+																											<uid></uid>
+																											<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																											<watermark_ref></watermark_ref>
+																											<type>0</type>
+																											<other_json_data></other_json_data>
+																										</max_flow>
+																										<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+																									</info>
+																								</px>
+																							</target>
+																						</item>
+																					</us>
+																				</hc>
+																				<info object_id="_189">
+																					<vol_descr object_id="_190">
+																						<points>
+																							<count>2</count>
+																							<item_version>0</item_version>
+																							<item object_id="_191">
+																								<x>6.49119995117187500e+02</x>
+																								<y>0.00000000000000000e+00</y>
+																							</item>
+																							<item object_id="_192">
+																								<x>6.51619995117187500e+02</x>
+																								<y>6.50000000000000000e+00</y>
+																							</item>
+																						</points>
+																					</vol_descr>
+																					<bottom_reservoir>0.00000000000000000e+00</bottom_reservoir>
+																					<owner_share>1.00000000000000000e+00</owner_share>
+																					<rsv_type>500</rsv_type>
+																					<uid>10516</uid>
+																					<other_json_data>{&quot;avg_yearly_reg_inflow&quot;: 16.10000228881836, &quot;deg_regulation&quot;: 0.40369999408721924, &quot;reg_inflow_ts_name&quot;: &quot;5060-J&quot;, &quot;avg_inflow_y_start&quot;: 1931, &quot;avg_inflow_y_stop&quot;: 2010, &quot;avg_yearly_ureg_inflow&quot;: 0.0, &quot;ureg_inflow_ts_name&quot;: &quot;5060-J&quot;}</other_json_data>
+																					<hydraulic_coupling object_id="_193">
+																						<group_code>0</group_code>
+																						<max_discharge>0.00000000000000000e+00</max_discharge>
+																						<with_hatches>0</with_hatches>
+																					</hydraulic_coupling>
+																				</info>
+																			</px>
+																		</target>
+																	</item>
+																</us>
+															</hc>
+															<info object_id="_194">
+																<uid>10516</uid>
+																<max_cap_m3s>1.00000000000000000e+05</max_cap_m3s>
+																<min_flow object_id="_195">
+																	<uid></uid>
+																	<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																	<watermark_ref></watermark_ref>
+																	<type>0</type>
+																	<other_json_data></other_json_data>
+																</min_flow>
+																<max_flow object_id="_196">
+																	<uid></uid>
+																	<mean_yearly_flow>0.00000000000000000e+00</mean_yearly_flow>
+																	<watermark_ref></watermark_ref>
+																	<type>0</type>
+																	<other_json_data></other_json_data>
+																</max_flow>
+																<other_json_data>{&quot;statkraft_share&quot;: 1.0}</other_json_data>
+															</info>
+														</px>
+													</target>
+												</item>
+												<item object_id="_197">
+													<role>3</role>
+													<target>
+														<px class_id_reference="22" object_id_reference="_55"></px>
+													</target>
+												</item>
+												<item object_id="_198">
+													<role>3</role>
+													<target>
+														<px class_id_reference="22" object_id_reference="_26"></px>
+													</target>
+												</item>
+												<item object_id="_199">
+													<role>3</role>
+													<target>
+														<px class_id_reference="22" object_id_reference="_63"></px>
+													</target>
+												</item>
+												<item object_id="_200">
+													<role>3</role>
+													<target>
+														<px class_id_reference="22" object_id_reference="_77"></px>
+													</target>
+												</item>
+											</us>
+										</hc>
+										<info object_id="_201">
+											<vol_descr object_id="_202">
+												<points>
+													<count>2</count>
+													<item_version>0</item_version>
+													<item object_id="_203">
+														<x>-2.00000000000000000e+00</x>
+														<y>0.00000000000000000e+00</y>
+													</item>
+													<item object_id="_204">
+														<x>0.00000000000000000e+00</x>
+														<y>1.35000000000000000e+18</y>
+													</item>
+												</points>
+											</vol_descr>
+											<bottom_reservoir>0.00000000000000000e+00</bottom_reservoir>
+											<owner_share>0.00000000000000000e+00</owner_share>
+											<rsv_type>0</rsv_type>
+											<uid></uid>
+											<other_json_data>{&quot;avg_yearly_reg_inflow&quot;: 0.0}</other_json_data>
+											<hydraulic_coupling object_id="_205">
+												<group_code>0</group_code>
+												<max_discharge>0.00000000000000000e+00</max_discharge>
+												<with_hatches>0</with_hatches>
+											</hydraulic_coupling>
+										</info>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="16" object_id_reference="_22"></px>
+								</item>
+								<item>
+									<px class_id_reference="16" object_id_reference="_46"></px>
+								</item>
+								<item>
+									<px class_id_reference="16" object_id_reference="_52"></px>
+								</item>
+							</reservoirs>
+							<power_stations class_id="43" tracking_level="0" version="0">
+								<count>3</count>
+								<item_version>1</item_version>
+								<item class_id="44" tracking_level="0" version="1">
+									<px class_id_reference="25" object_id_reference="_38"></px>
+								</item>
+								<item>
+									<px class_id_reference="25" object_id_reference="_117"></px>
+								</item>
+								<item>
+									<px class_id_reference="25" object_id_reference="_74"></px>
+								</item>
+							</power_stations>
+							<water_routes class_id="45" tracking_level="0" version="0">
+								<count>12</count>
+								<item_version>1</item_version>
+								<item class_id="46" tracking_level="0" version="1">
+									<px class_id_reference="22" object_id_reference="_18"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_49"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_55"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_26"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_105"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_63"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_34"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_113"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_77"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_42"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_121"></px>
+								</item>
+								<item>
+									<px class_id_reference="22" object_id_reference="_71"></px>
+								</item>
+							</water_routes>
+							<watermarks class_id="47" tracking_level="0" version="0">
+								<count>1</count>
+								<item_version>1</item_version>
+								<item class_id="48" tracking_level="0" version="1">
+									<px class_id="49" tracking_level="1" version="0" object_id="_206">
+										<name>5060-J</name>
+										<wms_info class_id="50" tracking_level="1" version="0" object_id="_207">
+											<uid>0</uid>
+											<scaling_factor>8.64000022411346436e-02</scaling_factor>
+											<average_inflow>1.73391235351562500e+02</average_inflow>
+											<other_json_data>{&quot;name&quot;: &quot;5060-J&quot;}</other_json_data>
+										</wms_info>
+										<hps>
+											<weak_ptr>
+												<px class_id="-1"></px>
+											</weak_ptr>
+										</hps>
+									</px>
+								</item>
+							</watermarks>
+						</px>
+					</hps>
+				</px>
+			</second>
+		</item>
+	</area>
+	<power_lines class_id="51" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>1</item_version>
+	</power_lines>
+	<power_type_map class_id="52" tracking_level="0" version="0">
+		<count>17</count>
+		<item_version>0</item_version>
+		<item class_id="53" tracking_level="0" version="0">
+			<first>1</first>
+			<second>Tilfeldigkraft Kj|P Og Import</second>
+		</item>
+		<item>
+			<first>2</first>
+			<second>Tilfeldigkraft Salg Og Eksport</second>
+		</item>
+		<item>
+			<first>3</first>
+			<second>Varmekraft</second>
+		</item>
+		<item>
+			<first>4</first>
+			<second>Gjenkjop</second>
+		</item>
+		<item>
+			<first>5</first>
+			<second>Kontrakter Med Delvis Bet.Plikt,</second>
+		</item>
+		<item>
+			<first>6</first>
+			<second>Kj|P Spotmarked (Prisrekke)</second>
+		</item>
+		<item>
+			<first>7</first>
+			<second>Salg Spotmarked (Prisrekke)</second>
+		</item>
+		<item>
+			<first>8</first>
+			<second>Kj|P Refert Lastprofil</second>
+		</item>
+		<item>
+			<first>9</first>
+			<second>Salg Refert Lastprofil</second>
+		</item>
+		<item>
+			<first>10</first>
+			<second>Kj|P Referert Tidsserie</second>
+		</item>
+		<item>
+			<first>11</first>
+			<second>Salg Referert Tidsserie</second>
+		</item>
+		<item>
+			<first>12</first>
+			<second>Tpris-Kj|P Spotmarked-Tidsserie</second>
+		</item>
+		<item>
+			<first>13</first>
+			<second>Tpris-Salg Spotmarked-Tidsserie</second>
+		</item>
+		<item>
+			<first>14</first>
+			<second>Gjenkjop Referert Tidsserie</second>
+		</item>
+		<item>
+			<first>20</first>
+			<second>Flomkraft</second>
+		</item>
+		<item>
+			<first>30</first>
+			<second>Prisavhengighet For Dellast</second>
+		</item>
+		<item>
+			<first>40</first>
+			<second>Rasjonering</second>
+		</item>
+	</power_type_map>
+	<load_type_map>
+		<count>5</count>
+		<item_version>0</item_version>
+		<item>
+			<first>1</first>
+			<second>Kontraktforpliktelse Med Forutbestemt Uttak</second>
+		</item>
+		<item>
+			<first>2</first>
+			<second>Kontraktrettighet Med Forutbestemt Uttak</second>
+		</item>
+		<item>
+			<first>5</first>
+			<second>Brukstidskontrakter Type Salg</second>
+		</item>
+		<item>
+			<first>6</first>
+			<second>Salg Tidsserie</second>
+		</item>
+		<item>
+			<first>7</first>
+			<second>Kjop Tidsserie</second>
+		</item>
+	</load_type_map>
+</model>
+</boost_serialization>
+

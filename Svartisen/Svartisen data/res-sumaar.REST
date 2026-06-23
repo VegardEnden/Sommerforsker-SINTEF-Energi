@@ -1,0 +1,34 @@
+                                                                                                                                   
+
+                   skjomen.ENMD                                                                                                    
+
+ Simuleringsperiode:    Fom. uke 47 2023 tom. uke 52 2027                                                                          
+
+ Resultatene er referert til prosentiler av tilsig                                                                                 
+
+
+ Kraft balanse fom.  uke 47 2023 tom. uke 52 2027                                                                                  
+
+                        ENHET MIDDEL    0 %    25 %    50 %    75 %   100 %                                                        
+                        ]r            1984    1980    1997    1945    1970                                                         
+                                                                                                                                   
+                                                                                                                                   
+ Tilsig                 GWh   5901.2  4701.1  5602.7  5861.0  6204.3  7001.6                                                       
+ Flom                   GWh    701.3    59.4   408.6   723.4   948.0  1453.3                                                       
+ Startmagasin           GWh    778.4   778.4   778.4   778.4   778.4   778.4                                                       
+ Sluttmagasin           GWh    959.4   757.6  1085.4  1147.9  1159.0  1089.2                                                       
+ Levert vannkraft       GWh   5019.0  4662.5  4887.0  4768.2  4875.6  5237.7                                                       
+                                                                                                                                   
+ RESTMAGASIN                                                                                                                       
+ Magasin >     0.00 Mm3                                                                                                            
+                                                                                                                                   
+ KJØRISVATN             GWh     21.1    19.2    20.6    22.5    26.4    23.0                                                       
+ BÅTSVATN               GWh    295.9   270.1   325.1   336.4   336.7   325.5                                                       
+ TILSIG LANGV           GWh      0.0     0.0     0.0     0.0     0.0     0.0                                                       
+ LANGVATNET             GWh    317.7   203.9   384.8   413.0   416.1   385.7                                                       
+ LOSIVATN               GWh    236.5   211.8   252.2   265.3   265.1   251.6                                                       
+ NORDDAL. DAM           GWh      0.7     0.5     0.5     1.2     1.5     1.2                                                       
+ IPTO/NORDELV           GWh     17.9    12.6    18.9    21.1    21.9    19.5                                                       
+ KJÅRDA                 GWh     69.4    39.5    83.3    88.3    91.2    82.5                                                       
+                                                                                                                                   
+ Sum restmagasin        GWh    959.3   757.5  1085.3  1147.8  1159.0  1089.1                                                       

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href="inflowfor_presentation.xsl" ?>
+<InflowForecast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="inflowfor_val.xsd">
+ <Inflowseries SeriesName="5060-J" AreaNo="0" AreaName="fjone">
+  <Forecast ForecastType="ManualShorttermForecast" ShortCalculationType="Weight" ForecastDate="06.09.2020">
+   <StartWeek>36                                                                                                  
+   </StartWeek>
+   <EndWeek>37                                                                                                  
+   </EndWeek>
+   <PercentDevMean>53.00                                                                                               
+   </PercentDevMean>
+   <WeightFirstWeek>100.0                                                                                               
+   </WeightFirstWeek>
+  </Forecast>
+ </Inflowseries>
+ <Inflowseries SeriesName="5060-J" AreaNo="0" AreaName="fjone">
+  <Forecast ForecastType="ManualLongtermForecast" ForecastDate="06.09.2020">
+   <StartWeek>38                                                                                                  
+   </StartWeek>
+   <EndWeek>39                                                                                                  
+   </EndWeek>
+   <PercentDevMean>100.00                                                                                              
+   </PercentDevMean>
+   <VariationCoefficient>0.75656                                                                                             
+   </VariationCoefficient>
+  </Forecast>
+ </Inflowseries>
+</InflowForecast>

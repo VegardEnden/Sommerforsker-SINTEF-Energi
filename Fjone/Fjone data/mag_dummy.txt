@@ -1,0 +1,34 @@
+	'Vassdrag fjone
+PARALLELL	'Simtype
+18	'Startuke simulering
+260	'SluttukeSim for simulering
+260	'SluttukeKutt for beregning av nye kutt
+5	'Startdogn hvis aktuelt
+	'Startår og antall simuleringsår
+M	' M = Mm3 eller P = Prosent
+rf	'rf = Read File
+fjone.smag	'Startmagasinet fra Vansimtap
+	'For å komme til neste meny
+SHOP	'Benytte resultatene i SHOP
+JA	'JA/NEI
+2	'Planleggingshorisont SHOP
+	'Referanse-prisnivå for beregning av vannverdier
+KUTT	'Sluttverdisetting basert på tidligere beregnede kutt
+NEI	'KUTT JA/NEI
+DET	'Skrive detaljerte verdier til .SIMT
+JA	'DET JA/NEI
+PRO	Tilsigskorrigering benyttes
+	'For å komme til neste meny
+	'For å starte optimaliseringen
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
