@@ -38,7 +38,7 @@ class InputObject(object):
 def build_prodrisk_model(LTM_input_folder, n_weeks=156, start_time="2030-01-07"):
     ScenF = h5py.File(os.path.join(LTM_input_folder+'ScenarioData.h5'), 'r')
     names = list(ScenF.keys())
-    model_name = names[0]
+    model_name = names[-1]
     ScenF.close()
     # INITIALIZE PRODRISK API #
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", silent=False, log_file='')
@@ -395,7 +395,14 @@ def get_price_scenarios(start_time, data_dir, priceFileName, n_weeks=-1, n_scen=
 
     for row in data_lines:
         scen = int(row[1])
-        values = [float(x) for x in row[2:] if x.strip() != ""]
+        # values = [float(x) for x in row[2:] if x.strip() != ""]
+        
+        values = [
+            float(x.replace(",", "."))
+            for x in row[2:]
+            if x.strip() != ""
+        ]
+
 
         scenario_name = f"scen{scen-1}"
         weekly_scenarios[scenario_name] = values
@@ -494,6 +501,19 @@ def set_price_periods_from_file(prodrisk, data_dir):
                                          index = [prodrisk.start_time + pd.Timedelta(hours=i) for i in range(168)]))
 
     return
+
+
+# def getPricePeriods(data_dir):
+#     fileNamePrisavsnitt = data_dir + "PRISAVSNITT.DATA"
+#     prisavsnitt = []
+#     with open(fileNamePrisavsnitt, 'r') as prisavsnitt_file:
+#         allData = prisavsnitt_file.readlines()
+#         nPriceLevels = int(allData[1].split(',')[0])
+#         pricePeriodsData = allData[nPriceLevels+2:]
+#         for line in pricePeriodsData:
+#             line = list(map(int, line.split(',')[:-2]))
+#             prisavsnitt.extend(line)
+#     return prisavsnitt
 
 
 def getPricePeriods(data_dir):

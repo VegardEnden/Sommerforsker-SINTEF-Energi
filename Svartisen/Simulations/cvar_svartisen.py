@@ -13,12 +13,14 @@ from helpers import build_prodrisk_model
 
 folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Svartisen\Svartisen data\\"
 
-prdrisk_cvar = build_prodrisk_model(folder)
+prdrisk_cvar = build_prodrisk_model(folder,52)
+
+prdrisk_cvar.plot_topology()
 
 prdrisk_cvar.cvar = 0.9
 prdrisk_cvar.cvar_weight = 0.2
 
-status = prdrisk_cvar.run()
+# status = prdrisk_cvar.run()
 
 
 # area_name = prdrisk_cvar.model.area.get_object_names()[0]
