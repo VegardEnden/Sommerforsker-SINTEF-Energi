@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 from pyprodrisk import ProdriskSession
-from helpers import build_prodrisk_model
+from Tools.helpers import build_prodrisk_model
 
 folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Svartisen\Svartisen data\\"
 
