@@ -8,9 +8,12 @@ import matplotlib.pyplot as plt
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from Tools.topology import topology
-from Tools.rsv_vols import plot_reservoir_volumes
+from Tools.helpers import topology, plot_reservoir_volumes, overflow
 
-topology("Fjone")
+# topology("Fjone")
 
-plot_reservoir_volumes("Fjone","CVaR","lg")
+# plot_reservoir_volumes("Fjone","CVaR","lg")
+# plot_reservoir_volumes("Fjone","RN","lg")
+
+overflow("Fjone","CVaR","lg")
+overflow("Fjone","RN","lg")

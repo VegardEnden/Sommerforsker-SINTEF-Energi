@@ -49,10 +49,11 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         for p, vals in zip(percs,total_perc):
             ax_total.plot(index, vals, label=f"{p}th percentile")
         ax_total.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
+        ax_total.grid()
         ax_total.legend()
 
 
-        path_total = os.path.join(plot_folder, "Fjone_total_volume.png")
+        path_total = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_total_volume.png")
         fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
 
 
@@ -62,9 +63,10 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         for p, vals in zip(percs,nape_perc):
             ax_nape.plot(index, vals, label=f"{p}th percentile")
         ax_nape.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
+        ax_nape.grid()
         ax_nape.legend()
 
-        path_nape = os.path.join(plot_folder, "Fjone_nape_volume.png")
+        path_nape = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_nape_volume.png")
         fig_nape.savefig(path_nape, dpi=300, bbox_inches='tight')
 
 
