@@ -11,30 +11,19 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 from pyprodrisk import ProdriskSession
 from helpers import build_prodrisk_model
 
-folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Fjone data\\"
 
-prdrisk_cvar = build_prodrisk_model(folder)
+prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
+                           solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
+                           silent=False,        # write console output
+                           sim_id=None)         # use default session id (a timestamp)
 
-prdrisk_cvar.plot_topology()
+local_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Fjone data"
+prodrisk.load_model_yaml(file_path=local_dir,file_name="fjone.yaml",)
+prodrisk.load_data_h5(file_path=local_dir,file_name="fjone.h5")
 
-prdrisk_cvar.cvar = 0.9
-prdrisk_cvar.cvar_weight = 0.2
+prodrisk.plot_topology()
 
-# status = prdrisk_cvar.run()
-
-
-# area_name = prdrisk_cvar.model.area.get_object_names()[0]
-# area_cvar = prdrisk_cvar.model.area[area_name]
-
-# price = area_cvar.price.get()
-
-# print("Price scenarios:", price.shape[1])
-
-# # Check inflow
-# modules = prdrisk_cvar.model.module.get_object_names()
-# mod0 = prdrisk_cvar.model.module[modules[0]]
-
-# inflow = mod0.localInflow.get()
-# print("Inflow scenarios:", inflow.shape[1])
+prodrisk.cvar = 0.9
+prodrisk.cvar_weight = 0.2
 
 
