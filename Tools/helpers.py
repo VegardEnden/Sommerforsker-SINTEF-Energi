@@ -52,6 +52,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
         for p, vals in zip(percs,total_perc):
             ax_total.plot(index, vals, label=f"{p}th percentile")
+        ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
         ax_total.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
         ax_total.grid()
         ax_total.legend()
@@ -66,6 +67,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         fig_nape, ax_nape = plt.subplots(figsize=(20,10),sharey=True)
         for p, vals in zip(percs,nape_perc):
             ax_nape.plot(index, vals, label=f"{p}th percentile")
+        ax_nape.plot(index,np.mean(nape_vol.values,axis=1),label="Mean")
         ax_nape.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
         ax_nape.grid()
         ax_nape.legend()

@@ -12,11 +12,15 @@ from Tools.helpers import *
 
 # topology("Fjone")
 
-# plot_reservoir_volumes("Fjone","CVaR","lg")
-# plot_reservoir_volumes("Fjone","RN","lg")
+plot_reservoir_volumes("Fjone","CVaR","lg")
+plot_reservoir_volumes("Fjone","RN","lg")
 
 # overflow("Fjone","CVaR","lg")
 # overflow("Fjone","RN","lg")
 
-income("Fjone","CVaR","lg")
-income("Fjone","RN","lg")
+# income("Fjone","CVaR","lg")
+# income("Fjone","RN","lg")
+
+
+print("All done!")
+
