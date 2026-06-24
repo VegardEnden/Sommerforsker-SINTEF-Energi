@@ -133,7 +133,28 @@ def income(plant_name, method, inflow_model):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
+    nscenarios = prodrisk.n_scenarios
+
+    area = prodrisk.model.area["my_area"]
+
+    volume = area.total_reservoir_volume.get().to_numpy()
+    production = area.total_production.get().to_numpy()
+    price = area.price.get().to_numpy()
+    mean_price = np.mean(price,axis=0)
+
+    income = np.sum(production * price)
+    endValue = np.sum(volume[-1,:] * mean_price)
+    startValue = np.sum(volume[0,:] * mean_price)
+
     
+    adjusted_income = (income + endValue - startValue) / nscenarios
+    income = income / nscenarios
+
+    print(f"Average income at {plant_name} using {method} and {inflow_model} is {income:.2f}.")
+    print(f"The adjusted income is {adjusted_income:.2f}")
 
 
+    return
+
+    
     
