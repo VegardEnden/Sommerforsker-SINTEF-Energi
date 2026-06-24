@@ -21,9 +21,8 @@ def topology(plant_name):
     prodrisk.load_model_yaml(file_path=data_path,file_name=plant_name)
     prodrisk.load_data_h5(file_path=data_path,file_name=plant_name)
 
-    folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Results")
+    path = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Results",plant_name + "_topology.png")
 
-    fig = prodrisk.plot_topology()
-    fig.savefig(os.path.join(folder, plant_name + "_topology.png"), dpi=300)
+    prodrisk.plot_topology(path)
 
     return 
