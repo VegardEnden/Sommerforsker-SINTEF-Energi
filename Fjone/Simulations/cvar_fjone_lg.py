@@ -18,12 +18,24 @@ prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Do
                            sim_id=None)         # use default session id (a timestamp)
 
 local_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Fjone data"
+
 prodrisk.load_model_yaml(file_path=local_dir,file_name="fjone.yaml",)
 prodrisk.load_data_h5(file_path=local_dir,file_name="fjone.h5")
 
-prodrisk.plot_topology()
+prodrisk.temp_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata"
+prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
+prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
+prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
+prodrisk.keep_working_directory = False                              # remove temporary files after the simulation
 
 prodrisk.cvar = 0.9
 prodrisk.cvar_weight = 0.2
+
+status = prodrisk.run()
+
+run_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Simulations\Finished Runs"
+
+prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_Fjone_lg",direction="both")
+prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_Fjone_lg",direction="both")
 
 
