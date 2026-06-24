@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from pyprodrisk import ProdriskSession
 
-def initialize_session(plant_name, method, inflow_model):
+def load_session(plant_name, method, inflow_model):
 
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
@@ -26,7 +26,7 @@ def initialize_session(plant_name, method, inflow_model):
 
 def plot_reservoir_volumes(plant_name, method, inflow_model):
 
-    prodrisk = initialize_session(plant_name,method,inflow_model)
+    prodrisk = load_session(plant_name,method,inflow_model)
 
     if plant_name == "Fjone":
         nape_mod = prodrisk.model.module["nape"]
@@ -104,7 +104,7 @@ def topology(plant_name):
 
 def overflow(plant_name, method, inflow_model):
 
-    prodrisk = initialize_session(plant_name,method,inflow_model)
+    prodrisk = load_session(plant_name,method,inflow_model)
 
     area = prodrisk.model.area["my_area"]
 
@@ -113,9 +113,27 @@ def overflow(plant_name, method, inflow_model):
     average_overflow = np.mean(overflow,axis=0)
 
 
+    if plant_name == "Fjone":
+
+        nape_mod = prodrisk.model.module["nape"]
+        rolle_mod = prodrisk.model.module["rolleivstadvatn"]
+        sand_mod = prodrisk.model.module["sandvatn"]
+
+        nape_overflow = nape_mod.overflow.get().values
+        rolle_overflow = rolle_mod.overflow.get().values
+        sand_overflow = sand_mod.overflow.get().values
+
+
 
 
     return
+
+
+def income(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    
 
 
     
