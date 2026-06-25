@@ -18,14 +18,16 @@ from Tools.helpers import *
 # overflow("Fjone","CVaR","lg")
 # overflow("Fjone","RN","lg")
 
-cvar_income = income("Fjone","CVaR","lg")
-rn_income = income("Fjone","RN","lg")
+# cvar_income = income("Fjone","CVaR","lg")
+# rn_income = income("Fjone","RN","lg")
 
-df = pd.DataFrame({
-    "Risk-Neutral":[rn_income],
-    "CVaR (0.9,20%)":[cvar_income]
+# income_df = pd.DataFrame({
+#     "Risk-Neutral":[rn_income*100/rn_income],
+#     "CVaR (0.9,20%)":[cvar_income*100/rn_income]
 
-}, index="Income in 1000EUR")
+# }, index=["Income scaled to risk-neutral"])
+
+# print(income_df)
 
 # income("Fjone","CVaR","pca")
 
@@ -35,6 +37,11 @@ df = pd.DataFrame({
 # water_vals = pd.concat([cvar_df,rn_df])
 
 # print(water_vals)
+
+neginflow_df = pd.concat([neg_inflow("Fjone","RN","lg"),neg_inflow("Fjone","RN","pca")])
+
+print(neginflow_df)
+
 
 
 print("All done!")
