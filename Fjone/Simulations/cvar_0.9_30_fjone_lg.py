@@ -31,13 +31,13 @@ prodrisk.keep_working_directory = False                              # remove te
 prodrisk.inflow_model = "lognormal"
 
 prodrisk.cvar = 0.9
-prodrisk.cvar_weight = 0.3
+prodrisk.cvar_weight = 0.5
 
 status = prodrisk.run()
 
 run_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Simulations\Finished Runs"
 
-prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_0.9_30_Fjone_lg",direction="both")
-prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_0.9_30_Fjone_lg",direction="both")
+prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_0.9_50_Fjone_lg",direction="both")
+prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_0.9_50_Fjone_lg",direction="both")
 
 

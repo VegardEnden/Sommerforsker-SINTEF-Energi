@@ -12,30 +12,33 @@ from Tools.helpers import *
 
 # topology("Fjone")
 
-# plot_reservoir_volumes("Fjone","CVaR","lg")
+# plot_reservoir_volumes("Fjone","CVaR_0.9_50","lg")
 # plot_reservoir_volumes("Fjone","RN","lg")
 
 # overflow("Fjone","CVaR","lg")
 # overflow("Fjone","RN","lg")
 
-cvar_income = income("Fjone","CVaR_0.9_30","lg")
+cvar_20_income = income("Fjone","CVaR_0.9_20","lg")
+cvar_50_income = income("Fjone","CVaR_0.9_50","lg")
 rn_income = income("Fjone","RN","lg")
+
 
 income_df = pd.DataFrame({
     "Risk-Neutral": [
         rn_income[0] * 100 / rn_income[0],  
         rn_income[1] * 100 / rn_income[0],
-        rn_income[2] * 100 / rn_income[0],
     ],
-    "CVaR (0.9,30%)": [
-        cvar_income[0] * 100 / rn_income[0],
-        cvar_income[1] * 100 / rn_income[0],
-        cvar_income[2] * 100 / rn_income[0],
+    "CVaR (0.9,20%)": [
+        cvar_20_income[0] * 100 / rn_income[0],
+        cvar_20_income[1] * 100 / rn_income[0],
+    ],
+    "CVaR (0.9,50%)": [
+        cvar_50_income[0] * 100 / rn_income[0],
+        cvar_50_income[1] * 100 / rn_income[0],
     ]
 }, index=[
     "Average income",
-    "CVaR 10%",
-    "CVaR 20%"
+    "CVaR 10%"
 ])
 
 

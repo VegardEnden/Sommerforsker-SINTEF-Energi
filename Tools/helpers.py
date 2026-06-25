@@ -158,12 +158,6 @@ def income(plant_name, method, inflow_model):
 
     mean_price = np.mean(price, axis=0)
 
-    
-    for i in range(5):
-        corr = np.corrcoef(production[:, i], price[:, i])[0, 1]
-        print(i, corr)
-
-
     # Scenario-wise calculations
     scenario_income = np.sum(production * price, axis=0)
 
@@ -185,7 +179,7 @@ def income(plant_name, method, inflow_model):
     print(f"Worst 10% VaR: {var10:.2f}, CVaR: {cvar10:.2f}")
     print(f"Worst 20% VaR: {var20:.2f}, CVaR: {cvar20:.2f}")
 
-    return [avg_adjusted, cvar10, cvar20]
+    return [avg_adjusted, cvar10]
 
 
 
