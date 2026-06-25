@@ -28,16 +28,16 @@ prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute 
 prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
 prodrisk.keep_working_directory = False                              # remove temporary files after the simulation
 
-prodrisk.inflow_model = "residual"
+prodrisk.inflow_model = "lognormal"
 
 prodrisk.cvar = 0.9
-prodrisk.cvar_weight = 0.2
+prodrisk.cvar_weight = 0.3
 
 status = prodrisk.run()
 
 run_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Simulations\Finished Runs"
 
-prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_Fjone_res",direction="both")
-prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_Fjone_res",direction="both")
+prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_0.9_30_Fjone_lg",direction="both")
+prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_0.9_30_Fjone_lg",direction="both")
 
 

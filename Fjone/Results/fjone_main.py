@@ -18,16 +18,28 @@ from Tools.helpers import *
 # overflow("Fjone","CVaR","lg")
 # overflow("Fjone","RN","lg")
 
-# cvar_income = income("Fjone","CVaR","lg")
-# rn_income = income("Fjone","RN","lg")
+cvar_income = income("Fjone","CVaR_0.9_30","lg")
+rn_income = income("Fjone","RN","lg")
 
-# income_df = pd.DataFrame({
-#     "Risk-Neutral":[rn_income*100/rn_income],
-#     "CVaR (0.9,20%)":[cvar_income*100/rn_income]
+income_df = pd.DataFrame({
+    "Risk-Neutral": [
+        rn_income[0] * 100 / rn_income[0],  
+        rn_income[1] * 100 / rn_income[0],
+        rn_income[2] * 100 / rn_income[0],
+    ],
+    "CVaR (0.9,30%)": [
+        cvar_income[0] * 100 / rn_income[0],
+        cvar_income[1] * 100 / rn_income[0],
+        cvar_income[2] * 100 / rn_income[0],
+    ]
+}, index=[
+    "Average income",
+    "CVaR 10%",
+    "CVaR 20%"
+])
 
-# }, index=["Income scaled to risk-neutral"])
 
-# print(income_df)
+print(income_df)
 
 # income("Fjone","CVaR","pca")
 
@@ -38,9 +50,9 @@ from Tools.helpers import *
 
 # print(water_vals)
 
-neginflow_df = pd.concat([neg_inflow("Fjone","RN","lg"),neg_inflow("Fjone","RN","pca")])
+# neginflow_df = pd.concat([neg_inflow("Fjone","RN","lg"),neg_inflow("Fjone","RN","pca")])
 
-print(neginflow_df)
+# print(neginflow_df)
 
 
 

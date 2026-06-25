@@ -131,32 +131,61 @@ def overflow(plant_name, method, inflow_model):
     return
 
 
+
+def tail_metrics(values, alpha):
+    n = len(values)
+    k = int(np.ceil(alpha * n))
+    sorted_vals = np.sort(values)
+    worst = sorted_vals[:k]
+
+    var = sorted_vals[k - 1]
+    cvar = np.mean(worst)
+
+    return var, cvar
+
+
+
 def income(plant_name, method, inflow_model):
 
-    prodrisk = load_session(plant_name,method,inflow_model)
+    prodrisk = load_session(plant_name, method, inflow_model)
 
     nscenarios = prodrisk.n_scenarios
-
     area = prodrisk.model.area["my_area"]
 
     volume = area.total_reservoir_volume.get().to_numpy()
     production = area.total_production.get().to_numpy()
-    price = area.price.get().to_numpy()
-    mean_price = np.mean(price,axis=0)
+    price = area.output_price.get().to_numpy()
 
-    income = np.sum(production * price)
-    endValue = np.sum(volume[-1,:] * mean_price)
-    startValue = np.sum(volume[0,:] * mean_price)
+    mean_price = np.mean(price, axis=0)
 
     
-    adjusted_income = (income + endValue - startValue) / nscenarios
-    income = income / nscenarios
-
-    print(f"Average income at {plant_name} using {method} and {inflow_model} is {income:.2f}.")
-    print(f"The adjusted income is {adjusted_income:.2f}")
+    for i in range(5):
+        corr = np.corrcoef(production[:, i], price[:, i])[0, 1]
+        print(i, corr)
 
 
-    return adjusted_income
+    # Scenario-wise calculations
+    scenario_income = np.sum(production * price, axis=0)
+
+
+    endValue = volume[-1, :] * mean_price
+    startValue = volume[0, :] * mean_price
+
+    scenario_adjusted = scenario_income + endValue - startValue
+
+    # Average results
+    avg_income = np.mean(scenario_income)
+    avg_adjusted = np.mean(scenario_adjusted)
+
+    var10, cvar10 = tail_metrics(scenario_adjusted, 0.10)
+    var20, cvar20 = tail_metrics(scenario_adjusted, 0.20)
+
+    print(f"Average income: {avg_income:.2f}")
+    print(f"Adjusted income: {avg_adjusted:.2f}")
+    print(f"Worst 10% VaR: {var10:.2f}, CVaR: {cvar10:.2f}")
+    print(f"Worst 20% VaR: {var20:.2f}, CVaR: {cvar20:.2f}")
+
+    return [avg_adjusted, cvar10, cvar20]
 
 
 
