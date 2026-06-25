@@ -156,7 +156,58 @@ def income(plant_name, method, inflow_model):
     print(f"The adjusted income is {adjusted_income:.2f}")
 
 
-    return
+    return income, adjusted_income
+
+
+
+
+def water_value(plant_name,method,inflow_model):
+
+
+    prodrisk = load_session(plant_name, method, inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+
+    water_vals = area.water_value_result.get()
+
+    min_water_val = water_vals.values[0].min()
+    max_water_val = water_vals.values[0].max()
+    mean_water_val = water_vals.values[0].mean()
+    std_water_val = water_vals.values[0].std()
+
+    summary_df = pd.DataFrame({
+        "Min": [min_water_val],
+        "Max": [max_water_val],
+        "Mean": [mean_water_val],
+        "STD" : [std_water_val]
+
+    }, index=[method + " " + inflow_model])
+
+    return summary_df
 
     
     
+
+
+def neg_inflow(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name, method, inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+
+    
+    data = {}
+
+    for mag in magazines:
+        mod = prodrisk.model.module[mag]
+        neg_inflow = mod.average_neg_inflow_back.get()
+        
+        data[mag] = neg_inflow   # use mag name as column
+
+    df = pd.DataFrame(data, index=[method + " " + inflow_model])
+
+    return df
+
+
+
+
