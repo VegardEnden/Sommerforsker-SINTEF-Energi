@@ -32,5 +32,5 @@ status = prodrisk.run()
 
 run_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Simulations\Finished Runs"
 
-prodrisk.dump_model_yaml(file_path=run_folder,file_name="RN_Fjone_lg",direction="both")
-prodrisk.dump_data_h5(file_path=run_folder,file_name="RN_Fjone_lg",direction="both")
+prodrisk.dump_model_yaml(file_path=run_folder,file_name="RN_Fjone_pca",direction="both")
+prodrisk.dump_data_h5(file_path=run_folder,file_name="RN_Fjone_pca",direction="both")

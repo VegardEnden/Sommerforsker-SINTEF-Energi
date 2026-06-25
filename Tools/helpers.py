@@ -156,7 +156,9 @@ def income(plant_name, method, inflow_model):
     print(f"The adjusted income is {adjusted_income:.2f}")
 
 
-    return income, adjusted_income
+    return adjusted_income
+
+
 
 
 

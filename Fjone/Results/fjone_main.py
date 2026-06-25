@@ -18,8 +18,15 @@ from Tools.helpers import *
 # overflow("Fjone","CVaR","lg")
 # overflow("Fjone","RN","lg")
 
-# income("Fjone","CVaR","lg")
-# income("Fjone","RN","lg")
+cvar_income = income("Fjone","CVaR","lg")
+rn_income = income("Fjone","RN","lg")
+
+df = pd.DataFrame({
+    "Risk-Neutral":[rn_income],
+    "CVaR (0.9,20%)":[cvar_income]
+
+}, index="Income in 1000EUR")
+
 # income("Fjone","CVaR","pca")
 
 # cvar_df = water_value("Fjone","CVaR","lg")
