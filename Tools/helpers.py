@@ -53,7 +53,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         for p, vals in zip(percs,total_perc):
             ax_total.plot(index, vals, label=f"{p}th percentile")
         ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
-        ax_total.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
+        ax_total.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
         ax_total.grid()
         ax_total.legend()
 
@@ -68,7 +68,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         for p, vals in zip(percs,nape_perc):
             ax_nape.plot(index, vals, label=f"{p}th percentile")
         ax_nape.plot(index,np.mean(nape_vol.values,axis=1),label="Mean")
-        ax_nape.set(title=method + ", " + inflow_model ,xlabel=r"Volume [Mm$^3$]",ylabel="Time")
+        ax_nape.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
         ax_nape.grid()
         ax_nape.legend()
 
@@ -104,29 +104,45 @@ def topology(plant_name):
     return 
 
 
-def overflow(plant_name, method, inflow_model):
+def plot_overflow(plant_name, method, inflow_model):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
-    area = prodrisk.model.area["my_area"]
+    magazines = prodrisk.model.module.get_object_names()
 
-    overflow = area.total_reservoir_overflow.get().values
+    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
 
-    average_overflow = np.mean(overflow,axis=0)
+    for i in range(len(magazines)):
+        mod = prodrisk.model.module[magazines[i]]
+        overflow = mod.overflow.get()
+        axes[i].fill_between(overflow.index, np.percentile(overflow.values[:,:],0,axis=1),np.percentile(overflow.values[:,:],100,axis=1),alpha=0.2)
+        axes[i].plot(overflow.mean(axis=1))
+        axes[i].set(title=magazines[i],xlabel="Time",ylabel="Overflow")
+        axes[i].grid()
+    fig.suptitle(f"Overflow with {method} and {inflow_model}")
 
+    return
 
-    if plant_name == "Fjone":
+def plot_inflow(plant_name, method, inflow_model):
 
-        nape_mod = prodrisk.model.module["nape"]
-        rolle_mod = prodrisk.model.module["rolleivstadvatn"]
-        sand_mod = prodrisk.model.module["sandvatn"]
+    prodrisk = load_session(plant_name,method,inflow_model)
 
-        nape_overflow = nape_mod.overflow.get().values
-        rolle_overflow = rolle_mod.overflow.get().values
-        sand_overflow = sand_mod.overflow.get().values
+    magazines = prodrisk.model.module.get_object_names()
 
+    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
 
-
+    for i in range(len(magazines)):
+        mod = prodrisk.model.module[magazines[i]]
+        inflow = mod.localInflow.get()
+        axes[i].fill_between(inflow.index, np.percentile(inflow.values[:,:],0,axis=1),np.percentile(inflow.values[:,:],100,axis=1),alpha=0.2)
+        axes[i].plot(inflow.mean(axis=1))
+        axes[i].set(title=magazines[i],xlabel="Time",ylabel="Inflow")
+        axes[i].grid()
+    fig.suptitle(f"Inflow with {method} and {inflow_model}")
+    
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Inflow"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_inflow.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return
 
