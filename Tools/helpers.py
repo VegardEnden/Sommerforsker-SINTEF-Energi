@@ -214,6 +214,28 @@ def plot_production(plant_name, method, inflow_model):
 
     return
 
+def plot_bypass(plant_name, method, inflow_model):
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+
+    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
+
+    for i in range(len(magazines)):
+        mod = prodrisk.model.module[magazines[i]]
+        bypass = mod.bypass.get()
+        # axes[i].fill_between(bypass.index, np.percentile(bypass.values[:,:],0,axis=1),np.percentile(bypass.values[:,:],100,axis=1),alpha=0.2)
+        axes[i].plot(bypass.mean(axis=1))
+        axes[i].set(title=magazines[i],xlabel="Time",ylabel="Bypass")
+        axes[i].grid()
+    fig.suptitle(f"Bypass with {method} and {inflow_model}")
+    
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Bypass"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_bypass.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+    return
+
 
 def tail_metrics(values, alpha):
     n = len(values)
@@ -309,8 +331,7 @@ def neg_inflow(plant_name, method, inflow_model):
     for mag in magazines:
         mod = prodrisk.model.module[mag]
         neg_inflow = mod.average_neg_inflow_back.get()
-        
-        data[mag] = neg_inflow   # use mag name as column
+        data[mag] = neg_inflow.mean()   
 
     df = pd.DataFrame(data, index=[method + " " + inflow_model])
 
