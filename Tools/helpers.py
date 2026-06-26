@@ -53,7 +53,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         for p, vals in zip(percs,total_perc):
             ax_total.plot(index, vals, label=f"{p}th percentile")
         ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
-        ax_total.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
+        ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time")
         ax_total.grid()
         ax_total.legend()
 
@@ -121,7 +121,31 @@ def plot_overflow(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Overflow with {method} and {inflow_model}")
 
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Overflow"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_overflow.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
     return
+
+def plot_total_overflow(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    fig,ax = plt.subplots(figsize=(20,10))
+
+    area = prodrisk.model.area["my_area"]
+    tot_overflow = area.total_reservoir_overflow.get()
+
+    # ax.fill_between(tot_overflow.index, np.percentile(tot_overflow.values[:,:],0,axis=1),np.percentile(tot_overflow.values[:,:],100,axis=1),alpha=0.2)
+    ax.plot(tot_overflow.max(axis=1))
+    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow")
+    ax.grid()
+
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Overflow"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_total_overflow.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+
 
 def plot_inflow(plant_name, method, inflow_model):
 

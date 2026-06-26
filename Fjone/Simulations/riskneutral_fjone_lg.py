@@ -20,7 +20,7 @@ local_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Fj
 prodrisk.load_model_yaml(file_path=local_dir,file_name="Fjone.yaml",)
 prodrisk.load_data_h5(file_path=local_dir,file_name="Fjone.h5")
 
-prodrisk.temp_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata"
+prodrisk.temp_dir = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata\fjone_rn_lg"
 prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
 prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
 prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables

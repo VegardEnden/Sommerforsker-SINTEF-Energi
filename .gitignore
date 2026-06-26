@@ -17,3 +17,6 @@ Blåsjøen/Blåsjøen data/
 Svartisen/Svartisen data/
 
 
+#ignore tempdata
+tempdata/
+
