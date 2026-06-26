@@ -27,16 +27,24 @@ prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosje
 prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
 prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
 prodrisk.keep_working_directory = False                              # remove temporary files after the simulation
+prodrisk.write_penalty_logfiles = 1
 
 prodrisk.inflow_model = "lognormal"
 
+prodrisk.summag_min_penalty = 0.9
+prodrisk.summag_max_penalty = 2.0
+prodrisk.summag_forward = 1
 
+area = prodrisk.model.area["my_area"]
+
+area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in [1,20,35]], data=[15.5,45.5,15.5]))
+area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in [1,20,35]], data=[80.5,90.9,80.5]))
 
 status = prodrisk.run()
 
 run_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Simulations\Finished Runs"
 
-prodrisk.dump_model_yaml(file_path=run_folder,file_name="CVaR_0.9_20_Fjone_lg",direction="both")
-prodrisk.dump_data_h5(file_path=run_folder,file_name="CVaR_0.9_20_Fjone_lg",direction="both")
+prodrisk.dump_model_yaml(file_path=run_folder,file_name="Summag_Fjone_lg",direction="both")
+prodrisk.dump_data_h5(file_path=run_folder,file_name="Summag_Fjone_lg",direction="both")
 
 

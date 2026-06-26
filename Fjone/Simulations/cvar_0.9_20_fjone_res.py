@@ -27,6 +27,7 @@ prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosje
 prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
 prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
 prodrisk.keep_working_directory = False                              # remove temporary files after the simulation
+prodrisk.write_penalty_logfiles = 1
 
 prodrisk.inflow_model = "residual"
 
