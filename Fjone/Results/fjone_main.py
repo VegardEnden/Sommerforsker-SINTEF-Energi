@@ -27,49 +27,143 @@ name = "Fjone"
 # plot_inflow(name,"CVaR_0.9_20","lg")
 # plot_inflow(name,"RN","lg")
 
+# plot_production(name,"CVaR_0.9_50","lg")
+# plot_production(name,"RN","lg")
+
 
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
 
+print("---Comparison Risk-neutral vs CVaR---")
+
+print("\nAdjusted income with risk-neutral as baseline: ")
 
 income_df = pd.DataFrame({
     "Risk-Neutral": [
         rn_income[0] * 100 / rn_income[0],  
-        rn_income[1] * 100 / rn_income[1],
+        rn_income[1] * 100 / rn_income[0],
     ],
     "CVaR (0.9,20%)": [
         cvar_20_income[0] * 100 / rn_income[0],
-        cvar_20_income[1] * 100 / rn_income[1],
+        cvar_20_income[1] * 100 / rn_income[0],
     ],
     "CVaR (0.9,50%)": [
         cvar_50_income[0] * 100 / rn_income[0],
-        cvar_50_income[1] * 100 / rn_income[1],
+        cvar_50_income[1] * 100 / rn_income[0],
     ]
 }, index=[
-    "Average income",
-    "CVaR 10%"
+    "Average",
+    "Avg 10% worst"
 ])
 
 
 print(income_df)
 
-# income(name,"CVaR","pca")
 
-# cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
-# cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
-# cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
-# rn_df = water_value(name,"RN","lg")
+cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
+cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
+rn_df = water_value(name,"RN","lg")
 
-# water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50])
+water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50])
 
-# print(water_vals)
+print("\nWater values the first week: ")
 
-# neginflow_df = pd.concat([neg_inflow(name,"RN","lg"),neg_inflow(name,"RN","pca"),neg_inflow(name,"RN","res")])
+print(water_vals)
 
-# print(neginflow_df)
+print("\n---Comparison of inflow models---")
 
+print("\nNegative inflow last backwards iteration: ")
+
+neginflow_df = pd.concat([neg_inflow(name,"RN","lg"),neg_inflow(name,"RN","pca"),neg_inflow(name,"RN","res")])
+
+print(neginflow_df)
+
+neginflow_df = pd.concat([neg_inflow(name,"CVaR_0.9_20","lg"),neg_inflow(name,"CVaR_0.9_20","pca"),neg_inflow(name,"CVaR_0.9_20","res")])
+
+print(neginflow_df)
+
+print("\nThe following results have used CVaR with 0.9, 20%")
+
+lg_income = income(name,"CVaR_0.9_20","lg")
+pca_income = income(name,"CVaR_0.9_20","pca")
+res_income = income(name,"CVaR_0.9_20","res")
+
+print("\nAdjusted income with lognormal as baseline: ")
+
+income_df = pd.DataFrame({
+    "Lognormal": [
+        lg_income[0] * 100 / lg_income[0],  
+        lg_income[1] * 100 / lg_income[0],
+    ],
+    "PCA": [
+        pca_income[0] * 100 / lg_income[0],
+        pca_income[1] * 100 / lg_income[0],
+    ],
+    "Residual": [
+        res_income[0] * 100 / lg_income[0],
+        res_income[1] * 100 / lg_income[0],
+    ]
+}, index=[
+    "Average",
+    "Avg 10% worst"
+])
+
+
+print(income_df)
+
+
+lg_df = water_value(name,"CVaR_0.9_20","lg")
+pca_df = water_value(name,"CVaR_0.9_20","pca")
+res_df = water_value(name,"CVaR_0.9_20","res")
+
+water_vals = pd.concat([lg_df,pca_df,res_df])
+
+print("\nWater values the first week: ")
+
+print(water_vals)
+
+print("\nThe following results have used Risk-Neutral")
+
+lg_income = income(name,"RN","lg")
+pca_income = income(name,"RN","pca")
+res_income = income(name,"RN","res")
+
+print("\nAdjusted income with lognormal as baseline: ")
+
+income_df = pd.DataFrame({
+    "Lognormal": [
+        lg_income[0] * 100 / lg_income[0],  
+        lg_income[1] * 100 / lg_income[0],
+    ],
+    "PCA": [
+        pca_income[0] * 100 / lg_income[0],
+        pca_income[1] * 100 / lg_income[0],
+    ],
+    "Residual": [
+        res_income[0] * 100 / lg_income[0],
+        res_income[1] * 100 / lg_income[0],
+    ]
+}, index=[
+    "Average",
+    "Avg 10% worst"
+])
+
+
+print(income_df)
+
+
+lg_df = water_value(name,"RN","lg")
+pca_df = water_value(name,"RN","pca")
+res_df = water_value(name,"RN","res")
+
+water_vals = pd.concat([lg_df,pca_df,res_df])
+
+print("\nWater values the first week: ")
+
+print(water_vals)
 
 
 print("All done!")

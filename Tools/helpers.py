@@ -146,6 +146,49 @@ def plot_inflow(plant_name, method, inflow_model):
 
     return
 
+def plot_discharge(plant_name, method, inflow_model):
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+
+    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
+
+    for i in range(len(magazines)):
+        mod = prodrisk.model.module[magazines[i]]
+        discharge = mod.discharge.get()
+        axes[i].fill_between(discharge.index, np.percentile(discharge.values[:,:],0,axis=1),np.percentile(discharge.values[:,:],100,axis=1),alpha=0.2)
+        axes[i].plot(discharge.mean(axis=1))
+        axes[i].set(title=magazines[i],xlabel="Time",ylabel="Discharge")
+        axes[i].grid()
+    fig.suptitle(f"Discharge with {method} and {inflow_model}")
+    
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Discharge"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_discharge.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+    return
+
+def plot_production(plant_name, method, inflow_model):
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+
+    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
+
+    for i in range(len(magazines)):
+        mod = prodrisk.model.module[magazines[i]]
+        production = mod.production.get()
+        axes[i].fill_between(production.index, np.percentile(production.values[:,:],0,axis=1),np.percentile(production.values[:,:],100,axis=1),alpha=0.2)
+        axes[i].plot(production.mean(axis=1))
+        axes[i].set(title=magazines[i],xlabel="Time",ylabel="Production")
+        axes[i].grid()
+    fig.suptitle(f"Production with {method} and {inflow_model}")
+    
+    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Production"
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_production.png")
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+    return
 
 
 def tail_metrics(values, alpha):
@@ -190,10 +233,10 @@ def income(plant_name, method, inflow_model):
     var10, cvar10 = tail_metrics(scenario_adjusted, 0.10)
     var20, cvar20 = tail_metrics(scenario_adjusted, 0.20)
 
-    print(f"Average income: {avg_income:.2f}")
-    print(f"Adjusted income: {avg_adjusted:.2f}")
-    print(f"Worst 10% VaR: {var10:.2f}, CVaR: {cvar10:.2f}")
-    print(f"Worst 20% VaR: {var20:.2f}, CVaR: {cvar20:.2f}")
+    # print(f"Average income: {avg_income:.2f}")
+    # print(f"Adjusted income: {avg_adjusted:.2f}")
+    # print(f"Worst 10% VaR: {var10:.2f}, CVaR: {cvar10:.2f}")
+    # print(f"Worst 20% VaR: {var20:.2f}, CVaR: {cvar20:.2f}")
 
     return [avg_adjusted, cvar10]
 
@@ -248,6 +291,18 @@ def neg_inflow(plant_name, method, inflow_model):
     df = pd.DataFrame(data, index=[method + " " + inflow_model])
 
     return df
+
+
+def inflow_weight(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name, method, inflow_model)
+
+    magazines = prodrisk.model.inflowSeries.get_object_names()
+
+    for mag in magazines:
+        inflow = prodrisk.model.inflowSeries[mag]
+        weight = inflow.outcomeProbability.get()
+        print(weight)
 
 
 
