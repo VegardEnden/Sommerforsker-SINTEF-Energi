@@ -1,8 +1,0 @@
- 1,2025, 8,15,13,12, 8,'Start vansim'
-   1,'Styreparameter'
- 'SVARTISEN           ','Systemnavn'
- 'SVARTISEN.ENMD                                              ','Navn ENMD-fil'
-   0,'0=tilsigsprognose brukes ikke,1=brukes'
-   0.250,'Realrente'
-   1,'Startuke vannverdiberegninger/Simulering'
-  52,'Antall uker vannverdiberegninger/Simulering'

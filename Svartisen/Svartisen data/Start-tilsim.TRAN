@@ -1,8 +1,0 @@
- 1,2025, 8,15,13,12, 8,'Start tilsim'
-   1,'Styreparameter'
- 'SVARTISEN           ','Systemnavn'
-   0,'Omr}denummer'
-   0,'0=tilsigsprognose brukes ikke, 1=brukes'
-SVARTISEN.R30,'Filnavn for regulert energitilsig'
-SVARTISEN.U30,'Filnavn for uregulert energitilsig'
-,'Filnavn for tilsigsavhengig fastkraft'
