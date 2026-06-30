@@ -9,6 +9,10 @@ import matplotlib.pyplot as plt
 from pyprodrisk import ProdriskSession
 
 
+plt.rcParams["axes.labelsize"] = 15
+plt.rcParams["axes.titlesize"] = 18
+
+
 def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=False,spillPenalty=0):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
@@ -37,7 +41,6 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.inflow_model = "residual"
 
     if cvar != [0,0]:
-
         prodrisk.cvar = cvar[0]
         prodrisk.cvar_weight = cvar[1]
     
