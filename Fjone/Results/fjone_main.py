@@ -17,6 +17,7 @@ name = "Fjone"
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg")
+plot_reservoir_volumes(name,"CVaR_0.9_30_spill","lg")
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg")
 # plot_reservoir_volumes(name,"CVaR_0.7_50","lg")
 # plot_reservoir_volumes(name,"CVaR_0.9_20","pca")
@@ -40,6 +41,7 @@ name = "Fjone"
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
 cvar_30_income = income(name,"CVaR_0.9_30","lg")
+cvar_30spill_income = income(name,"CVaR_0.9_30_spill","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
 
@@ -59,6 +61,11 @@ income_df = pd.DataFrame({
     "CVaR (0.9,30%)": [
         cvar_30_income[0] * 100 / rn_income[0],
         cvar_30_income[1] * 100 / rn_income[0],
+
+    ],
+    "CVaR (0.9,30%) with spill cost": [
+        cvar_30spill_income[0] * 100 / rn_income[0],
+        cvar_30spill_income[1] * 100 / rn_income[0],
 
     ],
     "CVaR (0.9,50%)": [
