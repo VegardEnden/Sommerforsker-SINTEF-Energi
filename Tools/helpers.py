@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from pyprodrisk import ProdriskSession
 
 
-def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=False,tempdata=False,spillPenalty=0):
+def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=False,spillPenalty=0):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -40,6 +40,15 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=False,tempdat
 
         prodrisk.cvar = cvar[0]
         prodrisk.cvar_weight = cvar[1]
+    
+    if summag != [0,0,0]:
+        prodrisk.summag_min_penalty = summag[0]
+        prodrisk.summag_max_penalty = summag[1]
+        prodrisk.summag_forward = summag[2]
+
+        area = prodrisk.model.area["my_area"]
+        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
+        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
     
     if spillPenalty != 0:
         prodrisk.overflow_cost = spillPenalty
