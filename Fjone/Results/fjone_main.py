@@ -15,24 +15,24 @@ name = "Fjone"
 
 # topology(name)
 
-# plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_30","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_50","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_20","pca")
-# plot_reservoir_volumes(name,"CVaR_0.9_20","res")
-# plot_reservoir_volumes(name,"RN","lg")
-# plot_reservoir_volumes(name,"RN","pca")
-# plot_reservoir_volumes(name,"RN","res")
+plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
+plot_reservoir_volumes(name,"CVaR_0.9_30","lg")
+plot_reservoir_volumes(name,"CVaR_0.9_50","lg")
+plot_reservoir_volumes(name,"CVaR_0.9_20","pca")
+plot_reservoir_volumes(name,"CVaR_0.9_20","res")
+plot_reservoir_volumes(name,"RN","lg")
+plot_reservoir_volumes(name,"RN","pca")
+plot_reservoir_volumes(name,"RN","res")
 
-# plot_bypass(name,"CVaR_0.9_20","lg")
-# plot_bypass(name,"RN","lg")
+plot_bypass(name,"CVaR_0.9_20","lg")
+plot_bypass(name,"RN","lg")
 
-# plot_total_overflow(name,"CVaR_0.9_50","lg")
-# plot_total_overflow(name,"CVaR_0.9_20","lg")
-# plot_total_overflow(name,"RN","lg")
+plot_total_overflow(name,"CVaR_0.9_50","lg")
+plot_total_overflow(name,"CVaR_0.9_20","lg")
+plot_total_overflow(name,"RN","lg")
 
-# plot_production(name,"CVaR_0.9_50","lg")
-# plot_production(name,"RN","lg")
+plot_production(name,"CVaR_0.9_50","lg")
+plot_production(name,"RN","lg")
 
 
 
