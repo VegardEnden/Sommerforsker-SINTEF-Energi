@@ -8,6 +8,53 @@ import matplotlib.pyplot as plt
 
 from pyprodrisk import ProdriskSession
 
+
+def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=False,tempdata=False,spillPenalty=0):
+    prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
+                           solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
+                           silent=False,        # write console output
+                           sim_id=None)         # use default session id (a timestamp)
+
+    local_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter",plant_name, plant_name + " data")
+
+    name = f"{method}_{plant_name}_{inflow_model}"
+
+    prodrisk.load_model_yaml(file_path=local_dir,file_name=plant_name + ".yaml")
+    prodrisk.load_data_h5(file_path=local_dir,file_name=plant_name + ".h5")
+
+    prodrisk.temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata",name)
+    prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
+    prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
+    prodrisk.keep_working_directory = tempdata                              # remove temporary files after the simulation
+    prodrisk.write_penalty_logfiles = 1
+
+    if inflow_model == "lg":
+        prodrisk.inflow_model = "lognormal"
+    if inflow_model == "pca":
+        prodrisk.inflow_model = "principal"
+    if inflow_model == "res":
+        prodrisk.inflow_model = "residual"
+
+    if cvar != [0,0]:
+
+        prodrisk.cvar = cvar[0]
+        prodrisk.cvar_weight = cvar[1]
+    
+    if spillPenalty != 0:
+        prodrisk.overflow_cost = spillPenalty
+
+    status = prodrisk.run()
+
+    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
+
+
+    prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
+    prodrisk.dump_data_h5(file_path=run_folder,file_name=name,direction="both")
+
+    return
+
+
 def load_session(plant_name, method, inflow_model):
 
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
@@ -48,7 +95,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
         # ----- Total Volume fig ----- 
         total_perc = np.percentile(total_vol,percs,axis=1)
-        fig_total, ax_total = plt.subplots(figsize=(20,10),sharey=True)
+        fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
 
         for p, vals in zip(percs,total_perc):
             ax_total.plot(index, vals, label=f"{p}th percentile")
@@ -64,7 +111,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
         # ----- Nape Volume fig -----
         nape_perc = np.percentile(nape_vol.values,percs,axis=1)
-        fig_nape, ax_nape = plt.subplots(figsize=(20,10),sharey=True)
+        fig_nape, ax_nape = plt.subplots(figsize=(10,10),sharey=True)
         for p, vals in zip(percs,nape_perc):
             ax_nape.plot(index, vals, label=f"{p}th percentile")
         ax_nape.plot(index,np.mean(nape_vol.values,axis=1),label="Mean")
@@ -137,8 +184,8 @@ def plot_total_overflow(plant_name, method, inflow_model):
     tot_overflow = area.total_reservoir_overflow.get()
 
     # ax.fill_between(tot_overflow.index, np.percentile(tot_overflow.values[:,:],0,axis=1),np.percentile(tot_overflow.values[:,:],100,axis=1),alpha=0.2)
-    ax.plot(tot_overflow.max(axis=1))
-    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow")
+    ax.plot(tot_overflow.mean(axis=1))
+    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow",ylim=(0,0.07))
     ax.grid()
 
     plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Overflow"
