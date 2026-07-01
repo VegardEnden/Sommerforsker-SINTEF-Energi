@@ -13,4 +13,9 @@ from Tools.helpers import *
 
 name = "Rjukan"
 
-topology(name)
+# topology(name)
+
+plot_reservoir_volumes(name,"RN","lg")
+
+
+print("All done!")

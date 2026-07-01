@@ -13,7 +13,7 @@ plt.rcParams["axes.labelsize"] = 15
 plt.rcParams["axes.titlesize"] = 18
 
 
-def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,spillPenalty=0):
+def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,spillPenalty=0,series=0):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -59,6 +59,12 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
     if spillPenalty != 0:
         prodrisk.overflow_cost = spillPenalty
 
+    if series == 1:
+        prodrisk.is_series_simulation = series
+
+
+    #prodrisk._pb_api
+
     status = prodrisk.run()
 
     run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
@@ -90,54 +96,55 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
-    if plant_name == "Fjone":
-        nape_mod = prodrisk.model.module["nape"]
-        rolle_mod = prodrisk.model.module["rolleivstadvatn"]
-        sand_mod = prodrisk.model.module["sandvatn"]
+    magazines = prodrisk.model.module.get_object_names()
+    
+    biggest = ""
+    max_vol = 0
+    total_vol = np.zeros_like(prodrisk.model.module[magazines[0]].reservoirVolume.get().values)
 
-        nape_vol = nape_mod.reservoirVolume.get()
-        rolle_vol = rolle_mod.reservoirVolume.get()
-        sand_vol = sand_mod.reservoirVolume.get()
+    for mag in magazines:
+        max_volume = prodrisk.model.module[mag].rsvMax.get()
+        if max_volume > max_vol:
+            max_vol = max_volume
+            biggest = mag
+        total_vol += prodrisk.model.module[mag].reservoirVolume.get().values
 
-        index = nape_vol.index
+    individ_vol = prodrisk.model.module[biggest].reservoirVolume.get()
+    index = individ_vol.index
 
-        total_vol = nape_vol.values + rolle_vol.values + sand_vol.values
-
-        percs = [0,25,50,75,100]
-
-
-        plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Volume"
-
-        # ----- Total Volume fig ----- 
-        total_perc = np.percentile(total_vol,percs,axis=1)
-        fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
-
-        for p, vals in zip(percs,total_perc):
-            ax_total.plot(index, vals, label=f"{p}th percentile")
-        ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
-        ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time")
-        ax_total.grid()
-        ax_total.legend()
+    percs = [0,25,50,75,100]
 
 
-        path_total = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_total_volume.png")
-        fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Volume")
+
+    # ----- Total Volume fig ----- 
+    total_perc = np.percentile(total_vol,percs,axis=1)
+    fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
+
+    for p, vals in zip(percs,total_perc):
+        ax_total.plot(index, vals, label=f"{p}th percentile")
+    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
+    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time")
+    ax_total.grid()
+    ax_total.legend()
 
 
-        # ----- Nape Volume fig -----
-        nape_perc = np.percentile(nape_vol.values,percs,axis=1)
-        fig_nape, ax_nape = plt.subplots(figsize=(10,10),sharey=True)
-        for p, vals in zip(percs,nape_perc):
-            ax_nape.plot(index, vals, label=f"{p}th percentile")
-        ax_nape.plot(index,np.mean(nape_vol.values,axis=1),label="Mean")
-        ax_nape.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
-        ax_nape.grid()
-        ax_nape.legend()
+    path_total = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_total_volume.png")
+    fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
 
-        path_nape = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_nape_volume.png")
-        fig_nape.savefig(path_nape, dpi=300, bbox_inches='tight')
+    if len(magazines) != 1:
+        # ----- Largest magazine Volume fig -----
+        individ_perc = np.percentile(individ_vol.values,percs,axis=1)
+        fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
+        for p, vals in zip(percs,individ_perc):
+            ax_individ.plot(index, vals, label=f"{p}th percentile")
+        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean")
+        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
+        ax_individ.grid()
+        ax_individ.legend()
 
-
+        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_"+ biggest + "_volume.png")
+        fig_individ.savefig(path_individ, dpi=300, bbox_inches='tight')
 
 
     return 
