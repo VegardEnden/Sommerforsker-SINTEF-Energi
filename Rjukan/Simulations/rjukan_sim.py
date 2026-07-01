@@ -12,7 +12,4 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session
 
-run_session("Fjone","CVaR_0.9_30","lg",cvar=[0.9,0.3])
-
-
-
+run_session("Rjukan","RN","lg")

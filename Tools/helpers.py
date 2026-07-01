@@ -13,7 +13,7 @@ plt.rcParams["axes.labelsize"] = 15
 plt.rcParams["axes.titlesize"] = 18
 
 
-def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=False,spillPenalty=0):
+def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,spillPenalty=0):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -26,18 +26,21 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
     prodrisk.load_model_yaml(file_path=local_dir,file_name=plant_name + ".yaml")
     prodrisk.load_data_h5(file_path=local_dir,file_name=plant_name + ".h5")
 
-    prodrisk.temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata",name)
+    temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata", name)
+    prodrisk.temp_dir = temp_dir
     prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
     prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
     prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
-    prodrisk.keep_working_directory = tempdata                              # remove temporary files after the simulation
+    prodrisk.keep_working_directory = tempdata                             
     prodrisk.write_penalty_logfiles = 1
+    prodrisk.n_processes = 8
+    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
 
     if inflow_model == "lg":
         prodrisk.inflow_model = "lognormal"
-    if inflow_model == "pca":
+    elif inflow_model == "pca":
         prodrisk.inflow_model = "principal"
-    if inflow_model == "res":
+    elif inflow_model == "res":
         prodrisk.inflow_model = "residual"
 
     if cvar != [0,0]:
