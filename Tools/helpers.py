@@ -14,7 +14,7 @@ plt.rcParams["axes.titlesize"] = 18
 
 
 def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
-                spillPenalty=0,series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
+                spillPenalty=0,bypassPenalty=0,series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -68,10 +68,14 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
                                                         data=[spillPenalty]*prodrisk.n_weeks))
             mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[spillPenalty]*prodrisk.n_weeks))
+    if bypassPenalty != 0:
+        magazines = prodrisk.model.module.get_object_names()
+        for mag in magazines:
+            mod = prodrisk.model.module[mag]
             mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
-                                                        data=[spillPenalty]*prodrisk.n_weeks))
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
             mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
-                                                        data=[spillPenalty]*prodrisk.n_weeks))
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
 
     if series == 1:
         prodrisk.is_series_simulation = series
@@ -267,7 +271,7 @@ def plot_overflow(plant_name, method, inflow_model):
 
     magazines = prodrisk.model.module.get_object_names()
 
-    fig, axes = plt.subplots(1, len(magazines),figsize=(20,10),sharey=True)
+    fig, axes = plt.subplots(1, len(magazines),figsize=(10,10),sharey=True)
 
     for i in range(len(magazines)):
         mod = prodrisk.model.module[magazines[i]]
@@ -278,8 +282,8 @@ def plot_overflow(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Overflow with {method} and {inflow_model}")
 
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Overflow"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_overflow.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Overflow")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_overflow.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return
@@ -288,18 +292,18 @@ def plot_total_overflow(plant_name, method, inflow_model):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
-    fig,ax = plt.subplots(figsize=(20,10))
+    fig,ax = plt.subplots(figsize=(10,10))
 
     area = prodrisk.model.area["my_area"]
     tot_overflow = area.total_reservoir_overflow.get()
 
     # ax.fill_between(tot_overflow.index, np.percentile(tot_overflow.values[:,:],0,axis=1),np.percentile(tot_overflow.values[:,:],100,axis=1),alpha=0.2)
     ax.plot(tot_overflow.mean(axis=1))
-    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow",ylim=(0,0.07))
+    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow")
     ax.grid()
 
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Overflow"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_total_overflow.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Overflow")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_total_overflow.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
 
@@ -321,8 +325,8 @@ def plot_inflow(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Inflow with {method} and {inflow_model}")
     
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Inflow"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_inflow.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Inflow")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_inflow.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return
@@ -343,8 +347,8 @@ def plot_discharge(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Discharge with {method} and {inflow_model}")
     
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Discharge"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_discharge.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Discharge")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_discharge.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return
@@ -365,8 +369,8 @@ def plot_production(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Production with {method} and {inflow_model}")
     
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Production"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_production.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Production")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_production.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return
@@ -387,8 +391,8 @@ def plot_bypass(plant_name, method, inflow_model):
         axes[i].grid()
     fig.suptitle(f"Bypass with {method} and {inflow_model}")
     
-    plot_folder = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Bypass"
-    path = os.path.join(plot_folder, method + "_" + inflow_model + "Fjone_bypass.png")
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Bypass")
+    path = os.path.join(plot_folder, method + "_" + inflow_model + "_" + plant_name + "_bypass.png")
     fig.savefig(path, dpi=300, bbox_inches='tight')
 
     return

@@ -12,7 +12,7 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session
 
-run_session("Fjone","CVaR_0.9_20_spill","lg",cvar=[0.9,0.2],loadInflow=True,spillPenalty=100)
+run_session("Fjone","CVaR_0.9_20_spill","lg",cvar=[0.9,0.2],loadInflow=True,spillPenalty=20)
 
 
 

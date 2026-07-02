@@ -29,10 +29,10 @@ plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
 # # plot_bypass(name,"CVaR_0.9_20","lg")
 # # plot_bypass(name,"RN","lg")
 
-# # plot_total_overflow(name,"CVaR_0.9_50","lg")
-# # plot_total_overflow(name,"CVaR_0.9_20","lg")
-# # plot_total_overflow(name,"CVaR_0.7_50","lg")
-# # plot_total_overflow(name,"RN","lg")
+# plot_total_overflow(name,"CVaR_0.9_50","lg")
+# plot_total_overflow(name,"CVaR_0.9_20","lg")
+# plot_total_overflow(name,"CVaR_0.7_50","lg")
+# plot_total_overflow(name,"RN","lg")
 
 # # plot_production(name,"CVaR_0.9_50","lg")
 # # plot_production(name,"RN","lg")
@@ -79,16 +79,16 @@ income_df = pd.DataFrame({
 
 print(income_df)
 
-rn_objective = obj_value(name,"RN","lg")
-cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
-cvar30_objective = obj_value(name,"CVaR_0.9_30","lg")
-cvar50_objective = obj_value(name,"CVaR_0.9_50","lg")
+# rn_objective = obj_value(name,"RN","lg")
+# cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
+# cvar30_objective = obj_value(name,"CVaR_0.9_30","lg")
+# cvar50_objective = obj_value(name,"CVaR_0.9_50","lg")
 
-print("\nObjective values: ")
-print(f"Risk-Neutral: {rn_objective}")
-print(f"CVaR (0.9,20%): {cvar20_objective}")
-print(f"CVaR (0.9,30%): {cvar30_objective}")
-print(f"CVaR (0.9,50%): {cvar50_objective}")
+# print("\nObjective values: ")
+# print(f"Risk-Neutral: {rn_objective}")
+# print(f"CVaR (0.9,20%): {cvar20_objective}")
+# print(f"CVaR (0.9,30%): {cvar30_objective}")
+# print(f"CVaR (0.9,50%): {cvar50_objective}")
 
 
 # cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
