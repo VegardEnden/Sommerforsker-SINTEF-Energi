@@ -15,16 +15,16 @@ name = "Fjone"
 
 # topology(name)
 
-plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_30","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_30_spill","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_50","lg")
-# plot_reservoir_volumes(name,"CVaR_0.7_50","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_20","pca")
-# plot_reservoir_volumes(name,"CVaR_0.9_20","res")
-# plot_reservoir_volumes(name,"RN","lg")
-# plot_reservoir_volumes(name,"RN","pca")
-# plot_reservoir_volumes(name,"RN","res")
+# plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
+plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
+# plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"RN","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"RN","res",lim=(0,250))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
 # # plot_bypass(name,"RN","lg")
@@ -40,6 +40,7 @@ plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
 
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
+cvar_20spill_income = income(name,"CVaR_0.9_20_spill","lg")
 cvar_30_income = income(name,"CVaR_0.9_30","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
@@ -56,6 +57,10 @@ income_df = pd.DataFrame({
     "CVaR (0.9,20%)": [
         cvar_20_income[0] * 100 / rn_income[0],
         cvar_20_income[1] * 100 / rn_income[0],
+    ],
+    "CVaR (0.9,20%) with Spill penalty": [
+        cvar_20spill_income[0] * 100 / rn_income[0],
+        cvar_20spill_income[1] * 100 / rn_income[0],
     ],
     "CVaR (0.9,30%)": [
         cvar_30_income[0] * 100 / rn_income[0],

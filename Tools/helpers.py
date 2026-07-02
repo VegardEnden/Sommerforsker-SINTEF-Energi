@@ -14,7 +14,7 @@ plt.rcParams["axes.titlesize"] = 18
 
 
 def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
-                spillPenalty=0,series=0,saveInflow=False,loadInflow=False):
+                spillPenalty=0,series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -41,6 +41,9 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.inflow_model = "lognormal"
     elif inflow_model == "pca":
         prodrisk.inflow_model = "principal"
+        prodrisk.n_principal_comp.set(nprinc)
+        prodrisk.n_principal_comp_discrete_values.set(princDisc)
+
     elif inflow_model == "res":
         prodrisk.inflow_model = "residual"
 
@@ -64,6 +67,10 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
             mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[spillPenalty]*prodrisk.n_weeks))
             mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+            mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+            mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[spillPenalty]*prodrisk.n_weeks))
 
     if series == 1:
@@ -150,7 +157,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
 
     for p, vals in zip(percs,total_perc):
         ax_total.plot(index, vals, label=f"{p}th percentile")
-    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3)
+    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3,color="black")
     ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
     ax_total.grid()
     ax_total.legend()
@@ -165,8 +172,8 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
         fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
         for p, vals in zip(percs,individ_perc):
             ax_individ.plot(index, vals, label=f"{p}th percentile")
-        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3)
-        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
+        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
+        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
         ax_individ.grid()
         ax_individ.legend()
 
@@ -208,7 +215,7 @@ def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
 
     for i in arr:
         ax_total.plot(index, total_vol[:, i], label=f"Scenario{i+1}")
-    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3)
+    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3,color="black")
     ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
     ax_total.grid()
     ax_total.legend()
@@ -222,8 +229,8 @@ def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
         fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
         for i in arr:
             ax_individ.plot(index, individ_vol.values[:, i], label=f"Scenario{i+1}")
-        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3)
-        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
+        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
+        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
         ax_individ.grid()
         ax_individ.legend()
 

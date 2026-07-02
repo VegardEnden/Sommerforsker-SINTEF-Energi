@@ -15,9 +15,9 @@ name = "Rjukan"
 
 # topology(name)
 
-# plot_reservoir_volumes(name,"RN","lg")
-# plot_reservoir_volumes(name,"CVaR_0.9_20","lg")
-plot_reservoir_volumes(name,"CVaR_0.9_50","lg")
+plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
+plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,2000))
+plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,2000))
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
@@ -47,5 +47,17 @@ income_df = pd.DataFrame({
 
 
 print(income_df)
+
+cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
+rn_df = water_value(name,"RN","lg")
+
+water_vals = pd.concat([rn_df,cvar_df20,cvar_df50])
+
+print("\nWater values the first week: ")
+
+print(water_vals)
+
+print("All done!")
 
 print("All done!")
