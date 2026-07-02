@@ -31,7 +31,7 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
     prodrisk.temp_dir = temp_dir
     prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
     prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
-    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"     # absolute path to Prodrisk executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\cvar-stefan\cvar-prototype"     # absolute path to Prodrisk executables
     prodrisk.keep_working_directory = tempdata                             
     prodrisk.write_penalty_logfiles = 1
     prodrisk.n_processes = 8
@@ -57,8 +57,14 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
         area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
     
-    # if spillPenalty != 0:
-    #     prodrisk.overflow_cost = spillPenalty
+    if spillPenalty != 0:
+        magazines = prodrisk.model.module.get_object_names()
+        for mag in magazines:
+            mod = prodrisk.model.module[mag]
+            mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+            mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
 
     if series == 1:
         prodrisk.is_series_simulation = series
@@ -113,7 +119,7 @@ def load_session(plant_name, method, inflow_model):
 
     return prodrisk
 
-def plot_reservoir_volumes(plant_name, method, inflow_model):
+def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
@@ -144,8 +150,8 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
     for p, vals in zip(percs,total_perc):
         ax_total.plot(index, vals, label=f"{p}th percentile")
-    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean")
-    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time")
+    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3)
+    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
     ax_total.grid()
     ax_total.legend()
 
@@ -159,8 +165,8 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
         fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
         for p, vals in zip(percs,individ_perc):
             ax_individ.plot(index, vals, label=f"{p}th percentile")
-        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean")
-        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time")
+        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3)
+        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
         ax_individ.grid()
         ax_individ.legend()
 
@@ -169,6 +175,60 @@ def plot_reservoir_volumes(plant_name, method, inflow_model):
 
 
     return 
+
+def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+    
+    biggest = ""
+    max_vol = 0
+    total_vol = np.zeros_like(prodrisk.model.module[magazines[0]].reservoirVolume.get().values)
+
+    for mag in magazines:
+        max_volume = prodrisk.model.module[mag].rsvMax.get()
+        if max_volume > max_vol:
+            max_vol = max_volume
+            biggest = mag
+        total_vol += prodrisk.model.module[mag].reservoirVolume.get().values
+
+    individ_vol = prodrisk.model.module[biggest].reservoirVolume.get()
+    index = individ_vol.index
+
+    n = 35
+
+    arr = np.round(np.linspace(0, n-1, 5)).astype(int)
+    
+
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Volume")
+
+    # ----- Total Volume fig ----- 
+    fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
+
+    for i in arr:
+        ax_total.plot(index, total_vol[:, i], label=f"Scenario{i+1}")
+    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3)
+    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
+    ax_total.grid()
+    ax_total.legend()
+
+
+    path_total = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_total_volume.png")
+    fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
+
+    if len(magazines) != 1:
+        # ----- Largest magazine Volume fig -----
+        fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
+        for i in arr:
+            ax_individ.plot(index, individ_vol.values[:, i], label=f"Scenario{i+1}")
+        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3)
+        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
+        ax_individ.grid()
+        ax_individ.legend()
+
+        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_"+ biggest + "_volume.png")
+        fig_individ.savefig(path_individ, dpi=300, bbox_inches='tight')
 
 
 
@@ -376,9 +436,40 @@ def income(plant_name, method, inflow_model):
 
     return [avg_adjusted, cvar10]
 
+def income_serial(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name, method, inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+
+    volume = area.total_reservoir_volume.get().to_numpy()
+    production = area.total_production.get().to_numpy()
+    price = area.output_price.get().to_numpy()
+
+    # Total revenue over all time periods and scenarios
+    total_income = np.sum(production * price)
+
+    # Terminal value of storage
+    mean_price = np.mean(price)
+
+    start_value = volume[0, 0] * mean_price
+    end_value = volume[-1, -1] * mean_price
+
+    adjusted_income = total_income + end_value - start_value
+
+    return adjusted_income
 
 
 
+def obj_value(plant_name,method,inflow_model):
+
+    prodrisk= load_session(plant_name,method,inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+    
+    objective = area.expected_objective_value.get()
+
+    return objective
 
 
 def water_value(plant_name,method,inflow_model):
