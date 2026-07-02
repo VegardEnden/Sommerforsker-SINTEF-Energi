@@ -13,7 +13,8 @@ plt.rcParams["axes.labelsize"] = 15
 plt.rcParams["axes.titlesize"] = 18
 
 
-def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,spillPenalty=0,series=0):
+def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
+                spillPenalty=0,series=0,saveInflow=False,loadInflow=False):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -56,11 +57,20 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
         area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
     
-    if spillPenalty != 0:
-        prodrisk.overflow_cost = spillPenalty
+    # if spillPenalty != 0:
+    #     prodrisk.overflow_cost = spillPenalty
 
     if series == 1:
         prodrisk.is_series_simulation = series
+
+    if loadInflow:
+        area = prodrisk.model.area["my_area"]
+        prob = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", plant_name + "_probabilities.parquet"))
+        area.lognormal_probabilities.set(prob)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", f"{plant_name}_{ser}_centers.parquet"))
+            prodrisk.model.inflowSeries[ser].lognormal_centers.set(centers)
+        prodrisk.read_lognormal_model.set(1)
 
 
     #prodrisk._pb_api
@@ -72,6 +82,17 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
 
     prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
     prodrisk.dump_data_h5(file_path=run_folder,file_name=name,direction="both")
+
+    if saveInflow:
+        inflow_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow")
+        prob_path = os.path.join(inflow_folder, plant_name + "_probabilities.parquet")
+        area = prodrisk.model.area["my_area"]
+        area.lognormal_probabilities.get().to_parquet(prob_path)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = prodrisk.model.inflowSeries[ser].lognormal_centers.get()
+            centers.to_parquet(os.path.join(inflow_folder, f"{plant_name}_{ser}_centers.parquet"))
+
+
 
     return
 
