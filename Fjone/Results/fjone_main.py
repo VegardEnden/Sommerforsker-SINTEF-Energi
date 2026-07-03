@@ -23,7 +23,7 @@ name = "Fjone"
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"RN","pca",lim=(0,250))
+plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","res",lim=(0,250))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
@@ -36,11 +36,6 @@ name = "Fjone"
 
 # # plot_production(name,"CVaR_0.9_50","lg")
 # # plot_production(name,"RN","lg")
-
-prodrisk = load_session(name,"CVaR_0.9_20_322","pca")
-
-print(prodrisk.n_principal_comp.get())
-print(prodrisk.n_principal_comp_discrete_values.get())
 
 
 
