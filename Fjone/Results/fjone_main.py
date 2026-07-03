@@ -17,10 +17,10 @@ name = "Fjone"
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
-plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","pca",lim=(0,250))
@@ -37,47 +37,52 @@ plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
 # # plot_production(name,"CVaR_0.9_50","lg")
 # # plot_production(name,"RN","lg")
 
+prodrisk = load_session(name,"CVaR_0.9_20_322","pca")
+
+print(prodrisk.n_principal_comp.get())
+print(prodrisk.n_principal_comp_discrete_values.get())
 
 
-cvar_20_income = income(name,"CVaR_0.9_20","lg")
-cvar_20spill_income = income(name,"CVaR_0.9_20_spill","lg")
-cvar_30_income = income(name,"CVaR_0.9_30","lg")
-cvar_50_income = income(name,"CVaR_0.9_50","lg")
-rn_income = income(name,"RN","lg")
 
-print("---Comparison Risk-neutral vs CVaR---")
+# cvar_20_income = income(name,"CVaR_0.9_20","lg")
+# cvar_20pca_income = income(name,"CVaR_0.9_20_322","pca")
+# cvar_30_income = income(name,"CVaR_0.9_30","lg")
+# cvar_50_income = income(name,"CVaR_0.9_50","lg")
+# rn_income = income(name,"RN","lg")
 
-print("\nAdjusted income with risk-neutral as baseline: ")
+# print("---Comparison Risk-neutral vs CVaR---")
 
-income_df = pd.DataFrame({
-    "Risk-Neutral": [
-        rn_income[0] * 100 / rn_income[0],  
-        rn_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR (0.9,20%)": [
-        cvar_20_income[0] * 100 / rn_income[0],
-        cvar_20_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR (0.9,20%) with Spill penalty": [
-        cvar_20spill_income[0] * 100 / rn_income[0],
-        cvar_20spill_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR (0.9,30%)": [
-        cvar_30_income[0] * 100 / rn_income[0],
-        cvar_30_income[1] * 100 / rn_income[0],
+# print("\nAdjusted income with risk-neutral as baseline: ")
 
-    ],
-    "CVaR (0.9,50%)": [
-        cvar_50_income[0] * 100 / rn_income[0],
-        cvar_50_income[1] * 100 / rn_income[0],
-    ]
-}, index=[
-    "Average",
-    "Avg 10% worst"
-])
+# income_df = pd.DataFrame({
+#     "Risk-Neutral": [
+#         rn_income[0] * 100 / rn_income[0],  
+#         rn_income[1] * 100 / rn_income[0],
+#     ],
+#     "CVaR (0.9,20%)": [
+#         cvar_20_income[0] * 100 / rn_income[0],
+#         cvar_20_income[1] * 100 / rn_income[0],
+#     ],
+#     "CVaR (0.9,20%) with PCA": [
+#         cvar_20pca_income[0] * 100 / rn_income[0],
+#         cvar_20pca_income[1] * 100 / rn_income[0],
+#     ],
+#     "CVaR (0.9,30%)": [
+#         cvar_30_income[0] * 100 / rn_income[0],
+#         cvar_30_income[1] * 100 / rn_income[0],
+
+#     ],
+#     "CVaR (0.9,50%)": [
+#         cvar_50_income[0] * 100 / rn_income[0],
+#         cvar_50_income[1] * 100 / rn_income[0],
+#     ]
+# }, index=[
+#     "Average",
+#     "Avg 10% worst"
+# ])
 
 
-print(income_df)
+# print(income_df)
 
 # rn_objective = obj_value(name,"RN","lg")
 # cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
@@ -92,11 +97,12 @@ print(income_df)
 
 
 # cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+# cvar_df20spill = water_value(name,"CVaR_0.9_20_spill","lg")
 # cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
 # cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
 # rn_df = water_value(name,"RN","lg")
 
-# water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50])
+# water_vals = pd.concat([rn_df,cvar_df20,cvar_df20spill,cvar_df30,cvar_df50])
 
 # print("\nWater values the first week: ")
 
@@ -110,7 +116,7 @@ print(income_df)
 
 # print(neginflow_df)
 
-# neginflow_df = pd.concat([neg_inflow(name,"CVaR_0.9_20","lg"),neg_inflow(name,"CVaR_0.9_20","pca"),neg_inflow(name,"CVaR_0.9_20","res")])
+# neginflow_df = pd.concat([neg_inflow(name,"CVaR_0.9_20","lg"),neg_inflow(name,"CVaR_0.9_20_322","pca"),neg_inflow(name,"CVaR_0.9_20","res")])
 
 # print(neginflow_df)
 

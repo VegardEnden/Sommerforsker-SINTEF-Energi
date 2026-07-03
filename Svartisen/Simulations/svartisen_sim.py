@@ -12,4 +12,4 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session
 
-run_session("Svartisen","CVaR_0.9_20_444","pca",nprinc=3, princDisc=[4,4,4],cvar=[0.9,0.2],series=1,loadInflow=True)
+run_session("Svartisen","summag","lg",summag=[0.9,2.0,1],week=[1],min=[0],max=[100],series=1,loadInflow=True)

@@ -51,15 +51,6 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.cvar = cvar[0]
         prodrisk.cvar_weight = cvar[1]
     
-    if summag != [0,0,0]:
-        prodrisk.summag_min_penalty = summag[0]
-        prodrisk.summag_max_penalty = summag[1]
-        prodrisk.summag_forward = summag[2]
-
-        area = prodrisk.model.area["my_area"]
-        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
-        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
-    
     if spillPenalty != 0:
         magazines = prodrisk.model.module.get_object_names()
         for mag in magazines:
@@ -90,11 +81,29 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.read_lognormal_model.set(1)
 
 
+    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
+
+    if summag != [0,0,0]:
+        prodrisk.summag_min_penalty = summag[0]
+        prodrisk.summag_max_penalty = summag[1]
+        prodrisk.summag_forward = summag[2]
+
+        area = prodrisk.model.area["my_area"]
+        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
+        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
+
+        prodrisk._pb_api.GenerateProdriskFiles()
+
+        input()
+
+        status = prodrisk._pb_api.RunProdrisk()
+
+        return     
+
+
     #prodrisk._pb_api
 
     status = prodrisk.run()
-
-    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
 
 
     prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
@@ -177,7 +186,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
         for p, vals in zip(percs,individ_perc):
             ax_individ.plot(index, vals, label=f"{p}th percentile")
         ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
-        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
+        ax_individ.set(title=method + ", " + inflow_model + "_" + biggest ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
         ax_individ.grid()
         ax_individ.legend()
 
@@ -438,12 +447,6 @@ def income(plant_name, method, inflow_model):
     avg_adjusted = np.mean(scenario_adjusted)
 
     var10, cvar10 = tail_metrics(scenario_adjusted, 0.10)
-    var20, cvar20 = tail_metrics(scenario_adjusted, 0.20)
-
-    # print(f"Average income: {avg_income:.2f}")
-    # print(f"Adjusted income: {avg_adjusted:.2f}")
-    # print(f"Worst 10% VaR: {var10:.2f}, CVaR: {cvar10:.2f}")
-    # print(f"Worst 20% VaR: {var20:.2f}, CVaR: {cvar20:.2f}")
 
     return [avg_adjusted, cvar10]
 
