@@ -14,7 +14,7 @@ plt.rcParams["axes.titlesize"] = 18
 
 
 def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
-                spillPenalty=0,bypassPenalty=0,series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
+                spillPenalty=0,bypassPenalty=0, magPenalty = "", series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -52,21 +52,36 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.cvar_weight = cvar[1]
     
     if spillPenalty != 0:
-        magazines = prodrisk.model.module.get_object_names()
-        for mag in magazines:
-            mod = prodrisk.model.module[mag]
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
             mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[spillPenalty]*prodrisk.n_weeks))
             mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[spillPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[spillPenalty]*prodrisk.n_weeks))
+                mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
     if bypassPenalty != 0:
-        magazines = prodrisk.model.module.get_object_names()
-        for mag in magazines:
-            mod = prodrisk.model.module[mag]
+
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
             mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[bypassPenalty]*prodrisk.n_weeks))
             mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
                                                         data=[bypassPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
+                mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
 
     if series == 1:
         prodrisk.is_series_simulation = series

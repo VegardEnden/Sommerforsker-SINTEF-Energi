@@ -17,13 +17,15 @@ name = "Fjone"
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_spill","lg",lim=(0,250))
+plot_reservoir_volumes(name,"CVaR_0.9_50_spill300","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
-plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"RN_3322","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_3322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","res",lim=(0,250))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
@@ -39,69 +41,72 @@ plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
 
 
 
-# cvar_20_income = income(name,"CVaR_0.9_20","lg")
-# cvar_20pca_income = income(name,"CVaR_0.9_20_322","pca")
-# cvar_30_income = income(name,"CVaR_0.9_30","lg")
-# cvar_50_income = income(name,"CVaR_0.9_50","lg")
-# rn_income = income(name,"RN","lg")
+cvar_20_income = income(name,"CVaR_0.9_20","lg")
+cvar_50spill_income = income(name,"CVaR_0.9_50_spill300","lg")
+cvar_30_income = income(name,"CVaR_0.9_30","lg")
+cvar_50_income = income(name,"CVaR_0.9_50","lg")
+rn_income = income(name,"RN","lg")
 
-# print("---Comparison Risk-neutral vs CVaR---")
+print("---Comparison Risk-neutral vs CVaR---")
 
-# print("\nAdjusted income with risk-neutral as baseline: ")
+print("\nAdjusted income with risk-neutral as baseline: ")
 
-# income_df = pd.DataFrame({
-#     "Risk-Neutral": [
-#         rn_income[0] * 100 / rn_income[0],  
-#         rn_income[1] * 100 / rn_income[0],
-#     ],
-#     "CVaR (0.9,20%)": [
-#         cvar_20_income[0] * 100 / rn_income[0],
-#         cvar_20_income[1] * 100 / rn_income[0],
-#     ],
-#     "CVaR (0.9,20%) with PCA": [
-#         cvar_20pca_income[0] * 100 / rn_income[0],
-#         cvar_20pca_income[1] * 100 / rn_income[0],
-#     ],
-#     "CVaR (0.9,30%)": [
-#         cvar_30_income[0] * 100 / rn_income[0],
-#         cvar_30_income[1] * 100 / rn_income[0],
+income_df = pd.DataFrame({
+    "Risk-Neutral": [
+        rn_income[0] * 100 / rn_income[0],  
+        rn_income[1] * 100 / rn_income[0],
+    ],
+    "CVaR (0.9,20%)": [
+        cvar_20_income[0] * 100 / rn_income[0],
+        cvar_20_income[1] * 100 / rn_income[0],
+    ],
+    
+    "CVaR (0.9,30%)": [
+        cvar_30_income[0] * 100 / rn_income[0],
+        cvar_30_income[1] * 100 / rn_income[0],
 
-#     ],
-#     "CVaR (0.9,50%)": [
-#         cvar_50_income[0] * 100 / rn_income[0],
-#         cvar_50_income[1] * 100 / rn_income[0],
-#     ]
-# }, index=[
-#     "Average",
-#     "Avg 10% worst"
-# ])
-
-
-# print(income_df)
-
-# rn_objective = obj_value(name,"RN","lg")
-# cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
-# cvar30_objective = obj_value(name,"CVaR_0.9_30","lg")
-# cvar50_objective = obj_value(name,"CVaR_0.9_50","lg")
-
-# print("\nObjective values: ")
-# print(f"Risk-Neutral: {rn_objective}")
-# print(f"CVaR (0.9,20%): {cvar20_objective}")
-# print(f"CVaR (0.9,30%): {cvar30_objective}")
-# print(f"CVaR (0.9,50%): {cvar50_objective}")
+    ],
+    "CVaR (0.9,50%)": [
+        cvar_50_income[0] * 100 / rn_income[0],
+        cvar_50_income[1] * 100 / rn_income[0],
+    ],
+    "CVaR (0.9,50%) with spill penalty": [
+        cvar_50spill_income[0] * 100 / rn_income[0],
+        cvar_50spill_income[1] * 100 / rn_income[0],
+    ]
+}, index=[
+    "Average",
+    "Avg 10% worst"
+])
 
 
-# cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
-# cvar_df20spill = water_value(name,"CVaR_0.9_20_spill","lg")
-# cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
-# cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
-# rn_df = water_value(name,"RN","lg")
+print(income_df)
 
-# water_vals = pd.concat([rn_df,cvar_df20,cvar_df20spill,cvar_df30,cvar_df50])
+rn_objective = obj_value(name,"RN","lg")
+cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
+cvar50spill_objective = obj_value(name,"CVaR_0.9_50_spill300","lg")
+cvar30_objective = obj_value(name,"CVaR_0.9_30","lg")
+cvar50_objective = obj_value(name,"CVaR_0.9_50","lg")
 
-# print("\nWater values the first week: ")
+print("\nObjective values: ")
+print(f"Risk-Neutral: {rn_objective}")
+print(f"CVaR (0.9,20%): {cvar20_objective}")
+print(f"CVaR (0.9,30%): {cvar30_objective}")
+print(f"CVaR (0.9,50%): {cvar50_objective}")
+print(f"CVaR (0.9,50% with spill): {cvar50spill_objective}")
 
-# print(water_vals)
+
+cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+cvar_df50spill = water_value(name,"CVaR_0.9_50_spill300","lg")
+cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
+cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
+rn_df = water_value(name,"RN","lg")
+
+water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50,cvar_df50spill])
+
+print("\nWater values the first week: ")
+
+print(water_vals)
 
 # print("\n---Comparison of inflow models---")
 

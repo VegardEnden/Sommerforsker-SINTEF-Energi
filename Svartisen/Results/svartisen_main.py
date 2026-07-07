@@ -15,10 +15,10 @@ name = "Svartisen"
 
 # topology(name)
 
-plot_reservoir_volumes_series(name,"RN","lg",(0,3500))
-plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500))
-plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500))
-plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
+# plot_reservoir_volumes_series(name,"RN","lg",(0,3500))
+# plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500))
+# plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500))
+# plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
 # plot_reservoir_volumes_series(name,"RN_322","pca",(0,3500))
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_444","pca",(0,3500))
 
@@ -53,16 +53,44 @@ plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
 
 # print(income_df)
 
+# rn_obj = obj_value(name,"RN","lg")
+# cvar_20_obj = obj_value(name,"CVaR_0.9_20","lg")
+# cvar_30_obj = obj_value(name,"CVaR_0.9_30","lg")
+# cvar_50_obj = obj_value(name,"CVaR_0.9_50","lg")
 
-# cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
-# cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
-# cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
-# rn_df = water_value(name,"RN","lg")
+# obj_df = pd.DataFrame({
+#     "Risk-Neutral": [
+#         rn_obj * 100 / rn_obj,  
+#     ],
+#     "CVaR (0.9,20%)": [
+#         cvar_20_obj * 100 / rn_obj,
+#     ],
+#     "CVaR (0.9,30%)": [
+#         cvar_30_obj * 100 / rn_obj,
 
-# water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50])
+#     ],
+    
+#     "CVaR (0.9,50%)": [
+#         cvar_50_obj * 100 / rn_obj,
+#     ]
+# }, index=[
+#     "Expected Objective Value"
+# ])
 
-# print("\nWater values the first week: ")
+# print("\nExpected objective value: ")
+# print(obj_df)
 
-# print(water_vals)
+
+
+cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
+cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
+rn_df = water_value(name,"RN","lg")
+
+water_vals = pd.concat([rn_df,cvar_df20,cvar_df30,cvar_df50])
+
+print("\nWater values the first week: ")
+
+print(water_vals)
 
 print("All done!")
