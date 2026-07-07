@@ -20,7 +20,7 @@ name = "Rjukan"
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_spill20","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,2000))
-plot_reservoir_volumes(name,"CVaR_0.9_50_spill100Froeystul","lg",lim=(0,2000))
+# plot_reservoir_volumes(name,"CVaR_0.9_50_spill100Froeystul","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,2000))
 
 # plot_total_overflow(name,"CVaR_0.9_50","lg")

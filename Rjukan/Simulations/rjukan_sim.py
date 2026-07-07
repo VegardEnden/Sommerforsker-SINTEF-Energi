@@ -12,4 +12,4 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session
 
-run_session("Rjukan","summag","lg",summag=[0.9,2.0,1],week=[1],min=[0],max=[100],series=1,loadInflow=True)
+run_session("Rjukan","CVaR_0.9_50_spill100","lg",cvar=[0.9,0.5],spillPenalty=100,bypassPenalty=100,loadInflow=True)

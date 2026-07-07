@@ -525,6 +525,24 @@ def water_value(plant_name,method,inflow_model):
 
     return summary_df
 
+def water_value_serial(plant_name,method,inflow_model):
+
+
+    prodrisk = load_session(plant_name, method, inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+
+    water_vals = area.water_value_result.get()
+
+    water_val = water_vals.values[0,0]
+
+    summary_df = pd.DataFrame({
+        "First scenario, first week": [water_val]
+
+    }, index=[method + " " + inflow_model])
+
+    return summary_df
+
     
     
 
