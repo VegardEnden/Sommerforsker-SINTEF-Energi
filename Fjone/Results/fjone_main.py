@@ -17,7 +17,7 @@ name = "Fjone"
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
-plot_reservoir_volumes(name,"CVaR_0.9_50_spill300","lg",lim=(0,250))
+plot_reservoir_volumes(name,"CVaR_0.9_50_spill100","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
@@ -42,7 +42,7 @@ plot_reservoir_volumes(name,"CVaR_0.9_50_spill300","lg",lim=(0,250))
 
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
-cvar_50spill_income = income(name,"CVaR_0.9_50_spill300","lg")
+cvar_50spill_income = income(name,"CVaR_0.9_50_spill100","lg")
 cvar_30_income = income(name,"CVaR_0.9_30","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
@@ -84,7 +84,7 @@ print(income_df)
 
 rn_objective = obj_value(name,"RN","lg")
 cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")
-cvar50spill_objective = obj_value(name,"CVaR_0.9_50_spill300","lg")
+cvar50spill_objective = obj_value(name,"CVaR_0.9_50_spill100","lg")
 cvar30_objective = obj_value(name,"CVaR_0.9_30","lg")
 cvar50_objective = obj_value(name,"CVaR_0.9_50","lg")
 
@@ -97,7 +97,7 @@ print(f"CVaR (0.9,50% with spill): {cvar50spill_objective}")
 
 
 cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
-cvar_df50spill = water_value(name,"CVaR_0.9_50_spill300","lg")
+cvar_df50spill = water_value(name,"CVaR_0.9_50_spill100","lg")
 cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
 cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
 rn_df = water_value(name,"RN","lg")
