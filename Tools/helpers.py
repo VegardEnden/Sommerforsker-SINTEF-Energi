@@ -266,6 +266,46 @@ def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
         fig_individ.savefig(path_individ, dpi=300, bbox_inches='tight')
 
 
+def compare_volumes(plant_name, method1, method2, inflow_model1, inflow_model2):
+
+    prodrisk1 = load_session(plant_name,method1,inflow_model1)
+    prodrisk2 = load_session(plant_name,method2,inflow_model2)
+
+    magazines1 = prodrisk1.model.module.get_object_names()
+    magazines2 = prodrisk2.model.module.get_object_names()
+
+    total_vol1 = np.zeros_like(prodrisk1.model.module[magazines1[0]].reservoirVolume.get().values)
+    total_vol2 = np.zeros_like(prodrisk2.model.module[magazines2[0]].reservoirVolume.get().values)
+
+    for mag1 in magazines1:
+        total_vol1 += prodrisk1.model.module[mag1].reservoirVolume.get().values
+
+    for mag2 in magazines2:
+        total_vol2 += prodrisk2.model.module[mag2].reservoirVolume.get().values
+
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Compare Volume")
+    os.makedirs(plot_folder, exist_ok=True)
+
+    index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
+
+    percs = [0,25,50,75,100]
+    perc1 = np.percentile(total_vol1,percs,axis=1)
+    perc2 = np.percentile(total_vol2,percs,axis=1)
+
+    diff = total_vol2 - total_vol1
+    diff_perc = perc2 - perc1
+
+    fig, ax = plt.subplots(figsize=(10,10))
+
+    for p, vals in zip(percs,diff_perc):
+        ax.plot(index, vals, label=f"{p}th percentile")
+    ax.plot(index,np.mean(diff,axis=1),label="Mean",lw=3,color="black")
+    ax.set(title="Difference in Reservoir Volumes", xlabel="Time", ylabel="Volume Difference [Mm$^3$]")
+    ax.legend()
+    ax.grid()
+
+    path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 + "_volume_diff.png")
+    fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
 def topology(plant_name):
 
