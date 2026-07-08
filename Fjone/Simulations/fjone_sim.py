@@ -10,9 +10,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 
 from pyprodrisk import ProdriskSession
 
-from Tools.helpers import run_session
+from Tools.helpers import run_session, run_timedependent_session, run_session_old
 
-run_session("Fjone","RN_spill50","lg",spillPenalty=50,bypassPenalty=50,loadInflow=True)
+# run_session("Fjone","CVaR_0.9_11","lg",cvar=[0.9,0.111],loadInflow=True)
+
+# run_session_old("Fjone","CVaR_0.9_20old", "lg", cvar=[0.9,0.2], loadInflow=True)
+
+run_timedependent_session("Fjone","lg",loadInflow=True)
 
 
 

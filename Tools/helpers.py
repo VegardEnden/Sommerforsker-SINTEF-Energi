@@ -137,6 +137,217 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
 
     return
 
+def run_session_old(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
+                spillPenalty=0,bypassPenalty=0, magPenalty = "", series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
+    prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
+                           solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
+                           silent=False,        # write console output
+                           sim_id=None)         # use default session id (a timestamp)
+
+    local_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter",plant_name, plant_name + " data")
+
+    name = f"{method}_{plant_name}_{inflow_model}"
+
+    prodrisk.load_model_yaml(file_path=local_dir,file_name=plant_name + ".yaml")
+    prodrisk.load_data_h5(file_path=local_dir,file_name=plant_name + ".h5")
+
+    temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata", name)
+    prodrisk.temp_dir = temp_dir
+    prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
+    prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268777wpdm_prodrisk_cvar_win\prodrisk_cvar_win"    # absolute path to Prodrisk executables
+    prodrisk.keep_working_directory = tempdata                             
+    prodrisk.write_penalty_logfiles = 1
+    prodrisk.n_processes = 8
+    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
+
+    if inflow_model == "lg":
+        prodrisk.inflow_model = "lognormal"
+    elif inflow_model == "pca":
+        prodrisk.inflow_model = "principal"
+        prodrisk.n_principal_comp.set(nprinc)
+        prodrisk.n_principal_comp_discrete_values.set(princDisc)
+
+    elif inflow_model == "res":
+        prodrisk.inflow_model = "residual"
+
+    if cvar != [0,0]:
+        prodrisk.cvar = cvar[0]
+        prodrisk.cvar_weight = cvar[1]
+    
+    if spillPenalty != 0:
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
+            mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+            mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[spillPenalty]*prodrisk.n_weeks))
+                mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+    if bypassPenalty != 0:
+
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
+            mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
+            mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
+                mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
+
+    if series == 1:
+        prodrisk.is_series_simulation = series
+
+    if loadInflow:
+        area = prodrisk.model.area["my_area"]
+        prob = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", plant_name + "_probabilities.parquet"))
+        area.lognormal_probabilities.set(prob)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", f"{plant_name}_{ser}_centers.parquet"))
+            prodrisk.model.inflowSeries[ser].lognormal_centers.set(centers)
+        prodrisk.read_lognormal_model.set(1)
+
+
+    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
+
+    if summag != [0,0,0]:
+        prodrisk.summag_min_penalty = summag[0]
+        prodrisk.summag_max_penalty = summag[1]
+        prodrisk.summag_forward = summag[2]
+
+        area = prodrisk.model.area["my_area"]
+        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
+        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
+
+        prodrisk._pb_api.GenerateProdriskFiles()
+
+        input()
+
+        status = prodrisk._pb_api.RunProdrisk()
+
+        return     
+
+
+    #prodrisk._pb_api
+
+    status = prodrisk.run()
+
+
+    prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
+    prodrisk.dump_data_h5(file_path=run_folder,file_name=name,direction="both")
+
+    if saveInflow:
+        inflow_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow")
+        prob_path = os.path.join(inflow_folder, plant_name + "_probabilities.parquet")
+        area = prodrisk.model.area["my_area"]
+        area.lognormal_probabilities.get().to_parquet(prob_path)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = prodrisk.model.inflowSeries[ser].lognormal_centers.get()
+            centers.to_parquet(os.path.join(inflow_folder, f"{plant_name}_{ser}_centers.parquet"))
+
+
+
+    return
+
+
+def run_timedependent_session(plant_name, inflow_model, tempdata=True, spillPenalty=0,bypassPenalty=0, magPenalty = "", loadInflow=False, saveInflow=False):
+    
+    prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
+                           solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
+                           silent=False,        # write console output
+                           sim_id=None)         # use default session id (a timestamp)
+
+    local_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter",plant_name, plant_name + " data")
+
+    name = f"Time-dependent_{plant_name}_{inflow_model}"
+
+    prodrisk.load_model_yaml(file_path=local_dir,file_name=plant_name + ".yaml")
+    prodrisk.load_data_h5(file_path=local_dir,file_name=plant_name + ".h5")
+
+    temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata", name)
+    prodrisk.temp_dir = temp_dir
+    prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
+    prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\cvar-timedependent"    # absolute path to Prodrisk executables
+    prodrisk.keep_working_directory = tempdata                             
+    prodrisk.write_penalty_logfiles = 1
+    prodrisk.n_processes = 8
+    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
+    
+    if spillPenalty != 0:
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
+            mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+            mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[spillPenalty]*prodrisk.n_weeks))
+                mod.BackwardSpillingCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[spillPenalty]*prodrisk.n_weeks))
+    if bypassPenalty != 0:
+
+        if magPenalty != "":
+            mod = prodrisk.model.module[magPenalty]
+            mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
+            mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                        data=[bypassPenalty]*prodrisk.n_weeks))
+        else:
+            magazines = prodrisk.model.module.get_object_names()
+            for mag in magazines:
+                mod = prodrisk.model.module[mag]
+                mod.ForwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
+                mod.BackwardBypassCostEnergy.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in range(prodrisk.n_weeks)],
+                                                            data=[bypassPenalty]*prodrisk.n_weeks))
+    if loadInflow:
+        area = prodrisk.model.area["my_area"]
+        prob = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", plant_name + "_probabilities.parquet"))
+        area.lognormal_probabilities.set(prob)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", f"{plant_name}_{ser}_centers.parquet"))
+            prodrisk.model.inflowSeries[ser].lognormal_centers.set(centers)
+        prodrisk.read_lognormal_model.set(1)
+    
+    prodrisk._pb_api.GenerateProdriskFiles()
+
+    input("Add riskparam.dat")
+
+    status = prodrisk._pb_api.RunProdrisk()
+
+    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
+
+    prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
+    prodrisk.dump_data_h5(file_path=run_folder,file_name=name,direction="both")
+
+    if saveInflow:
+        inflow_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow")
+        prob_path = os.path.join(inflow_folder, plant_name + "_probabilities.parquet")
+        area = prodrisk.model.area["my_area"]
+        area.lognormal_probabilities.get().to_parquet(prob_path)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = prodrisk.model.inflowSeries[ser].lognormal_centers.get()
+            centers.to_parquet(os.path.join(inflow_folder, f"{plant_name}_{ser}_centers.parquet"))
+
+    
+    return
 
 def load_session(plant_name, method, inflow_model):
 
@@ -154,7 +365,7 @@ def load_session(plant_name, method, inflow_model):
 
     return prodrisk
 
-def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
+def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
@@ -186,6 +397,16 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
     for p, vals in zip(percs,total_perc):
         ax_total.plot(index, vals, label=f"{p}th percentile")
     ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3,color="black")
+
+    for marker in week_marker:
+        if isinstance(marker, (int, np.integer)):
+            target_time = index[0] + pd.Timedelta(weeks=marker)
+            if isinstance(index, pd.DatetimeIndex):
+                pos = np.argmin(np.abs(index - target_time))
+                ax_total.axvline(index[pos], linestyle="--", color="gray", alpha=0.7)
+        elif marker in index:
+            ax_total.axvline(marker, linestyle="--", color="gray", alpha=0.7)
+
     ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
     ax_total.grid()
     ax_total.legend()
@@ -201,6 +422,17 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim):
         for p, vals in zip(percs,individ_perc):
             ax_individ.plot(index, vals, label=f"{p}th percentile")
         ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
+
+        for marker in week_marker:
+            if isinstance(marker, (int, np.integer)):
+                target_time = index[0] + pd.Timedelta(weeks=marker)
+                if isinstance(index, pd.DatetimeIndex):
+                    pos = np.argmin(np.abs(index - target_time))
+                    ax_individ.axvline(index[pos], linestyle="--", color="gray", alpha=0.7)
+            elif marker in index:
+                ax_individ.axvline(marker, linestyle="--", color="gray", alpha=0.7)
+
+
         ax_individ.set(title=method + ", " + inflow_model + "_" + biggest ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
         ax_individ.grid()
         ax_individ.legend()

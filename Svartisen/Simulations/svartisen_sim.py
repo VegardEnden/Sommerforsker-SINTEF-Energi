@@ -12,4 +12,4 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session
 
-run_session("Svartisen","RN","lg",series=1,loadInflow=True)
+run_session("Svartisen","RN","pca",series=1,loadInflow=True)
