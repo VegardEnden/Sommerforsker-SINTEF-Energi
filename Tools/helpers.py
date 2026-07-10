@@ -222,26 +222,6 @@ def run_session_old(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],w
 
     run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
 
-    if summag != [0,0,0]:
-        prodrisk.summag_min_penalty = summag[0]
-        prodrisk.summag_max_penalty = summag[1]
-        prodrisk.summag_forward = summag[2]
-
-        area = prodrisk.model.area["my_area"]
-        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
-        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
-
-        prodrisk._pb_api.GenerateProdriskFiles()
-
-        input()
-
-        status = prodrisk._pb_api.RunProdrisk()
-
-        return     
-
-
-    #prodrisk._pb_api
-
     status = prodrisk.run()
 
 
@@ -348,6 +328,89 @@ def run_timedependent_session(plant_name, inflow_model, tempdata=True, spillPena
 
     
     return
+
+
+def run_session_summag(plant_name,inflow_model,tempdata=True,loadInflow=False,saveInflow=False,
+                       nprinc=0,princDisc=[],summag=[0,0,0],week=[],min=[],max=[]):
+
+    prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
+                           solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\prapi\dist\release64\6.0.1_2026-07-10_36225e8f5\Prodrisk_API_6.0.1_2026-07-10_36225e8f5\pyprodrisk", # absolute path to pyprodrisk binaries
+                           silent=False,        # write console output
+                           sim_id=None)         # use default session id (a timestamp)
+
+    local_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter",plant_name, plant_name + " data")
+
+    name = f"Summag_{plant_name}_{inflow_model}"
+
+    prodrisk.load_model_yaml(file_path=local_dir,file_name=plant_name + ".yaml")
+    prodrisk.load_data_h5(file_path=local_dir,file_name=plant_name + ".h5")
+
+    temp_dir = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\tempdata", name)
+    prodrisk.temp_dir = temp_dir
+    prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
+    prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\ltm_core\dist\x64\windows\release\package\prodrisk_core"   # absolute path to Prodrisk executables
+    prodrisk.keep_working_directory = tempdata                             
+    prodrisk.write_penalty_logfiles = 1
+    prodrisk.n_processes = 8
+    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
+
+    if inflow_model == "lg":
+        prodrisk.inflow_model = "lognormal"
+    elif inflow_model == "pca":
+        prodrisk.inflow_model = "principal"
+        prodrisk.n_principal_comp.set(nprinc)
+        prodrisk.n_principal_comp_discrete_values.set(princDisc)
+
+    elif inflow_model == "res":
+        prodrisk.inflow_model = "residual"
+
+    if loadInflow:
+        area = prodrisk.model.area["my_area"]
+        prob = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", plant_name + "_probabilities.parquet"))
+        area.lognormal_probabilities.set(prob)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = pd.read_parquet(os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow", f"{plant_name}_{ser}_centers.parquet"))
+            prodrisk.model.inflowSeries[ser].lognormal_centers.set(centers)
+        prodrisk.read_lognormal_model.set(1)
+
+    if summag != [0,0,0]:
+        prodrisk.summag_min_penalty = summag[0]
+        prodrisk.summag_max_penalty = summag[1]
+        prodrisk.summag_forward = summag[2]
+
+        area = prodrisk.model.area["my_area"]
+        area.summag_min.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=min))
+        area.summag_max.set(pd.Series(index=[prodrisk.start_time + pd.Timedelta(weeks=w) for w in week], data=max))
+
+
+    run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
+
+    status = prodrisk.run()
+
+
+    prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
+    prodrisk.dump_data_h5(file_path=run_folder,file_name=name,direction="both")
+
+    if saveInflow:
+        inflow_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Inflow")
+        prob_path = os.path.join(inflow_folder, plant_name + "_probabilities.parquet")
+        area = prodrisk.model.area["my_area"]
+        area.lognormal_probabilities.get().to_parquet(prob_path)
+        for ser in prodrisk.model.inflowSeries.get_object_names():
+            centers = prodrisk.model.inflowSeries[ser].lognormal_centers.get()
+            centers.to_parquet(os.path.join(inflow_folder, f"{plant_name}_{ser}_centers.parquet"))
+
+
+
+    return
+
+    
+    
+
+        
+
+
 
 def load_session(plant_name, method, inflow_model):
 
@@ -539,6 +602,88 @@ def compare_volumes(plant_name, method1, method2, inflow_model1, inflow_model2):
     path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 + "_volume_diff.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
+    return 
+
+
+def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_model2,lim):
+
+    prodrisk1 = load_session(plant_name,method1,inflow_model1)
+    prodrisk2 = load_session(plant_name,method2,inflow_model2)
+
+    magazines1 = prodrisk1.model.module.get_object_names()
+    magazines2 = prodrisk2.model.module.get_object_names()
+
+    total_vol1 = np.zeros_like(prodrisk1.model.module[magazines1[0]].reservoirVolume.get().values)
+    total_vol2 = np.zeros_like(prodrisk2.model.module[magazines2[0]].reservoirVolume.get().values)
+
+    for mag1 in magazines1:
+        total_vol1 += prodrisk1.model.module[mag1].reservoirVolume.get().values
+
+    for mag2 in magazines2:
+        total_vol2 += prodrisk2.model.module[mag2].reservoirVolume.get().values
+
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Compare Volume")
+    os.makedirs(plot_folder, exist_ok=True)
+
+    index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
+
+
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}")
+    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}")
+    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
+    ax.legend(loc="upper left")
+    ax.grid()
+
+    path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 + "_volume_mean.png")
+    fig.savefig(path_diff, dpi=300, bbox_inches='tight')
+
+    return 
+
+def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, lim):
+
+    prodrisk1 = load_session(plant_name,method1,inflow_model1)
+    prodrisk2 = load_session(plant_name,method2,inflow_model2)
+    prodrisk3 = load_session(plant_name,method3,inflow_model3)
+
+    magazines1 = prodrisk1.model.module.get_object_names()
+    magazines2 = prodrisk2.model.module.get_object_names()
+    magazines3 = prodrisk3.model.module.get_object_names()
+
+    total_vol1 = np.zeros_like(prodrisk1.model.module[magazines1[0]].reservoirVolume.get().values)
+    total_vol2 = np.zeros_like(prodrisk2.model.module[magazines2[0]].reservoirVolume.get().values)
+    total_vol3 = np.zeros_like(prodrisk3.model.module[magazines3[0]].reservoirVolume.get().values)
+
+    for mag1 in magazines1:
+        total_vol1 += prodrisk1.model.module[mag1].reservoirVolume.get().values
+
+    for mag2 in magazines2:
+        total_vol2 += prodrisk2.model.module[mag2].reservoirVolume.get().values
+
+    for mag3 in magazines3:
+        total_vol3 += prodrisk3.model.module[mag3].reservoirVolume.get().values
+
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Compare Volume")
+    os.makedirs(plot_folder, exist_ok=True)
+
+    index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
+
+
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}_{inflow_model1}")
+    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}_{inflow_model2}")
+    ax.plot(index,np.mean(total_vol3,axis=1),label=f"{method3}_{inflow_model3}")
+    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
+    ax.legend(loc="upper left")
+    ax.grid()
+
+    path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 
+                             + "_vs_" + method3 + "_" + inflow_model3 + "_volume_mean.png")
+    fig.savefig(path_diff, dpi=300, bbox_inches='tight')
+
+    return 
+
+
 def topology(plant_name):
 
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
@@ -584,7 +729,7 @@ def plot_overflow(plant_name, method, inflow_model):
 
     return
 
-def plot_total_overflow(plant_name, method, inflow_model):
+def plot_total_overflow(plant_name, method, inflow_model,lim):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
@@ -595,7 +740,7 @@ def plot_total_overflow(plant_name, method, inflow_model):
 
     # ax.fill_between(tot_overflow.index, np.percentile(tot_overflow.values[:,:],0,axis=1),np.percentile(tot_overflow.values[:,:],100,axis=1),alpha=0.2)
     ax.plot(tot_overflow.mean(axis=1))
-    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow")
+    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow",ylim=lim)
     ax.grid()
 
     plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Overflow")

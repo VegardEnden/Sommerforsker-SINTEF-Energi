@@ -10,13 +10,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 
 from pyprodrisk import ProdriskSession
 
-from Tools.helpers import run_session, run_timedependent_session, run_session_old
+from Tools.helpers import run_session, run_timedependent_session, run_session_old, run_session_summag
 
-# run_session("Fjone","CVaR_0.9_11","lg",cvar=[0.9,0.111],loadInflow=True)
+# run_session("Fjone","CVaR_0.9_20_33","pca",nprinc=2,princDisc=[3,3], cvar=[0.9,0.2],loadInflow=True)
 
-# run_session_old("Fjone","CVaR_0.9_20old", "lg", cvar=[0.9,0.2], loadInflow=True)
+# run_session_old("Fjone","CVaR_0.9_20old","res",cvar=[0.9,0.2],loadInflow=True)
 
-run_timedependent_session("Fjone","lg",loadInflow=True)
+# run_timedependent_session("Fjone","lg",loadInflow=True)
+
+run_session_summag("Fjone","lg",summag=[0.9,2.0,1],week=[1,100,180,220],min=[10,0,20,0],max=[95,80,100,100])
 
 
 

@@ -17,40 +17,51 @@ name = "Fjone"
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20old","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_spill50nape","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_11","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_50_spill50","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_50_spill50nape","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_50_spill100nape","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_322old","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20old","res",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
 # plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"RN_3322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_3322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","res",lim=(0,250))
-plot_reservoir_volumes(name,"Time-dependent","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"Time-dependent","lg",lim=(0,250),week_marker=[50,80,100,125,150,180,200])
+
+# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(40,160))
+# compare_volumes_mean(name,"CVaR_0.9_15_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,160))
+
+compare_three_means(name,"RN","lg", "RN_322","pca","RN","res",lim=(40,180))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
 # # plot_bypass(name,"RN","lg")
 
-# plot_total_overflow(name,"CVaR_0.9_50","lg")
-# plot_total_overflow(name,"CVaR_0.9_20","lg")
-# plot_total_overflow(name,"CVaR_0.7_50","lg")
-# plot_total_overflow(name,"RN","lg")
+# plot_total_overflow(name,"CVaR_0.9_50","lg",lim=(0,0.1))
+# plot_total_overflow(name,"CVaR_0.9_20","lg",lim=(0,0.1))
+# plot_total_overflow(name,"RN","lg",lim=(0,0.1))
+# plot_total_overflow(name,"Time-dependent","lg",lim=(0,0.1))
+# plot_total_overflow(name,"CVaR_0.9_50_spill50nape","lg",lim=(0,0.1))
+# plot_total_overflow(name,"CVaR_0.9_50_spill100nape","lg",lim=(0,0.1))
+# plot_total_overflow(name,"CVaR_0.9_50_spill50","lg",lim=(0,0.1))
 
 # # plot_production(name,"CVaR_0.9_50","lg")
 # # plot_production(name,"RN","lg")
 
 
-cvar_11_income = income(name,"CVaR_0.9_11","lg")
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
-cvar_20old_income = income(name,"CVaR_0.9_20old","lg")
-cvar_50spill_income = income(name,"CVaR_0.9_50_spill50","lg")
-cvar_30_income = income(name,"CVaR_0.9_30","lg")
+cvar_20pcaincome = income(name,"CVaR_0.9_20_322","pca")
+timedep_income = income(name,"Time-dependent","lg")
+cvar_50spillnape_income = income(name,"CVaR_0.9_50_spill100nape","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
-rn_spill50_income = income(name,"RN_spill50","lg")
 
 print("---Comparison Risk-neutral vs CVaR---")
 
@@ -65,27 +76,24 @@ income_df = pd.DataFrame({
         cvar_20_income[0] * 100 / rn_income[0],
         cvar_20_income[1] * 100 / rn_income[0],
     ],
-    "CVaR (0.9,11%)": [
-        cvar_11_income[0] * 100 / rn_income[0],
-        cvar_11_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR (0.9,20%) old": [
-        cvar_20old_income[0] * 100 / rn_income[0],
-        cvar_20old_income[1] * 100 / rn_income[0],
+    "CVaR time-dependent": [
+        timedep_income[0] * 100 / rn_income[0],
+        timedep_income[1] * 100 / rn_income[0],
     ],
     
-    "CVaR (0.9,30%)": [
-        cvar_30_income[0] * 100 / rn_income[0],
-        cvar_30_income[1] * 100 / rn_income[0],
+    "CVaR (0.9,20%) pca": [
+        cvar_20pcaincome[0] * 100 / rn_income[0],
+        cvar_20pcaincome[1] * 100 / rn_income[0],
 
     ],
     "CVaR (0.9,50%)": [
         cvar_50_income[0] * 100 / rn_income[0],
         cvar_50_income[1] * 100 / rn_income[0],
     ],
-    "CVaR (0.9,50%) with spill penalty": [
-        cvar_50spill_income[0] * 100 / rn_income[0],
-        cvar_50spill_income[1] * 100 / rn_income[0],
+    
+    "CVaR (0.9,50%) spill on nape": [
+        cvar_50spillnape_income[0] * 100 / rn_income[0],
+        cvar_50spillnape_income[1] * 100 / rn_income[0],
     ]
 }, index=[
     "Average",
@@ -109,18 +117,18 @@ print(income_df)
 # print(f"CVaR (0.9,50% with spill): {cvar50spill_objective}")
 
 
-cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
-cvar_df50spill = water_value(name,"CVaR_0.9_50_spill50","lg")
-cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
-cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
-rn_df = water_value(name,"RN","lg")
-cvarold_df20 = water_value(name, "CVaR_0.9_20old","lg")
+# cvar_df20 = water_value(name,"CVaR_0.9_20","lg")
+# cvar_df50spill = water_value(name,"CVaR_0.9_50_spill100nape","lg")
+# cvar_df30 = water_value(name,"CVaR_0.9_30","lg")
+# cvar_df50 = water_value(name,"CVaR_0.9_50","lg")
+# rn_df = water_value(name,"RN","lg")
+# timedep_df = water_value(name, "Time-dependent","lg")
 
-water_vals = pd.concat([rn_df, cvar_df20,cvarold_df20, cvar_df30,cvar_df50,cvar_df50spill])
+# water_vals = pd.concat([rn_df, cvar_df20,timedep_df, cvar_df30,cvar_df50,cvar_df50spill])
 
-print("\nWater values the first week: ")
+# print("\nWater values the first week: ")
 
-print(water_vals)
+# print(water_vals)
 
 # print("\n---Comparison of inflow models---")
 

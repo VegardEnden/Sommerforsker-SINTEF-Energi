@@ -15,22 +15,26 @@ name = "Rjukan"
 
 # topology(name)
 
-plot_reservoir_volumes(name,"RN","lg",lim=(0,2000),week_marker=[30,50,80,100,130])
+plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,2000))
+# plot_reservoir_volumes(name,"CVaR_0.9_20old","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_20_spill20","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_50_spill100","lg",lim=(0,2000))
 # plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,2000))
-# plot_reservoir_volumes(name, "Time-dependent", "lg", lim=(0,2000),week_marker=[30,50,80,100,130])
+# plot_reservoir_volumes(name, "Time-dependent", "lg", lim=(0,2000),week_marker=[25,50,80,100,135])
 
 # compare_volumes(name,"CVaR_0.9_50_spill100","CVaR_0.9_50","lg","lg")
+# compare_volumes(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg")
+# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(0,2000))
 
-# plot_total_overflow(name,"CVaR_0.9_50","lg")
-# plot_total_overflow(name,"CVaR_0.9_50_spill50","lg")
-# plot_total_overflow(name,"CVaR_0.9_20","lg")
-# plot_total_overflow(name,"RN","lg")
-# plot_total_overflow(name,"Time-dependent","lg")
+# plot_total_overflow(name,"CVaR_0.9_50","lg",lim=(0,40))
+# plot_total_overflow(name,"CVaR_0.9_20_spill50","lg",lim=(0,40))
+# plot_total_overflow(name,"CVaR_0.9_50_spill100Froeystul","lg",lim=(0,40))
+# plot_total_overflow(name,"CVaR_0.9_20","lg",lim=(0,40))
+# plot_total_overflow(name,"RN","lg",lim=(0,40))
+# plot_total_overflow(name,"Time-dependent","lg",lim=(0,40))
 
 cvar_20_income = income(name,"CVaR_0.9_20","lg")
 cvar_20spill_income = income(name,"CVaR_0.9_20_spill20","lg")
