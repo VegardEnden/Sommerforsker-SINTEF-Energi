@@ -42,7 +42,12 @@ name = "Fjone"
 # compare_volumes_mean(name,"CVaR_0.9_15_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,160))
 
-compare_three_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca",lim=(40,180))
+
+scenario_volumes(name,"RN", "lg", lim=(0,250))
+scenario_volumes(name,"CVaR_0.9_20","lg", lim=(0,250))
+scenario_volumes(name,"CVaR_0.9_30","lg", lim=(0,250))
+scenario_volumes(name,"CVaR_0.9_50","lg", lim=(0,250))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
 # # plot_bypass(name,"RN","lg")
@@ -59,53 +64,53 @@ compare_three_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0
 # # plot_production(name,"RN","lg")
 
 
-cvar_20_income = income(name,"CVaR_0.9_20","lg")
-cvar_20pcaincome = income(name,"CVaR_0.9_20_322","pca")
-timedep_income = income(name,"Time-dependent","lg")
-cvar_50spillnape_income = income(name,"CVaR_0.9_50_spill100nape","lg")
-cvar_50_income = income(name,"CVaR_0.9_50","lg")
-rn_income = income(name,"RN","lg")
-summag_income = income(name,"Summag","lg")
+# cvar_20_income = income(name,"CVaR_0.9_20","lg")
+# cvar_20pcaincome = income(name,"CVaR_0.9_20_322","pca")
+# timedep_income = income(name,"Time-dependent","lg")
+# cvar_50spillnape_income = income(name,"CVaR_0.9_50_spill100nape","lg")
+# cvar_50_income = income(name,"CVaR_0.9_50","lg")
+# rn_income = income(name,"RN","lg")
+# summag_income = income(name,"Summag","lg")
 
-print("---Comparison Risk-neutral vs CVaR---")
+# print("---Comparison Risk-neutral vs CVaR---")
 
-print("\nAdjusted income with risk-neutral as baseline: ")
+# print("\nAdjusted income with risk-neutral as baseline: ")
 
-income_df = pd.DataFrame({
-    "Risk-Neutral": [
-        rn_income[0] * 100 / rn_income[0],  
-        rn_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR (0.9,20%)": [
-        cvar_20_income[0] * 100 / rn_income[0],
-        cvar_20_income[1] * 100 / rn_income[0],
-    ],
-    "CVaR time-dependent": [
-        timedep_income[0] * 100 / rn_income[0],
-        timedep_income[1] * 100 / rn_income[0],
-    ],
+# income_df = pd.DataFrame({
+#     "Risk-Neutral": [
+#         rn_income[0] * 100 / rn_income[0],  
+#         rn_income[1] * 100 / rn_income[0],
+#     ],
+#     "CVaR (0.9,20%)": [
+#         cvar_20_income[0] * 100 / rn_income[0],
+#         cvar_20_income[1] * 100 / rn_income[0],
+#     ],
+#     "CVaR time-dependent": [
+#         timedep_income[0] * 100 / rn_income[0],
+#         timedep_income[1] * 100 / rn_income[0],
+#     ],
     
-    "Summag": [
-        summag_income[0] * 100 / rn_income[0],
-        summag_income[1] * 100 / rn_income[0],
+#     "Summag": [
+#         summag_income[0] * 100 / rn_income[0],
+#         summag_income[1] * 100 / rn_income[0],
 
-    ],
-    "CVaR (0.9,50%)": [
-        cvar_50_income[0] * 100 / rn_income[0],
-        cvar_50_income[1] * 100 / rn_income[0],
-    ],
+#     ],
+#     "CVaR (0.9,50%)": [
+#         cvar_50_income[0] * 100 / rn_income[0],
+#         cvar_50_income[1] * 100 / rn_income[0],
+#     ],
     
-    "CVaR (0.9,50%) spill on nape": [
-        cvar_50spillnape_income[0] * 100 / rn_income[0],
-        cvar_50spillnape_income[1] * 100 / rn_income[0],
-    ]
-}, index=[
-    "Average",
-    "Avg 10% worst"
-])
+#     "CVaR (0.9,50%) spill on nape": [
+#         cvar_50spillnape_income[0] * 100 / rn_income[0],
+#         cvar_50spillnape_income[1] * 100 / rn_income[0],
+#     ]
+# }, index=[
+#     "Average",
+#     "Avg 10% worst"
+# ])
 
 
-print(income_df)
+# print(income_df)
 
 # rn_objective = obj_value(name,"RN","lg")
 # cvar20_objective = obj_value(name,"CVaR_0.9_20","lg")

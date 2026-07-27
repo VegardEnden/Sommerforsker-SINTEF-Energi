@@ -452,6 +452,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
 
 
     plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Volume")
+    os.makedirs(plot_folder, exist_ok=True)
 
     # ----- Total Volume fig ----- 
     total_perc = np.percentile(total_vol,percs,axis=1)
@@ -680,6 +681,60 @@ def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_mode
     path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 
                              + "_vs_" + method3 + "_" + inflow_model3 + "_volume_mean.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
+
+    return 
+
+
+def scenario_volumes(plant_name, method, inflow_model, lim):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    magazines = prodrisk.model.module.get_object_names()
+    
+    biggest = ""
+    max_vol = 0
+    total_vol = np.zeros_like(prodrisk.model.module[magazines[0]].reservoirVolume.get().values)
+
+    for mag in magazines:
+        max_volume = prodrisk.model.module[mag].rsvMax.get()
+        if max_volume > max_vol:
+            max_vol = max_volume
+            biggest = mag
+        total_vol += prodrisk.model.module[mag].reservoirVolume.get().values
+
+    individ_vol = prodrisk.model.module[biggest].reservoirVolume.get()
+    index = individ_vol.index
+
+    total_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","ScenarioVols",f"{method}_{inflow_model}","Total")
+    os.makedirs(total_folder, exist_ok=True)
+
+    if len(magazines) != 1:
+        individ_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","ScenarioVols",f"{method}_{inflow_model}", biggest)
+        os.makedirs(individ_folder,exist_ok=True)
+
+    n_scenarios = len(total_vol[0,:])
+    
+    for i in range(1,n_scenarios + 1):
+        tot_fig, tot_ax = plt.subplots(figsize=(10,10))
+        tot_ax.plot(index, total_vol[:,i - 1])
+        tot_ax.set(title=f"Total volume scenario {i} {method} {inflow_model}", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
+        tot_ax.grid()
+
+        path = os.path.join(total_folder, f"{i}")
+        tot_fig.savefig(path, dpi=300, bbox_inches="tight")
+        plt.close(tot_fig)
+
+
+        if len(magazines) != 1: 
+            fig, ax = plt.subplots(figsize=(10,10))
+            ax.plot(index, individ_vol.values[:,i-1])
+            ax.set(title=f"{biggest} volume scenario {i} {method} {inflow_model}", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=(0,max_vol*1.2))
+            ax.grid()
+
+            path = os.path.join(individ_folder, f"{i}")
+            fig.savefig(path, dpi=300, bbox_inches="tight")
+            plt.close(fig)
+
 
     return 
 
