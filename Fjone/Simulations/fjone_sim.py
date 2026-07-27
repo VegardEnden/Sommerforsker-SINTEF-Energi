@@ -18,7 +18,7 @@ from Tools.helpers import run_session, run_timedependent_session, run_session_ol
 
 # run_timedependent_session("Fjone","lg",loadInflow=True)
 
-run_session_summag("Fjone","lg",summag=[0.9,2.0,1],week=[1,100,180,220],min=[10,0,20,0],max=[95,80,100,100])
+run_session_summag("Fjone","lg",loadInflow=True,summag=[0.9,2,1],week=[1],min=[0],max=[100])
 
 
 

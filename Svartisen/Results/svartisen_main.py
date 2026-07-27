@@ -21,6 +21,7 @@ name = "Svartisen"
 # plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
 # plot_reservoir_volumes_series(name,"RN_322","pca",(0,3500))
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_444","pca",(0,3500))
+plot_reservoir_volumes(name,"Summag", "lg",(0,3500))
 
 cvar_20_income = income_serial(name,"CVaR_0.9_20","lg")
 cvar_30_income = income_serial(name,"CVaR_0.9_30","lg")

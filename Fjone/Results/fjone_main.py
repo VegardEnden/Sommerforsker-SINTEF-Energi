@@ -34,12 +34,15 @@ name = "Fjone"
 # plot_reservoir_volumes(name,"CVaR_0.9_20_3322","pca",lim=(0,250))
 # plot_reservoir_volumes(name,"RN","res",lim=(0,250))
 # plot_reservoir_volumes(name,"Time-dependent","lg",lim=(0,250),week_marker=[50,80,100,125,150,180,200])
+# plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_33","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_20_222","pca",lim=(0,250))
 
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(40,160))
 # compare_volumes_mean(name,"CVaR_0.9_15_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,160))
 
-compare_three_means(name,"RN","lg", "RN_322","pca","RN","res",lim=(40,180))
+compare_three_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca",lim=(40,180))
 
 # # plot_bypass(name,"CVaR_0.9_20","lg")
 # # plot_bypass(name,"RN","lg")
@@ -62,6 +65,7 @@ timedep_income = income(name,"Time-dependent","lg")
 cvar_50spillnape_income = income(name,"CVaR_0.9_50_spill100nape","lg")
 cvar_50_income = income(name,"CVaR_0.9_50","lg")
 rn_income = income(name,"RN","lg")
+summag_income = income(name,"Summag","lg")
 
 print("---Comparison Risk-neutral vs CVaR---")
 
@@ -81,9 +85,9 @@ income_df = pd.DataFrame({
         timedep_income[1] * 100 / rn_income[0],
     ],
     
-    "CVaR (0.9,20%) pca": [
-        cvar_20pcaincome[0] * 100 / rn_income[0],
-        cvar_20pcaincome[1] * 100 / rn_income[0],
+    "Summag": [
+        summag_income[0] * 100 / rn_income[0],
+        summag_income[1] * 100 / rn_income[0],
 
     ],
     "CVaR (0.9,50%)": [
