@@ -12,7 +12,7 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session, run_timedependent_session, run_session_old
 
-run_session("RjukanPump","RN","lg",saveInflow=True)
+run_session("RjukanPump","CVaR_0.9_20","lg",cvar=[0.9,0.2],loadInflow=True)
 
 # run_timedependent_session("Rjukan","lg",loadInflow=True)
 

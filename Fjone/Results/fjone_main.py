@@ -16,52 +16,19 @@ name = "Fjone"
 # topology(name)
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20old","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_spill50nape","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_11","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_50_spill50nape","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_50_spill100nape","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_50","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.7_50","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_322","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_322old","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20","res",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20old","res",lim=(0,250))
-# plot_reservoir_volumes(name,"RN","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"RN_322","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"RN_3322","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_3322","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"RN","res",lim=(0,250))
-# plot_reservoir_volumes(name,"Time-dependent","lg",lim=(0,250),week_marker=[50,80,100,125,150,180,200])
-# plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_33","pca",lim=(0,250))
-# plot_reservoir_volumes(name,"CVaR_0.9_20_222","pca",lim=(0,250))
+
+
+
 
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(40,160))
-# compare_volumes_mean(name,"CVaR_0.9_15_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_15_4333","CVaR_0.9_20_4333old","pca","pca",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_20_33","CVaR_0.9_20_33old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,160))
 
-# compare_three_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_20_322old","pca", "CVaR_0.9_20_33old","pca","CVaR_0.9_20_222old","pca",lim=(40,180))
+# compare_four_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca","CVaR_0.9_20_4333","pca",lim=(40,180))
 
-scenario_volumes(name,"RN", "lg", lim=(0,250))
-scenario_volumes(name,"CVaR_0.9_20","lg", lim=(0,250))
-scenario_volumes(name,"CVaR_0.9_30","lg", lim=(0,250))
-scenario_volumes(name,"CVaR_0.9_50","lg", lim=(0,250))
-
-# # plot_bypass(name,"CVaR_0.9_20","lg")
-# # plot_bypass(name,"RN","lg")
-
-# plot_total_overflow(name,"CVaR_0.9_50","lg",lim=(0,0.1))
-# plot_total_overflow(name,"CVaR_0.9_20","lg",lim=(0,0.1))
-# plot_total_overflow(name,"RN","lg",lim=(0,0.1))
-# plot_total_overflow(name,"Time-dependent","lg",lim=(0,0.1))
-# plot_total_overflow(name,"CVaR_0.9_50_spill50nape","lg",lim=(0,0.1))
-# plot_total_overflow(name,"CVaR_0.9_50_spill100nape","lg",lim=(0,0.1))
-# plot_total_overflow(name,"CVaR_0.9_50_spill50","lg",lim=(0,0.1))
-
-# # plot_production(name,"CVaR_0.9_50","lg")
-# # plot_production(name,"RN","lg")
+# scenario_volumes(name,"CVaR_0.9_50_spill100nape", "lg", lim=(0,250))
 
 
 # cvar_20_income = income(name,"CVaR_0.9_20","lg")

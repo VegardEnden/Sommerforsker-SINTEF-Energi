@@ -16,10 +16,12 @@ name = "RjukanPump"
 
 # topology(name)
 
-# plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
+plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
+plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,2000))
 
 pump_income = income(name,"RN","lg")
 nopump_income = income("Rjukan","RN","lg")
+cvar_income = income(name,"CVaR_0.9_20","lg")
 
 income_df = pd.DataFrame({
     "No pump": [
@@ -31,6 +33,11 @@ income_df = pd.DataFrame({
         pump_income[1] * 100 / nopump_income[0],
     
     ],
+    "Pump CVaR": [
+            cvar_income[0] * 100 / nopump_income[0],
+            cvar_income[1] * 100 / nopump_income[0],
+        
+        ],
 }, index=[
     "Average",
     "Avg 10% worst"

@@ -14,7 +14,7 @@ plt.rcParams["axes.titlesize"] = 18
 
 
 def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=[],min=[],max=[],tempdata=True,
-                spillPenalty=0,bypassPenalty=0, magPenalty = "", series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False):
+                spillPenalty=0,bypassPenalty=0, magPenalty = "", series=0,nprinc= 0, princDisc= [], saveInflow=False,loadInflow=False, hardCap=False):
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
                            solver_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk-CVar-and-Summag-prototype-5825\1781268775wpdm_prapi_cvar_win\prapi_cvar_win\6.0.1_2026-06-12_020b04dce\Prodrisk_API_6.0.1_2026-06-12_020b04dce\pyprodrisk", # absolute path to pyprodrisk binaries
                            silent=False,        # write console output
@@ -50,6 +50,9 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
     if cvar != [0,0]:
         prodrisk.cvar = cvar[0]
         prodrisk.cvar_weight = cvar[1]
+
+    if hardCap:
+        prodrisk.model.module["FROEYSTUL"].reservoirMinRestrictionType.set(2) 
     
     if spillPenalty != 0:
         if magPenalty != "":
@@ -116,7 +119,6 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         return     
 
 
-    #prodrisk._pb_api
 
     status = prodrisk.run()
 
@@ -680,6 +682,55 @@ def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_mode
 
     path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 
                              + "_vs_" + method3 + "_" + inflow_model3 + "_volume_mean.png")
+    fig.savefig(path_diff, dpi=300, bbox_inches='tight')
+
+    return 
+
+def compare_four_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, method4, inflow_model4, lim):
+
+    prodrisk1 = load_session(plant_name,method1,inflow_model1)
+    prodrisk2 = load_session(plant_name,method2,inflow_model2)
+    prodrisk3 = load_session(plant_name,method3,inflow_model3)
+    prodrisk4 = load_session(plant_name,method4,inflow_model4)
+
+    magazines1 = prodrisk1.model.module.get_object_names()
+    magazines2 = prodrisk2.model.module.get_object_names()
+    magazines3 = prodrisk3.model.module.get_object_names()
+    magazines4 = prodrisk4.model.module.get_object_names()
+
+    total_vol1 = np.zeros_like(prodrisk1.model.module[magazines1[0]].reservoirVolume.get().values)
+    total_vol2 = np.zeros_like(prodrisk2.model.module[magazines2[0]].reservoirVolume.get().values)
+    total_vol3 = np.zeros_like(prodrisk3.model.module[magazines3[0]].reservoirVolume.get().values)
+    total_vol4 = np.zeros_like(prodrisk4.model.module[magazines4[0]].reservoirVolume.get().values)
+
+    for mag1 in magazines1:
+        total_vol1 += prodrisk1.model.module[mag1].reservoirVolume.get().values
+
+    for mag2 in magazines2:
+        total_vol2 += prodrisk2.model.module[mag2].reservoirVolume.get().values
+
+    for mag3 in magazines3:
+        total_vol3 += prodrisk3.model.module[mag3].reservoirVolume.get().values
+
+    for mag4 in magazines4:
+        total_vol4 += prodrisk4.model.module[mag4].reservoirVolume.get().values
+
+    plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Compare Volume")
+    os.makedirs(plot_folder, exist_ok=True)
+
+    index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
+
+
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}_{inflow_model1}")
+    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}_{inflow_model2}")
+    ax.plot(index,np.mean(total_vol3,axis=1),label=f"{method3}_{inflow_model3}")
+    ax.plot(index,np.mean(total_vol4,axis=1),label=f"{method4}_{inflow_model4}")
+    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
+    ax.legend(loc="upper left")
+    ax.grid()
+
+    path_diff = os.path.join(plot_folder, "four_mean_comp.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
     return 
