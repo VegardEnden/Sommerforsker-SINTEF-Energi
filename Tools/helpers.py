@@ -633,7 +633,7 @@ def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_mod
 
     fig, ax = plt.subplots(figsize=(10,10))
     ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}")
-    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}")
+    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}",ls="--")
     ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
     ax.legend(loc="upper left")
     ax.grid()
@@ -998,8 +998,10 @@ def income_serial(plant_name, method, inflow_model):
     production = area.total_production.get().to_numpy()
     price = area.output_price.get().to_numpy()
 
+
+
     # Total revenue over all time periods and scenarios
-    total_income = np.sum(production * price)
+    scenario_income = np.sum(production * price)
 
     # Terminal value of storage
     mean_price = np.mean(price)
@@ -1007,7 +1009,7 @@ def income_serial(plant_name, method, inflow_model):
     start_value = volume[0, 0] * mean_price
     end_value = volume[-1, -1] * mean_price
 
-    adjusted_income = total_income + end_value - start_value
+    adjusted_income = scenario_income + end_value - start_value
 
     return adjusted_income
 
@@ -1099,6 +1101,49 @@ def inflow_weight(plant_name, method, inflow_model):
         inflow = prodrisk.model.inflowSeries[mag]
         weight = inflow.outcomeProbability.get()
         print(weight)
+
+
+def implementation_prob_comp(alpha=0.9):
+    y = np.linspace(0,1,100)
+
+    x = alpha*y + 1 - alpha
+
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.plot(y,y,label=r"$P_1 = P_2$")
+    ax.plot(x,y,label=r"$P_1 = 1 - \alpha + \alpha P_2$")
+    ax.set(xlabel=r"$P_1$",ylabel=r"$P_2$",title=rf"$\alpha = {alpha}$")
+    ax.grid()
+    ax.legend()
+
+    path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Tools\ProbabilityComparison.png"
+
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+    return
+
+
+def flexibility_factor(plant_name, method, inflow_model):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+
+    price = area.output_price.get()
+
+    mean_price = np.mean(price)
+
+    production = area.total_production.get().values
+
+    scenario_income = np.sum(production * price, axis=0)
+
+    total_prod = np.sum(production, axis=0)
+
+    flex_factor = (scenario_income/total_prod)/mean_price
+
+    # flex_factor = np.flip(np.sort(flex_factor))
+
+    return flex_factor
+    
 
 
 

@@ -12,8 +12,8 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session, run_timedependent_session, run_session_old
 
-run_session("Rjukan","RN_cap","lg",loadInflow=True,hardCap=True)
+# run_session("Rjukan","CVaR_0.9_10","lg",cvar=[0.9,0.1],loadInflow=True)
 
 # run_timedependent_session("Rjukan","lg",loadInflow=True)
 
-# run_session_old("Rjukan", "CVaR_0.9_20old","lg",cvar=[0.9,0.2],loadInflow=True)
+run_session_old("Rjukan", "CVaR_0.9_50old","lg",cvar=[0.9,0.5],loadInflow=True)

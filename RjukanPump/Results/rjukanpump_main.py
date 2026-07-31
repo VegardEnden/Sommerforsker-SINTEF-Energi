@@ -16,8 +16,8 @@ name = "RjukanPump"
 
 # topology(name)
 
-plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
-plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,2000))
+# plot_reservoir_volumes(name,"RN","lg",lim=(0,2000))
+# plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,2000))
 
 pump_income = income(name,"RN","lg")
 nopump_income = income("Rjukan","RN","lg")

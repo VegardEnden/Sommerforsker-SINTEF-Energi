@@ -16,12 +16,17 @@ name = "Svartisen"
 # topology(name)
 
 # plot_reservoir_volumes_series(name,"RN","lg",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
+plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500))
+plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500))
+plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
 # plot_reservoir_volumes_series(name,"RN_322","pca",(0,3500))
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_444","pca",(0,3500))
 # plot_reservoir_volumes(name,"Summag", "lg",(0,3500))
+
+# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(0,2500))
+
+# compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(0,2500))
+# compare_volumes(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg")
 
 # cvar_20_income = income_serial(name,"CVaR_0.9_20","lg")
 # cvar_30_income = income_serial(name,"CVaR_0.9_30","lg")

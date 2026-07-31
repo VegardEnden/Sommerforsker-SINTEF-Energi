@@ -20,13 +20,14 @@ name = "Fjone"
 
 
 
-# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(40,160))
-# compare_volumes_mean(name,"CVaR_0.9_15_4333","CVaR_0.9_20_4333old","pca","pca",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_20_66","CVaR_0.9_20_66old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20_33","CVaR_0.9_20_33old","pca","pca",lim=(40,180))
-# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,160))
+# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,180))
 
-# compare_three_means(name,"CVaR_0.9_20_322old","pca", "CVaR_0.9_20_33old","pca","CVaR_0.9_20_222old","pca",lim=(40,180))
-# compare_four_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca","CVaR_0.9_20_4333","pca",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_15","lg", "CVaR_0.9_15_322","pca","CVaR_0.9_15","res",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_50","lg", "CVaR_0.9_50_222","pca","CVaR_0.9_50","res",lim=(40,180))
+# compare_four_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca","CVaR_0.9_20_66","pca",lim=(40,180))
 
 # scenario_volumes(name,"CVaR_0.9_50_spill100nape", "lg", lim=(0,250))
 
@@ -198,7 +199,23 @@ name = "Fjone"
 
 # print(water_vals)
 
+rn_flex = flexibility_factor(name,"RN","lg")
+cvar20_flex = flexibility_factor(name,"CVaR_0.9_20","lg")
+cvar50_flex = flexibility_factor(name,"CVaR_0.9_50","lg")
+timedep_flex = flexibility_factor(name,"Time-dependent","lg")
 
+fig, ax = plt.subplots(figsize=(10,10))
+
+x = np.linspace(1,37,37)
+
+ax.plot(x,rn_flex,label="RN")
+ax.plot(x,cvar20_flex,label="CVaR 20%")
+ax.plot(x,cvar50_flex,label="CVaR 50%")
+ax.plot(x,timedep_flex,label="Time-dependent CVaR")
+
+ax.legend()
+
+plt.show()
 
 
 print("All done!")

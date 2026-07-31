@@ -27,7 +27,7 @@ name = "Rjukan"
 
 
 # compare_volumes(name,"CVaR_0.9_50_spill100","CVaR_0.9_50","lg","lg")
-# compare_volumes(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg")
+# compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(0,2000))
 # compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(0,2000))
 
 # scenario_volumes(name, "RN", "lg", lim=(0,2000))
@@ -43,7 +43,7 @@ name = "Rjukan"
 # plot_total_overflow(name,"Time-dependent","lg",lim=(0,40))
 
 # cvar_20_income = income(name,"CVaR_0.9_20","lg")
-# cvar_20spill_income = income(name,"CVaR_0.9_20_spill20","lg")
+# cvar_20old_income = income(name,"CVaR_0.9_20old","lg")
 # cvar_30_income = income(name,"CVaR_0.9_30","lg")
 # cvar_50_income = income(name,"CVaR_0.9_50","lg")
 # cvar_50spill_income = income(name,"CVaR_0.9_50_spill100","lg")
@@ -63,6 +63,10 @@ name = "Rjukan"
 #         cvar_20_income[0] * 100 / rn_income[0],
 #         cvar_20_income[1] * 100 / rn_income[0],
 #     ],
+#     "CVaR (0.9,20%) old": [
+#             cvar_20old_income[0] * 100 / rn_income[0],
+#             cvar_20old_income[1] * 100 / rn_income[0],
+#         ],
 #     "CVaR (0.9,30%)": [
 #         cvar_30_income[0] * 100 / rn_income[0],
 #         cvar_30_income[1] * 100 / rn_income[0],
@@ -71,10 +75,10 @@ name = "Rjukan"
 #         cvar_50_income[0] * 100 / rn_income[0],
 #         cvar_50_income[1] * 100 / rn_income[0],
 #     ],
-#     "CVaR (0.9,50%) with spill penalty": [
-#         cvar_50spill_income[0] * 100 / rn_income[0],
-#         cvar_50spill_income[1] * 100 / rn_income[0],
-#     ],
+#     # "CVaR (0.9,50%) with spill penalty": [
+#     #     cvar_50spill_income[0] * 100 / rn_income[0],
+#     #     cvar_50spill_income[1] * 100 / rn_income[0],
+#     # ],
 #     "Time-dependent CVaR": [
 #         timedep_income[0] * 100 / rn_income[0],
 #         timedep_income[1] * 100 / rn_income[0],
@@ -99,5 +103,23 @@ name = "Rjukan"
 # print("\nWater values the first week: ")
 
 # print(water_vals)
+
+rn_flex = flexibility_factor(name,"RN","lg")
+cvar20_flex = flexibility_factor(name,"CVaR_0.9_20","lg")
+cvar50_flex = flexibility_factor(name,"CVaR_0.9_50","lg")
+timedep_flex = flexibility_factor(name,"Time-dependent","lg")
+
+fig, ax = plt.subplots(figsize=(10,10))
+
+x = np.linspace(1,30,30)
+
+ax.plot(x,rn_flex,label="RN")
+ax.plot(x,cvar20_flex,label="CVaR 20%")
+ax.plot(x,cvar50_flex,label="CVaR 50%")
+ax.plot(x,timedep_flex,label="Time-dependent CVaR")
+
+ax.legend()
+
+plt.show()
 
 print("All done!")
