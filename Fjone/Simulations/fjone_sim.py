@@ -12,13 +12,13 @@ from pyprodrisk import ProdriskSession
 
 from Tools.helpers import run_session, run_timedependent_session, run_session_old, run_session_summag
 
-# run_session("Fjone","CVaR_0.9_50_222","pca",nprinc=3,princDisc=[2,2,2], cvar=[0.9,0.50],loadInflow=True)
+# run_session("Fjone","CVaR_0.9_20_532","lg",cvar=[0.9,0.2],nprinc=3,princDisc=[5,3,2])
 
-run_session_old("Fjone","CVaR_0.9_50old","lg",cvar=[0.9,0.5],loadInflow=True)
+# run_session_old("Fjone","CVaR_0.9_20_532old","lg",cvar=[0.9,0.2],nprinc=3,princDisc=[5,3,2])
 
 # run_timedependent_session("Fjone","lg",loadInflow=True)
 
-# run_session_summag("Fjone","lg",loadInflow=True,summag=[0.9,2,1],week=[1],min=[0],max=[100])
+run_session_summag("Fjone","lg")
 
 
 

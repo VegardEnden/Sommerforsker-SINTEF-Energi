@@ -16,6 +16,7 @@ name = "Fjone"
 # topology(name)
 
 # plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
+plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
 
 
 
@@ -23,7 +24,7 @@ name = "Fjone"
 # compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20_66","CVaR_0.9_20_66old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20_33","CVaR_0.9_20_33old","pca","pca",lim=(40,180))
-# compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","res","res",lim=(40,180))
+# compare_volumes_mean(name,"CVaR_0.9_11","CVaR_0.9_20_532old","lg","lg",lim=(40,180))
 
 # compare_three_means(name,"CVaR_0.9_15","lg", "CVaR_0.9_15_322","pca","CVaR_0.9_15","res",lim=(40,180))
 # compare_three_means(name,"CVaR_0.9_50","lg", "CVaR_0.9_50_222","pca","CVaR_0.9_50","res",lim=(40,180))
@@ -31,6 +32,12 @@ name = "Fjone"
 
 # scenario_volumes(name,"CVaR_0.9_50_spill100nape", "lg", lim=(0,250))
 
+
+# plot_total_overflow(name,"RN","lg",lim=(0,0.025))
+# plot_total_overflow(name,"CVar_0.9_20","lg",lim=(0,0.025))
+# plot_total_overflow(name,"CVaR_0.9_30","lg",lim=(0,0.025))
+# plot_total_overflow(name,"CVaR_0.9_50","lg",lim=(0,0.025))
+# plot_total_overflow(name,"Time-dependent","lg",lim=(0,0.025))
 
 # cvar_20_income = income(name,"CVaR_0.9_20","lg")
 # cvar_20pcaincome = income(name,"CVaR_0.9_20_322","pca")
@@ -199,23 +206,144 @@ name = "Fjone"
 
 # print(water_vals)
 
-rn_flex = flexibility_factor(name,"RN","lg")
-cvar20_flex = flexibility_factor(name,"CVaR_0.9_20","lg")
-cvar50_flex = flexibility_factor(name,"CVaR_0.9_50","lg")
-timedep_flex = flexibility_factor(name,"Time-dependent","lg")
+# rn_flex = flexibility_factor(name,"RN","lg")
+# cvar20_flex = flexibility_factor(name,"CVaR_0.9_20","lg")
+# cvar50_flex = flexibility_factor(name,"CVaR_0.9_50","lg")
+# timedep_flex = flexibility_factor(name,"Time-dependent","lg")
 
-fig, ax = plt.subplots(figsize=(10,10))
 
-x = np.linspace(1,37,37)
 
-ax.plot(x,rn_flex,label="RN")
-ax.plot(x,cvar20_flex,label="CVaR 20%")
-ax.plot(x,cvar50_flex,label="CVaR 50%")
-ax.plot(x,timedep_flex,label="Time-dependent CVaR")
+# plt.style.use("seaborn-v0_8-whitegrid")
 
-ax.legend()
+# x = np.arange(1, 38)
 
-plt.show()
+# fig, (ax1, ax2) = plt.subplots(
+#     2, 1,
+#     figsize=(12, 9),
+#     sharex=True,
+#     gridspec_kw={"height_ratios": [3, 1]}
+# )
+
+# # =========================
+# # Hovedplot
+# # =========================
+
+# ax1.plot(
+#     x, rn_flex,
+#     color="black",
+#     linewidth=3,
+#     label="RN",
+#     zorder=5
+# )
+
+# ax1.plot(
+#     x, cvar20_flex,
+#     color="#1f77b4",
+#     linestyle="--",
+#     marker="o",
+#     markersize=4,
+#     linewidth=2,
+#     label="CVaR 20%"
+# )
+
+# ax1.plot(
+#     x, cvar50_flex,
+#     color="#d62728",
+#     linestyle="--",
+#     marker="s",
+#     markersize=4,
+#     linewidth=2,
+#     label="CVaR 50%"
+# )
+
+# ax1.plot(
+#     x, timedep_flex,
+#     color="#2ca02c",
+#     linestyle="-.",
+#     marker="^",
+#     markersize=4,
+#     linewidth=2,
+#     label="Time-dependent CVaR"
+# )
+
+# ax1.set_title(
+#     "Flexibility Factor for Fjone",
+#     fontsize=18,
+#     pad=15
+# )
+
+# ax1.set_ylabel(
+#     "Flexibility factor",
+#     fontsize=14
+# )
+
+# ax1.legend(
+#     fontsize=12,
+#     frameon=True,
+#     loc="upper right"
+# )
+
+# ax1.grid(True, alpha=0.3)
+
+# # =========================
+# # Avvik mot RN
+# # =========================
+
+# ax2.plot(
+#     x,
+#     np.array(cvar20_flex) - np.array(rn_flex),
+#     color="#1f77b4",
+#     linewidth=2,
+#     label="CVaR 20% - RN"
+# )
+
+# ax2.plot(
+#     x,
+#     np.array(cvar50_flex) - np.array(rn_flex),
+#     color="#d62728",
+#     linewidth=2,
+#     label="CVaR 50% - RN"
+# )
+
+# ax2.plot(
+#     x,
+#     np.array(timedep_flex) - np.array(rn_flex),
+#     color="#2ca02c",
+#     linewidth=2,
+#     label="TD CVaR - RN"
+# )
+
+# ax2.axhline(
+#     y=0,
+#     color="black",
+#     linestyle="-",
+#     linewidth=1
+# )
+
+# ax2.set_xlabel(
+#     "Scenario",
+#     fontsize=14
+# )
+
+# ax2.set_ylabel(
+#     "Δ from RN",
+#     fontsize=12
+# )
+
+# ax2.grid(True, alpha=0.3)
+
+# # Kun hvert 2. scenario på x-aksen
+# ax2.set_xticks(np.arange(1, 38, 2))
+
+# plt.tight_layout()
+
+# path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Fjone\Results\Flexibility_factor.png"
+
+# fig.savefig(
+#     path,
+#     dpi=300,
+#     bbox_inches="tight"
+# )
 
 
 print("All done!")

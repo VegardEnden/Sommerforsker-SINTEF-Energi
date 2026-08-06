@@ -5,6 +5,7 @@ import h5py
 import sys
 import os
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 from pyprodrisk import ProdriskSession
 
@@ -41,11 +42,15 @@ def run_session(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],week=
         prodrisk.inflow_model = "lognormal"
     elif inflow_model == "pca":
         prodrisk.inflow_model = "principal"
-        prodrisk.n_principal_comp.set(nprinc)
-        prodrisk.n_principal_comp_discrete_values.set(princDisc)
+    
 
     elif inflow_model == "res":
         prodrisk.inflow_model = "residual"
+
+
+    if nprinc != 0:
+        prodrisk.n_principal_comp.set(nprinc)
+        prodrisk.n_principal_comp_discrete_values.set(princDisc)
 
     if cvar != [0,0]:
         prodrisk.cvar = cvar[0]
@@ -167,11 +172,13 @@ def run_session_old(plant_name, method, inflow_model,cvar=[0,0],summag=[0,0,0],w
         prodrisk.inflow_model = "lognormal"
     elif inflow_model == "pca":
         prodrisk.inflow_model = "principal"
-        prodrisk.n_principal_comp.set(nprinc)
-        prodrisk.n_principal_comp_discrete_values.set(princDisc)
 
     elif inflow_model == "res":
         prodrisk.inflow_model = "residual"
+
+    if nprinc != 0:
+        prodrisk.n_principal_comp.set(nprinc)
+        prodrisk.n_principal_comp_discrete_values.set(princDisc)
 
     if cvar != [0,0]:
         prodrisk.cvar = cvar[0]
@@ -351,11 +358,11 @@ def run_session_summag(plant_name,inflow_model,tempdata=True,loadInflow=False,sa
     prodrisk.temp_dir = temp_dir
     prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
     prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
-    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\ltm_core\dist\x64\windows\release\package\prodrisk_core"   # absolute path to Prodrisk executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk_10.16.1_2026-05-21_8f952c9d9 1\Prodrisk_10.16.1_2026-05-21_8f952c9d9\bin"   # absolute path to Prodrisk executables
     prodrisk.keep_working_directory = tempdata                             
     prodrisk.write_penalty_logfiles = 1
-    prodrisk.n_processes = 8
-    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
+    prodrisk.n_processes = 1
+    prodrisk.prodrisk_variant = "prodrisk_cplex.exe"
 
     if inflow_model == "lg":
         prodrisk.inflow_model = "lognormal"
@@ -388,7 +395,11 @@ def run_session_summag(plant_name,inflow_model,tempdata=True,loadInflow=False,sa
 
     run_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name, "Simulations", "Finished Runs")
 
-    status = prodrisk.run()
+    prodrisk._pb_api.GenerateProdriskFiles()
+    
+    input("Edit summag.dat")
+    
+    status = prodrisk._pb_api.RunProdrisk()
 
 
     prodrisk.dump_model_yaml(file_path=run_folder,file_name=name,direction="both")
@@ -457,26 +468,91 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
     os.makedirs(plot_folder, exist_ok=True)
 
     # ----- Total Volume fig ----- 
-    total_perc = np.percentile(total_vol,percs,axis=1)
-    fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
 
-    for p, vals in zip(percs,total_perc):
-        ax_total.plot(index, vals, label=f"{p}th percentile")
-    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3,color="black")
+    total_perc = np.percentile(total_vol, percs, axis=1)
 
+    fig_total, ax_total = plt.subplots(figsize=(12, 7))
+
+    # Nice color gradient for percentiles
+    colors = plt.cm.viridis(np.linspace(0.15, 0.85, len(percs)))
+
+    for p, vals, c in zip(percs, total_perc, colors):
+        ax_total.plot(
+            index,
+            vals,
+            label=f"{p}th percentile",
+            color=c,
+            lw=1.8,
+            alpha=0.85,
+        )
+
+    # Highlight mean
+    ax_total.plot(
+        index,
+        np.mean(total_vol, axis=1),
+        label="Mean",
+        lw=3,
+        color="black",
+        zorder=10,
+    )
+
+    # Week markers
     for marker in week_marker:
         if isinstance(marker, (int, np.integer)):
             target_time = index[0] + pd.Timedelta(weeks=marker)
             if isinstance(index, pd.DatetimeIndex):
                 pos = np.argmin(np.abs(index - target_time))
-                ax_total.axvline(index[pos], linestyle="--", color="gray", alpha=0.7)
+                ax_total.axvline(
+                    index[pos],
+                    linestyle="--",
+                    color="gray",
+                    lw=1,
+                    alpha=0.5,
+                )
         elif marker in index:
-            ax_total.axvline(marker, linestyle="--", color="gray", alpha=0.7)
+            ax_total.axvline(
+                marker,
+                linestyle="--",
+                color="gray",
+                lw=1,
+                alpha=0.5,
+            )
 
-    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
-    ax_total.grid()
-    ax_total.legend()
+    # Title and labels
+    ax_total.set_title(
+        f"{method}, {inflow_model} total volume",
+        fontsize=16,
+        weight="bold",
+    )
+    ax_total.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+    ax_total.set_xlabel("Time", fontsize=12)
 
+    if lim is not None:
+        ax_total.set_ylim(lim)
+
+    # Cleaner grid
+    ax_total.grid(True, which="major", linestyle=":", alpha=0.4)
+
+    # Remove unnecessary spines
+    ax_total.spines["top"].set_visible(False)
+    ax_total.spines["right"].set_visible(False)
+
+    # Always place legend in top-left
+    ax_total.legend(
+        loc="upper left",
+        frameon=True,
+        framealpha=0.95,
+        edgecolor="lightgray",
+    )
+
+    # Better date formatting
+    if isinstance(index, pd.DatetimeIndex):
+        locator = mdates.AutoDateLocator()
+        formatter = mdates.ConciseDateFormatter(locator)
+        ax_total.xaxis.set_major_locator(locator)
+        ax_total.xaxis.set_major_formatter(formatter)
+
+    fig_total.tight_layout()
 
     path_total = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_total_volume.png")
     fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
@@ -634,7 +710,7 @@ def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_mod
     fig, ax = plt.subplots(figsize=(10,10))
     ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}")
     ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}",ls="--")
-    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
+    ax.set(title=f"Volume means {plant_name}", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
     ax.legend(loc="upper left")
     ax.grid()
 
@@ -790,6 +866,34 @@ def scenario_volumes(plant_name, method, inflow_model, lim):
     return 
 
 
+def reservoir_energy(plant_name, method, inflow_model,lim):
+
+    prodrisk = load_session(plant_name,method,inflow_model)
+
+    area = prodrisk.model.area["my_area"]
+
+    energy = area.total_reservoir_volume.get()
+    index = energy.index
+
+    percs=[0,25,50,75,100]
+    perc = np.percentile(energy.values,percs,axis=1)
+    fig, ax = plt.subplots(figsize=(10,10),sharey=True)
+    
+    for p, vals in zip(percs,perc):
+        ax.plot(index, vals, label=f"{p}th percentile")
+    ax.plot(index,np.mean(energy.values,axis=1),label="Mean",lw=3,color="black")
+    ax.set(title=method + ", " + inflow_model + " total reservoir energy at " + plant_name, ylabel=r"Energy [GWh]",xlabel="Time",ylim=lim)
+    ax.legend()
+    ax.grid()
+
+    path = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Energy", method + "_" + inflow_model + "_" + plant_name + "_total_reservoir_energy.png")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    fig.savefig(path, dpi=300, bbox_inches='tight')
+
+    return 
+
+
+
 def topology(plant_name):
 
     prodrisk = ProdriskSession(license_path=r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk license", # absolute path to license file
@@ -846,7 +950,7 @@ def plot_total_overflow(plant_name, method, inflow_model,lim):
 
     # ax.fill_between(tot_overflow.index, np.percentile(tot_overflow.values[:,:],0,axis=1),np.percentile(tot_overflow.values[:,:],100,axis=1),alpha=0.2)
     ax.plot(tot_overflow.mean(axis=1))
-    ax.set(title="Total reservoir overflow",xlabel="Time",ylabel="Overflow",ylim=lim)
+    ax.set(title=f"{plant_name} {method} {inflow_model}",xlabel="Time",ylabel="Overflow",ylim=lim)
     ax.grid()
 
     plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Overflow")
