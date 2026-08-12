@@ -28,9 +28,9 @@ name = "Rjukan"
 # reservoir_energy(name,"RN","lg",lim=(0,4000))
 
 
-# compare_volumes(name,"CVaR_0.9_50_spill100","CVaR_0.9_50","lg","lg")
-# compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(0,2000))
-# compare_volumes_mean(name,"CVaR_0.9_20old","CVaR_0.9_20_332old","lg","lg",lim=(0,2000))
+compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20old","lg","lg",lim=(0,2000),title="CVaR comparison with same 20% weight")
+compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(0,2000),title="CVaR comparison with same 50% weight")
+
 
 # scenario_volumes(name, "RN", "lg", lim=(0,2000))
 # scenario_volumes(name, "CVaR_0.9_20", "lg", lim=(0,2000))

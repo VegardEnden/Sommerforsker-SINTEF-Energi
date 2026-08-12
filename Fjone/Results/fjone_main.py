@@ -25,13 +25,15 @@ name = "Fjone"
 
 
 
-compare_volumes_mean(name,"RN","CVaR_0.9_20","lg","lg",lim=(40,180),title="Risk-neutral vs CVaR with 20% weight")
-# compare_volumes_mean(name,"CVaR_0.9_20_66","CVaR_0.9_20_66old","pca","pca",lim=(40,180))
+compare_volumes_mean(name,"CVaR_0.9_20_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180),title="PCA comparison with same 20% weight")
+compare_volumes_mean(name,"CVaR_0.9_15_322","CVaR_0.9_20_322old","pca","pca",lim=(40,180),title="PCA comparison with different weights")
+# compare_volumes_mean(name,"CVaR_0.9_15","CVaR_0.9_20old","lg","lg",lim=(40,180),title="CVaR comparison with different weights")
+# # compare_volumes_mean(name,"CVaR_0.9_20_66","CVaR_0.9_20_66old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20_33","CVaR_0.9_20_33old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_11","CVaR_0.9_20_532old","lg","lg",lim=(40,180))
 
-# compare_three_means(name,"RN_66","pca", "CVaR_0.9_20_66","pca","CVaR_0.9_20_66old","pca",lim=(40,180))
-# compare_three_means(name,"RN_222","pca", "CVaR_0.9_20_222","pca","CVaR_0.9_20_222old","pca",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_20","lg", "CVaR_0.9_20_322","pca","CVaR_0.9_20","res",lim=(40,180))
+# compare_three_means(name,"CVaR_0.9_20old","lg", "CVaR_0.9_20_322old","pca","CVaR_0.9_20old","res",lim=(40,180))
 # compare_three_means(name,"RN_33","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_33old","pca",lim=(40,180))
 # compare_three_means(name,"RN_322","pca", "CVaR_0.9_20_322","pca","CVaR_0.9_20_322old","pca",lim=(40,180))
 

@@ -585,27 +585,60 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[],m
 
     if len(magazines) != 1:
         # ----- Largest magazine Volume fig -----
-        individ_perc = np.percentile(individ_vol.values,percs,axis=1)
-        fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
-        for p, vals in zip(percs,individ_perc):
-            ax_individ.plot(index, vals, label=f"{p}th percentile")
-        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
+        individ_perc = np.percentile(individ_vol.values, percs, axis=1)
+        fig_individ, ax_individ = plt.subplots(figsize=(12, 7))
+
+        colors = plt.cm.turbo(np.linspace(0.05, 0.95, len(percs)))
+        for p, vals, c in zip(percs, individ_perc, colors):
+            ax_individ.plot(
+                index,
+                vals,
+                label=f"{p}th percentile",
+                color=c,
+                lw=1.8,
+                alpha=0.85,
+            )
+
+        ax_individ.plot(
+            index,
+            np.mean(individ_vol.values, axis=1),
+            label="Mean",
+            lw=3,
+            color="black",
+            zorder=10,
+        )
 
         for marker in week_marker:
             if isinstance(marker, (int, np.integer)):
                 target_time = index[0] + pd.Timedelta(weeks=marker)
                 if isinstance(index, pd.DatetimeIndex):
                     pos = np.argmin(np.abs(index - target_time))
-                    ax_individ.axvline(index[pos], linestyle="--", color="black", alpha=0.7)
+                    ax_individ.axvline(index[pos], linestyle="--", color="gray", lw=1.5, alpha=0.7)
             elif marker in index:
-                ax_individ.axvline(marker, linestyle="--", color="black", alpha=0.7)
+                ax_individ.axvline(marker, linestyle="--", color="gray", lw=1.5, alpha=0.7)
 
+        ax_individ.set_title(
+            f"{title} - {biggest}",
+            fontsize=16,
+            weight="bold",
+        )
+        ax_individ.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+        ax_individ.set_xlabel("Time", fontsize=12)
+        ax_individ.set_ylim((0, 1.2 * max_vol))
 
-        ax_individ.set(title=method + ", " + inflow_model + "_" + biggest ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
-        ax_individ.grid()
-        ax_individ.legend()
+        ax_individ.grid(True, which="major", linestyle=":", alpha=0.4)
+        ax_individ.spines["top"].set_visible(False)
+        ax_individ.spines["right"].set_visible(False)
+        ax_individ.legend(loc="upper left", frameon=True, framealpha=0.95, edgecolor="lightgray")
 
-        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_"+ biggest + "_volume.png")
+        if isinstance(index, pd.DatetimeIndex):
+            locator = mdates.AutoDateLocator()
+            formatter = mdates.ConciseDateFormatter(locator)
+            ax_individ.xaxis.set_major_locator(locator)
+            ax_individ.xaxis.set_major_formatter(formatter)
+
+        fig_individ.tight_layout()
+        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_" + biggest + "_volume.png")
         fig_individ.savefig(path_individ, dpi=300, bbox_inches='tight')
 
 
@@ -881,19 +914,61 @@ def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_mode
     index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
 
 
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}_{inflow_model1}")
-    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}_{inflow_model2}")
-    ax.plot(index,np.mean(total_vol3,axis=1),label=f"{method3}_{inflow_model3}")
-    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
-    ax.legend(loc="upper left")
-    ax.grid()
+    fig, ax = plt.subplots(figsize=(12, 7))
 
+    colors = plt.cm.turbo(np.linspace(0.1, 0.9, 3))
+
+    ax.plot(
+        index,
+        np.mean(total_vol1, axis=1),
+        label=f"{method1}_{inflow_model1}",
+        color=colors[0],
+        lw=3,
+    )
+
+    ax.plot(
+        index,
+        np.mean(total_vol2, axis=1),
+        label=f"{method2}_{inflow_model2}",
+        color=colors[1],
+        lw=3,
+        ls="--",
+    )
+
+    ax.plot(
+        index,
+        np.mean(total_vol3, axis=1),
+        label=f"{method3}_{inflow_model3}",
+        color=colors[2],
+        lw=3,
+        ls=(0, (5, 1)),
+    )
+
+    ax.set_title(f"Volume means", fontsize=16, weight="bold")
+    ax.set_xlabel("Time", fontsize=12)
+    ax.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+
+    if lim is not None:
+        ax.set_ylim(lim)
+
+    ax.grid(True, which="major", linestyle=":", alpha=0.4)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    ax.legend(loc="upper left", frameon=True, framealpha=0.95, edgecolor="lightgray")
+
+    if isinstance(index, pd.DatetimeIndex):
+        locator = mdates.AutoDateLocator()
+        formatter = mdates.ConciseDateFormatter(locator)
+        ax.xaxis.set_major_locator(locator)
+        ax.xaxis.set_major_formatter(formatter)
+
+    fig.tight_layout()
     path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 
                              + "_vs_" + method3 + "_" + inflow_model3 + "_volume_mean.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
-    return 
+    return
 
 def compare_four_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, method4, inflow_model4, lim,name):
 

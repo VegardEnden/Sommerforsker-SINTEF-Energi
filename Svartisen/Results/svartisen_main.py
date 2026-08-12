@@ -15,18 +15,18 @@ name = "Svartisen"
 
 # topology(name)
 
-plot_reservoir_volumes_series(name,"RN","lg",(0,3500),title="Risk-Neutral")
+# plot_reservoir_volumes_series(name,"RN","lg",(0,3500),title="Risk-Neutral")
 # plot_reservoir_volumes_series(name,"Summag","pca",(0,3500))
-plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500),title="CVaR with 30% weight")
-plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500),title="CVaR with 50% weight")
+# plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500),title="CVaR with 30% weight")
+# plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500),title="CVaR with 50% weight")
 # plot_reservoir_volumes_series(name,"RN_322","pca",(0,3500))
-plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500),title="CVaR with 20% weight")
+# plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500),title="CVaR with 20% weight")
 
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_10", "lg",(0,3500))
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_10old", "lg",(0,3500))
 
-# compare_volumes_mean(name,"CVaR_0.9_50_10","CVaR_0.9_50_10old","lg","lg",lim=(0,2500))
-# compare_volumes_mean(name,"CVaR_0.9_20old","CVaR_0.9_20_10old","lg","lg",lim=(0,2500))
+compare_volumes_mean(name,"CVaR_0.9_20old","CVaR_0.9_20_10old","lg","lg",lim=(0,2500),title="Effect of more noise alternatives for implementation 1")
+compare_volumes_mean(name,"CVaR_0.9_20","CVaR_0.9_20_10","lg","lg",lim=(0,2500),title="Effect of more noise alternatives for implementation 2")
 
 # compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(0,2500))
 # compare_volumes(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg")
