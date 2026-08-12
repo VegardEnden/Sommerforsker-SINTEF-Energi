@@ -15,12 +15,12 @@ name = "Svartisen"
 
 # topology(name)
 
-# plot_reservoir_volumes_series(name,"RN","lg",(0,3500))
-plot_reservoir_volumes_series(name,"Summag","pca",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500))
+plot_reservoir_volumes_series(name,"RN","lg",(0,3500),title="Risk-Neutral")
+# plot_reservoir_volumes_series(name,"Summag","pca",(0,3500))
+plot_reservoir_volumes_series(name,"CVaR_0.9_30","lg",(0,3500),title="CVaR with 30% weight")
+plot_reservoir_volumes_series(name,"CVaR_0.9_50","lg",(0,3500),title="CVaR with 50% weight")
 # plot_reservoir_volumes_series(name,"RN_322","pca",(0,3500))
-# plot_reservoir_volumes_series(name,"CVaR_0.9_20_444","pca",(0,3500))
+plot_reservoir_volumes_series(name,"CVaR_0.9_20","lg",(0,3500),title="CVaR with 20% weight")
 
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_10", "lg",(0,3500))
 # plot_reservoir_volumes_series(name,"CVaR_0.9_20_10old", "lg",(0,3500))

@@ -15,20 +15,30 @@ name = "Fjone"
 
 # topology(name)
 
-# plot_reservoir_volumes(name,"CVaR_0.9_20","lg",lim=(0,250))
-plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
+
+# plot_reservoir_volumes(name,"RN","pca",lim=(0,250))
+# plot_reservoir_volumes(name,"CVaR_0.9_30","lg",lim=(0,250),title="CVaR with 30% weight")
+# plot_reservoir_volumes(name,"CVaR_0.9_50_spill100nape","lg",lim=(0,250),title="CVaR with 50% weight and spill penalty")
+# plot_reservoir_volumes(name,"Time-dependent","lg",lim=(0,250),week_marker=[50,80,100,125,150,180,200],title="Time-dependent CVaR")
 
 
 
 
-# compare_volumes_mean(name,"CVaR_0.9_50","CVaR_0.9_50old","lg","lg",lim=(40,180))
+
+compare_volumes_mean(name,"RN","CVaR_0.9_20","lg","lg",lim=(40,180),title="Risk-neutral vs CVaR with 20% weight")
 # compare_volumes_mean(name,"CVaR_0.9_20_66","CVaR_0.9_20_66old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_20_33","CVaR_0.9_20_33old","pca","pca",lim=(40,180))
 # compare_volumes_mean(name,"CVaR_0.9_11","CVaR_0.9_20_532old","lg","lg",lim=(40,180))
 
-# compare_three_means(name,"CVaR_0.9_15","lg", "CVaR_0.9_15_322","pca","CVaR_0.9_15","res",lim=(40,180))
-# compare_three_means(name,"CVaR_0.9_50","lg", "CVaR_0.9_50_222","pca","CVaR_0.9_50","res",lim=(40,180))
-# compare_four_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca","CVaR_0.9_20_66","pca",lim=(40,180))
+# compare_three_means(name,"RN_66","pca", "CVaR_0.9_20_66","pca","CVaR_0.9_20_66old","pca",lim=(40,180))
+# compare_three_means(name,"RN_222","pca", "CVaR_0.9_20_222","pca","CVaR_0.9_20_222old","pca",lim=(40,180))
+# compare_three_means(name,"RN_33","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_33old","pca",lim=(40,180))
+# compare_three_means(name,"RN_322","pca", "CVaR_0.9_20_322","pca","CVaR_0.9_20_322old","pca",lim=(40,180))
+
+
+# compare_four_means(name,"CVaR_0.9_20_322","pca", "CVaR_0.9_20_33","pca","CVaR_0.9_20_222","pca","CVaR_0.9_20_66","pca",lim=(40,180),name="CVaR_20_Comparison")
+# compare_four_means(name,"RN_322","pca", "RN_33","pca","RN_222","pca","RN_66","pca",lim=(40,180),name="RiskNeutral_Comparison")
+# compare_four_means(name,"CVaR_0.9_20_322old","pca", "CVaR_0.9_20_33old","pca","CVaR_0.9_20_222old","pca","CVaR_0.9_20_66old","pca",lim=(40,180),name="CVaR_20old_Comparison")
 
 # scenario_volumes(name,"CVaR_0.9_50_spill100nape", "lg", lim=(0,250))
 
@@ -40,12 +50,11 @@ plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
 # plot_total_overflow(name,"Time-dependent","lg",lim=(0,0.025))
 
 # cvar_20_income = income(name,"CVaR_0.9_20","lg")
-# cvar_20pcaincome = income(name,"CVaR_0.9_20_322","pca")
+# summag_income = income(name,"Summag","pca")
 # timedep_income = income(name,"Time-dependent","lg")
 # cvar_50spillnape_income = income(name,"CVaR_0.9_50_spill100nape","lg")
 # cvar_50_income = income(name,"CVaR_0.9_50","lg")
 # rn_income = income(name,"RN","lg")
-# summag_income = income(name,"Summag","lg")
 
 # print("---Comparison Risk-neutral vs CVaR---")
 
@@ -118,11 +127,11 @@ plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
 
 # print("\nNegative inflow last backwards iteration: ")
 
-# neginflow_df = pd.concat([neg_inflow(name,"RN","lg"),neg_inflow(name,"RN","pca"),neg_inflow(name,"RN","res")])
+# neginflow_df = pd.concat([neg_inflow(name,"RN_222","pca"),neg_inflow(name,"RN_33","pca"),neg_inflow(name,"RN_322","pca"),neg_inflow(name,"RN_66","pca")])
 
 # print(neginflow_df)
 
-# neginflow_df = pd.concat([neg_inflow(name,"CVaR_0.9_20","lg"),neg_inflow(name,"CVaR_0.9_20_322","pca"),neg_inflow(name,"CVaR_0.9_20","res")])
+# neginflow_df = pd.concat([neg_inflow(name,"CVaR_0.9_20_66","pca"),neg_inflow(name,"CVaR_0.9_20_322","pca"),neg_inflow(name,"CVaR_0.9_20_222","pca")])
 
 # print(neginflow_df)
 
@@ -344,6 +353,7 @@ plot_reservoir_volumes(name,"Summag","lg",lim=(0,250))
 #     dpi=300,
 #     bbox_inches="tight"
 # )
+
 
 
 print("All done!")

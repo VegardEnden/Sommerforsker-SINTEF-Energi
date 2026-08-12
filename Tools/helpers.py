@@ -358,11 +358,11 @@ def run_session_summag(plant_name,inflow_model,tempdata=True,loadInflow=False,sa
     prodrisk.temp_dir = temp_dir
     prodrisk.log_file_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter\Logfiles"
     prodrisk.mpi_path = r"C:\Program Files\Microsoft MPI\bin"            # absolute path to mpi executables
-    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prodrisk_10.16.1_2026-05-21_8f952c9d9 1\Prodrisk_10.16.1_2026-05-21_8f952c9d9\bin"   # absolute path to Prodrisk executables
+    prodrisk.prodrisk_path = r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\ProdriskSummag_3"  # absolute path to Prodrisk executables
     prodrisk.keep_working_directory = tempdata                             
     prodrisk.write_penalty_logfiles = 1
-    prodrisk.n_processes = 1
-    prodrisk.prodrisk_variant = "prodrisk_cplex.exe"
+    prodrisk.n_processes = 8
+    prodrisk.prodrisk_variant = "prodrisk_cplex_ms_mpi.exe"
 
     if inflow_model == "lg":
         prodrisk.inflow_model = "lognormal"
@@ -441,7 +441,7 @@ def load_session(plant_name, method, inflow_model):
 
     return prodrisk
 
-def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
+def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[],min_marker=[],max_marker=[],title=""):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
@@ -474,7 +474,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
     fig_total, ax_total = plt.subplots(figsize=(12, 7))
 
     # Nice color gradient for percentiles
-    colors = plt.cm.viridis(np.linspace(0.15, 0.85, len(percs)))
+    colors = plt.cm.turbo(np.linspace(0.05, 0.95, len(percs)))
 
     for p, vals, c in zip(percs, total_perc, colors):
         ax_total.plot(
@@ -505,22 +505,48 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
                 ax_total.axvline(
                     index[pos],
                     linestyle="--",
-                    color="gray",
-                    lw=1,
+                    color="black",
+                    lw=1.5,
                     alpha=0.5,
                 )
         elif marker in index:
             ax_total.axvline(
                 marker,
                 linestyle="--",
-                color="gray",
-                lw=1,
+                color="black",
+                lw=1.5,
                 alpha=0.5,
             )
 
+    combined_max_volume = np.max(total_vol)
+    for marker in min_marker:
+        if isinstance(marker, (int, np.integer, float, np.floating)):
+            value = combined_max_volume * (marker / 100.0)
+            ax_total.axhline(
+                value,
+                linestyle="--",
+                color="tab:blue",
+                lw=1,
+                alpha=0.65
+            )
+
+    for marker in max_marker:
+        if isinstance(marker, (int, np.integer, float, np.floating)):
+            value = combined_max_volume * (marker / 100.0)
+            ax_total.axhline(
+                value,
+                linestyle="--",
+                color="tab:orange",
+                lw=1,
+                alpha=0.65
+            )
+
     # Title and labels
+    if title == "":
+        title = f"{method}, {inflow_model} total volume"
+
     ax_total.set_title(
-        f"{method}, {inflow_model} total volume",
+        title,
         fontsize=16,
         weight="bold",
     )
@@ -570,9 +596,9 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
                 target_time = index[0] + pd.Timedelta(weeks=marker)
                 if isinstance(index, pd.DatetimeIndex):
                     pos = np.argmin(np.abs(index - target_time))
-                    ax_individ.axvline(index[pos], linestyle="--", color="gray", alpha=0.7)
+                    ax_individ.axvline(index[pos], linestyle="--", color="black", alpha=0.7)
             elif marker in index:
-                ax_individ.axvline(marker, linestyle="--", color="gray", alpha=0.7)
+                ax_individ.axvline(marker, linestyle="--", color="black", alpha=0.7)
 
 
         ax_individ.set(title=method + ", " + inflow_model + "_" + biggest ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
@@ -585,7 +611,7 @@ def plot_reservoir_volumes(plant_name, method, inflow_model,lim,week_marker=[]):
 
     return 
 
-def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
+def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim,title=""):
 
     prodrisk = load_session(plant_name,method,inflow_model)
 
@@ -605,38 +631,108 @@ def plot_reservoir_volumes_series(plant_name, method, inflow_model,lim):
     individ_vol = prodrisk.model.module[biggest].reservoirVolume.get()
     index = individ_vol.index
 
-    n = 35
-
-    arr = np.round(np.linspace(0, n-1, 5)).astype(int)
-    
+    n = total_vol.shape[1]
+    arr = np.round(np.linspace(0, n - 1, min(5, n))).astype(int)
 
     plot_folder = os.path.join(r"C:\Users\vegarden\OneDrive - SINTEF\Dokumenter\Prosjekter", plant_name,"Results","Volume")
+    os.makedirs(plot_folder, exist_ok=True)
 
     # ----- Total Volume fig ----- 
-    fig_total, ax_total = plt.subplots(figsize=(10,10),sharey=True)
+    fig_total, ax_total = plt.subplots(figsize=(12, 7))
+    colors = plt.cm.turbo(np.linspace(0.05, 0.95, len(arr)))
+    # Title and labels
+    if title == "":
+        title = f"{method}, {inflow_model} total volume"
 
-    for i in arr:
-        ax_total.plot(index, total_vol[:, i], label=f"Scenario{i+1}")
-    ax_total.plot(index,np.mean(total_vol,axis=1),label="Mean",lw=3,color="black")
-    ax_total.set(title=method + ", " + inflow_model + " total volume",ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=lim)
-    ax_total.grid()
-    ax_total.legend()
+    for i, c in zip(arr, colors):
+        ax_total.plot(
+            index,
+            total_vol[:, i],
+            label=f"Scenario {i + 1}",
+            color=c,
+            lw=1.8,
+            alpha=0.85,
+        )
 
+    ax_total.plot(
+        index,
+        np.mean(total_vol, axis=1),
+        label="Mean",
+        lw=3,
+        color="black",
+        zorder=10,
+    )
 
+    ax_total.set_title(
+        title,
+        fontsize=16,
+        weight="bold",
+    )
+    ax_total.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+    ax_total.set_xlabel("Time", fontsize=12)
+
+    if lim is not None:
+        ax_total.set_ylim(lim)
+
+    ax_total.grid(True, which="major", linestyle=":", alpha=0.4)
+    ax_total.spines["top"].set_visible(False)
+    ax_total.spines["right"].set_visible(False)
+    ax_total.legend(loc="upper left", frameon=True, framealpha=0.95, edgecolor="lightgray")
+
+    if isinstance(index, pd.DatetimeIndex):
+        locator = mdates.AutoDateLocator()
+        formatter = mdates.ConciseDateFormatter(locator)
+        ax_total.xaxis.set_major_locator(locator)
+        ax_total.xaxis.set_major_formatter(formatter)
+
+    fig_total.tight_layout()
     path_total = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_total_volume.png")
     fig_total.savefig(path_total, dpi=300, bbox_inches='tight')
 
     if len(magazines) != 1:
-        # ----- Largest magazine Volume fig -----
-        fig_individ, ax_individ = plt.subplots(figsize=(10,10),sharey=True)
-        for i in arr:
-            ax_individ.plot(index, individ_vol.values[:, i], label=f"Scenario{i+1}")
-        ax_individ.plot(index,np.mean(individ_vol.values,axis=1),label="Mean",lw=3,color="black")
-        ax_individ.set(title=method + ", " + inflow_model ,ylabel=r"Volume [Mm$^3$]",xlabel="Time",ylim=(0,1.2*max_vol))
-        ax_individ.grid()
-        ax_individ.legend()
+        fig_individ, ax_individ = plt.subplots(figsize=(12, 7))
+        colors = plt.cm.turbo(np.linspace(0.05, 0.95, len(arr)))
+        for i, c in zip(arr, colors):
+            ax_individ.plot(
+                index,
+                individ_vol.values[:, i],
+                label=f"Scenario {i + 1}",
+                color=c,
+                lw=1.8,
+                alpha=0.85,
+            )
 
-        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_"+ biggest + "_volume.png")
+        ax_individ.plot(
+            index,
+            np.mean(individ_vol.values, axis=1),
+            label="Mean",
+            lw=3,
+            color="black",
+            zorder=10,
+        )
+
+        ax_individ.set_title(
+            title,
+            fontsize=16,
+            weight="bold",
+        )
+        ax_individ.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+        ax_individ.set_xlabel("Time", fontsize=12)
+        ax_individ.set_ylim((0, 1.2 * max_vol))
+
+        ax_individ.grid(True, which="major", linestyle=":", alpha=0.4)
+        ax_individ.spines["top"].set_visible(False)
+        ax_individ.spines["right"].set_visible(False)
+        ax_individ.legend(loc="upper left", frameon=True, framealpha=0.95, edgecolor="lightgray")
+
+        if isinstance(index, pd.DatetimeIndex):
+            locator = mdates.AutoDateLocator()
+            formatter = mdates.ConciseDateFormatter(locator)
+            ax_individ.xaxis.set_major_locator(locator)
+            ax_individ.xaxis.set_major_formatter(formatter)
+
+        fig_individ.tight_layout()
+        path_individ = os.path.join(plot_folder, method + "_" + inflow_model + plant_name + "_" + biggest + "_volume.png")
         fig_individ.savefig(path_individ, dpi=300, bbox_inches='tight')
 
 
@@ -684,7 +780,7 @@ def compare_volumes(plant_name, method1, method2, inflow_model1, inflow_model2):
     return 
 
 
-def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_model2,lim):
+def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_model2,lim,title=""):
 
     prodrisk1 = load_session(plant_name,method1,inflow_model1)
     prodrisk2 = load_session(plant_name,method2,inflow_model2)
@@ -707,17 +803,54 @@ def compare_volumes_mean(plant_name, method1, method2, inflow_model1, inflow_mod
     index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
 
 
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}")
-    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}",ls="--")
-    ax.set(title=f"Volume means {plant_name}", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
-    ax.legend(loc="upper left")
-    ax.grid()
+    fig, ax = plt.subplots(figsize=(12, 7))
 
+    colors = plt.cm.turbo(np.linspace(0.1, 0.9, 2))
+
+    ax.plot(
+        index,
+        np.mean(total_vol1, axis=1),
+        label=f"{method1}_{inflow_model1}",
+        color=colors[0],
+        lw=3,
+    )
+
+    ax.plot(
+        index,
+        np.mean(total_vol2, axis=1),
+        label=f"{method2}_{inflow_model2}",
+        color=colors[1],
+        lw=3,
+        
+    )
+    if title == "":
+        title = f"Volume means {plant_name}"
+
+    
+    ax.set_title(title, fontsize=16, weight="bold")
+    ax.set_xlabel("Time", fontsize=12)
+    ax.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+
+    if lim is not None:
+        ax.set_ylim(lim)
+
+    ax.grid(True, which="major", linestyle=":", alpha=0.4)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    ax.legend(loc="upper left", frameon=True, framealpha=0.95, edgecolor="lightgray")
+
+    if isinstance(index, pd.DatetimeIndex):
+        locator = mdates.AutoDateLocator()
+        formatter = mdates.ConciseDateFormatter(locator)
+        ax.xaxis.set_major_locator(locator)
+        ax.xaxis.set_major_formatter(formatter)
+
+    fig.tight_layout()
     path_diff = os.path.join(plot_folder, method1 + "_" + inflow_model1 + "_vs_" + method2 + "_" + inflow_model2 + "_volume_mean.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
-    return 
+    return
 
 def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, lim):
 
@@ -762,7 +895,7 @@ def compare_three_means(plant_name, method1, inflow_model1, method2, inflow_mode
 
     return 
 
-def compare_four_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, method4, inflow_model4, lim):
+def compare_four_means(plant_name, method1, inflow_model1, method2, inflow_model2, method3, inflow_model3, method4, inflow_model4, lim,name):
 
     prodrisk1 = load_session(plant_name,method1,inflow_model1)
     prodrisk2 = load_session(plant_name,method2,inflow_model2)
@@ -797,16 +930,58 @@ def compare_four_means(plant_name, method1, inflow_model1, method2, inflow_model
     index = prodrisk1.model.module[magazines1[0]].reservoirVolume.get().index
 
 
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax.plot(index,np.mean(total_vol1,axis=1),label=f"{method1}_{inflow_model1}")
-    ax.plot(index,np.mean(total_vol2,axis=1),label=f"{method2}_{inflow_model2}")
-    ax.plot(index,np.mean(total_vol3,axis=1),label=f"{method3}_{inflow_model3}")
-    ax.plot(index,np.mean(total_vol4,axis=1),label=f"{method4}_{inflow_model4}")
-    ax.set(title=f"Volume means", xlabel="Time", ylabel="Volume [Mm$^3$]",ylim=lim)
-    ax.legend(loc="upper left")
-    ax.grid()
+    fig, ax = plt.subplots(figsize=(12, 7))
 
-    path_diff = os.path.join(plot_folder, "four_mean_comp.png")
+    # Bold, well-separated turbo colors
+    colors = plt.cm.turbo(np.linspace(0.1, 0.9, 4))
+
+    ax.plot(
+        index, np.mean(total_vol1, axis=1),
+        label=f"{method1}_{inflow_model1}",
+        color=colors[0], lw=3
+    )
+
+    ax.plot(
+        index, np.mean(total_vol2, axis=1),
+        label=f"{method2}_{inflow_model2}",
+        color=colors[1], lw=3
+    )
+
+    ax.plot(
+        index, np.mean(total_vol3, axis=1),
+        label=f"{method3}_{inflow_model3}",
+        color=colors[2], lw=3,ls="--"
+    )
+
+    ax.plot(
+        index, np.mean(total_vol4, axis=1),
+        label=f"{method4}_{inflow_model4}",
+        color=colors[3], lw=3,ls="--"
+    )
+
+    ax.set_title("Volume Means", fontsize=16, weight="bold")
+    ax.set_xlabel("Time", fontsize=12)
+    ax.set_ylabel(r"Volume [Mm$^3$]", fontsize=12)
+
+    if lim is not None:
+        ax.set_ylim(lim)
+
+    # Cleaner appearance
+    ax.grid(True, linestyle=":", alpha=0.4)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Always top-left
+    ax.legend(
+        loc="upper left",
+        frameon=True,
+        framealpha=0.95,
+        edgecolor="lightgray"
+    )
+
+    fig.tight_layout()
+
+    path_diff = os.path.join(plot_folder, f"{name}.png")
     fig.savefig(path_diff, dpi=300, bbox_inches='tight')
 
     return 
@@ -1233,18 +1408,14 @@ def flexibility_factor(plant_name, method, inflow_model):
     area = prodrisk.model.area["my_area"]
 
     price = area.output_price.get()
-
     mean_price = np.mean(price)
 
     production = area.total_production.get().values
-
     scenario_income = np.sum(production * price, axis=0)
-
     total_prod = np.sum(production, axis=0)
+    
 
     flex_factor = (scenario_income/total_prod)/mean_price
-
-    # flex_factor = np.flip(np.sort(flex_factor))
 
     return flex_factor
     
